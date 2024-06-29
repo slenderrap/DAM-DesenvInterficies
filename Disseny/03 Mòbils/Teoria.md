@@ -87,7 +87,7 @@ A més, les diferents accions s’organitzen en sub-vistes creant una sensació 
 
 Generalment hi ha una manera estàndard de tornar enrere cap a la vista anterior, que es manté per totes les aplicacions del sistema operatiu.
 
-<center><img src="./assets/mobilewindows.gif" style="max-width: 90%;" alt="">
+<center><img src="./assets/mobilewindows.gif" style="max-height: 400px;" alt="">
 <br/></center>
 <br/>
 
@@ -97,7 +97,7 @@ La quantitat de sub-vistes, i la seva relació (la manera de navegar entre aques
 
 Per aquest motiu quan es dissenya l’aplicació, es fa un “stroyboard” amb totes les pantalles, i definint la navegació entre elles.
 
-<center><img src="./assets/storyboards.png" style="max-width: 90%;" alt="">
+<center><img src="./assets/storyboards.png" style="max-width: 90%;max-height: 400px;" alt="">
 <br/></center>
 <br/> 
 
