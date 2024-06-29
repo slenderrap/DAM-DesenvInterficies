@@ -47,14 +47,16 @@ L’experiència d’usuari ha de tenir en compte des que s’obté el producte 
 
 Poder contestar trucades del telèfon desde altres dispositius, quan els estàs fent servir, encara que no tinguin tarjeta SIM. A més, fent servir una interfície igual o similar entre dispositius.
 <style>
-    .image-container {
+.image-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
 .image-item {
+    display: flex;
     flex-grow: 1;
+    flex-direction: column;
     padding: 0px;
     display: flex;
     justify-content: center;
@@ -62,10 +64,16 @@ Poder contestar trucades del telèfon desde altres dispositius, quan els estàs 
 }
 
 .image-item img {
-    max-height: 150px;
+    max-height: 250px;
     height: auto;
     width: auto;
     max-width: 90%;
+
+}
+
+.image-item div {
+    color: #444444;
+    text-align: center;
 }
 </style>
 <div class="image-container">

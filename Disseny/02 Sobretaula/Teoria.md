@@ -32,14 +32,16 @@ L’escriptori esdevé la metàfora de la interacció amb el sistema, es tracta 
 }
 
 .image-item img {
-    max-height: 150px;
+    max-height: 250px;
     height: auto;
     width: auto;
     max-width: 90%;
+
 }
 
 .image-item div {
     color: #444444;
+    text-align: center;
 }
 </style>
 <div class="image-container">
