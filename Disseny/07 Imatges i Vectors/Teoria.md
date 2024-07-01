@@ -222,7 +222,7 @@ Avantatges:
 - El principal inconvenient és que no són adequats per guardar informació fotogràfica.
 
 <center><img src="./assets/inkscape.png" style="max-height: 350px; max-width: 90%;" alt=""> 
-<br/></center>
+<br/><div style="color: #444444;">Inkscape</div></center>
 <br/> 
 <br/> 
 
