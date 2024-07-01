@@ -226,10 +226,10 @@ De no ser així, ha de quedar clar que hi ha un continuació amb scroll.
 
 Fer servir diferents colors de fons és una bona manera de mostrar les diferències entres seccions.
 
-<center><img src="./assets/colors.gif" style="max-width: 90%; max-height: 350px;" alt="">
-<br/></center>
-<br/>
-<br/>
+<video width="640" height="480" controls>
+  <source src="./assets/colors.mov" type="video/mp4">
+  El teu navegador no suporta la reproducció de vídeo.
+</video>
 
 ## Scrolls horitzontals
 
