@@ -52,6 +52,17 @@ Anti-aliasing és una tècnica de processament d’imatges, que es fa servir per
 
 Hi ha diverses maneres de fer anti-aliasing, les més senzilles només mesclen els píxels adjacents i les més complicades intenten tenir en compte les formes geomètriques de les imatges.
 
+<center><img src="./assets/aliasing.png" style="max-height: 350px; max-width: 90%;" alt=""> 
+<br/></center>
+<br/> 
+<br/> 
+
+## Dots per inch, DPI
+
+Quan s’ha d’imprimir una imatge, es parla de DPI que són els punts per cada Inch (2.54 cm) que hi ha en una imatge.
+
+Una imatge a 600DPI tindrà molta més definició que una a 72DPI, ocupant el mateix espai un cop impresses.
+
 <style>
 .image-container {
     display: flex;
@@ -86,20 +97,6 @@ Hi ha diverses maneres de fer anti-aliasing, les més senzilles només mesclen e
     text-align: center;
 }
 </style>
-<div class="image-container">
-    <div class="image-item">
-        <img src="./assets/aliasing.png" alt="">
-    </div>
-</div>
-<br/>
-<br/>
-
-## Dots per inch, DPI
-
-Quan s’ha d’imprimir una imatge, es parla de DPI que són els punts per cada Inch (2.54 cm) que hi ha en una imatge.
-
-Una imatge a 600DPI tindrà molta més definició que una a 72DPI, ocupant el mateix espai un cop impresses.
-
 <div class="image-container">
     <div class="image-item">
         <img src="./assets/dpi72.png" alt="">
