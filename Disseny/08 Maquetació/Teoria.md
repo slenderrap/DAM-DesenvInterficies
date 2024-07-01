@@ -225,11 +225,12 @@ De no ser així, ha de quedar clar que hi ha un continuació amb scroll.
 ### Colors per espaiar seccions
 
 Fer servir diferents colors de fons és una bona manera de mostrar les diferències entres seccions.
-
-<video width="640" height="480" controls>
+<center>
+<video width="275" height="480" controls>
   <source src="./assets/colors.mov" type="video/mp4">
   El teu navegador no suporta la reproducció de vídeo.
 </video>
+</center>
 
 ## Scrolls horitzontals
 
