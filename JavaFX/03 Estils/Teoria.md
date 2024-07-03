@@ -59,17 +59,21 @@ Això queda plasmat al codi *.fxml*:
 <Button ... style="-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 8; -fx-background-color: rgba(0,0,0,0);" text="Border Red" />
 ```
 
+O bé a partir d'un arxiu *.css*:
+
 ```xml
+<AnchorPane ... styleClass="root" ... fx:controller="com.project.Controller">
+
 <Label ... styleClass="label" text="ABC">
 ```
 
 Programàticament es pot canviar el full d'estil que afecta un objecte:
 
 ```java
-    private void setStyle0(ActionEvent event) {
-        container.getStylesheets().clear();
-        container.getStylesheets().add("/assets/style0.css");
-    }
+private void setStyle0(ActionEvent event) {
+    container.getStylesheets().clear();
+    container.getStylesheets().add("/assets/style0.css");
+}
 ```
 
 Programàticament també es pot canviar directament l'estil d'un element:
