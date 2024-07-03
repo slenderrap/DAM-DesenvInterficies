@@ -50,11 +50,12 @@ public class Controller implements Initializable {
         buttonChange1.setDisable(true);
     }
 
-
     @FXML
     private void setBorderRed(ActionEvent event) {
         String currentStyle = labelStyle.getStyle();
         String redBorderStyle = "-fx-border-color: red;";
+
+        container.getStylesheets().clear();
 
         if (currentStyle.contains(redBorderStyle)) {
             // If the style already contains the red border, remove it
