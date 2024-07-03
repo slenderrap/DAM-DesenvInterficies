@@ -49,7 +49,7 @@ El canvas va 'pintant' els objectes a sobre dels antics, així si volem netejar-
 
 ```java
 @FXML
-private void clearAction(ActionEvent event) {
+private void actionClear(ActionEvent event) {
     // Netejar tot el Canvas
     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 }
@@ -57,10 +57,20 @@ private void clearAction(ActionEvent event) {
 
 ## Exemple 0600
 
-Aquest exemple mostra un projecte bàsic que inicia un canvas amb un dibuix, i té un botó per afegir cercles i quadres de manera aleatòria.
+Aquest exemple és un projecte bàsic que inicia un canvas amb un dibuix, i té un botó per afegir cercles i quadres de manera aleatòria.
 
 <br/>
 <center><img src="./assets/ex0600.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
+## Exemple 0601
+
+Aquest exemple és un projecte on es fa servir un timer per actualitzar una animació i mostar els FPS (frames per segon) de dibuix.
+
+<br/>
+<center><img src="./assets/ex0601.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 <br/>

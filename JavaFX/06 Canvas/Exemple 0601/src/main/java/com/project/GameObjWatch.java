@@ -1,39 +1,19 @@
 package com.project;
 
-import java.util.Calendar;
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
 
-public class DrawObjAgulles implements DrawObj {
-    private double hores = 0;
-    private double minuts = 0;
-    private double segons = 0;
-    private double millis = 0;
+public class GameObjWatch implements GameObj {
 
-    public void setHores(double hores) {
-        this.hores = hores;
+    @Override
+    public void run(Canvas cnv, double fps, GameData data) {
+        // Update object attributes if any
     }
 
-    public void setMinuts(double minuts) {
-        this.minuts = minuts;
-    }
-
-    public void setSegons(double segons) {
-        this.segons = segons;
-    }
-
-    public void run(Canvas cnv, double fps) {
-        Calendar cal = Calendar.getInstance();
-        hores = cal.get(Calendar.HOUR_OF_DAY);
-        minuts = cal.get(Calendar.MINUTE);
-        segons = cal.get(Calendar.SECOND);
-        millis = cal.get(Calendar.MILLISECOND);
-    }
-
-    public void draw(GraphicsContext gc) {
+    @Override
+    public void draw(GraphicsContext gc, GameData data) {
         int canvasHeight = (int) gc.getCanvas().getHeight();
         int canvasWidth = (int) gc.getCanvas().getWidth();
         int diameter = Math.min(canvasWidth, canvasHeight) - 25;
@@ -45,17 +25,17 @@ public class DrawObjAgulles implements DrawObj {
         double radians;
 
         // Dibuixar les hores
-        radians = Math.toRadians((hores + minuts / 60) * 30) - sub;
+        radians = Math.toRadians((data.hores + data.minuts / 60) * 30) - sub;
         drawCircleLine(gc, Color.WHITE, 3, x, y, 0, 25, radians);
         drawCircleLine(gc, Color.WHITE, 8, x, y, 20, radiusHalf, radians);
 
         // Dibuixar els minuts
-        radians = Math.toRadians((minuts + segons / 60) * 6) - sub;
+        radians = Math.toRadians((data.minuts + data.segons / 60) * 6) - sub;
         drawCircleLine(gc, Color.WHITE, 3, x, y, 0, 25, radians);
         drawCircleLine(gc, Color.WHITE, 8, x, y, 20, radius - 25, radians);
 
         // Dibuixar els segons
-        radians = Math.toRadians(segons * 6) + Math.toRadians(millis * 0.006) - sub;
+        radians = Math.toRadians(data.segons * 6) + Math.toRadians(data.millis * 0.006) - sub;
         drawCircleLine(gc, Color.RED, 2, x, y, -20, radius, radians);
 
         // Dibuixar el cercle dels segons
@@ -65,12 +45,12 @@ public class DrawObjAgulles implements DrawObj {
 
         // Dibuixar el centre
         int radiusCT = 3;
+        int diameterCT = radiusCT * 2;
         gc.setFill(Color.BLACK);
-        gc.fillOval(x - radiusCT, y - radiusCT, radiusCT * 2, radiusCT * 2);
+        gc.fillOval(x - radiusCT, y - radiusCT, diameterCT, diameterCT);
     }
 
-    private void drawCircleLine(GraphicsContext gc, Color color, double size, int x, int y, int radiusMin,
-            int radiusMax, double radians) {
+    private void drawCircleLine(GraphicsContext gc, Color color, double size, int x, int y, int radiusMin, int radiusMax, double radians) {
         gc.setStroke(color);
         gc.setLineWidth(size);
         gc.setLineCap(StrokeLineCap.ROUND);

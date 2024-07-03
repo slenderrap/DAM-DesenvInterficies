@@ -49,7 +49,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void addAction(ActionEvent event) {
+    private void actionAdd(ActionEvent event) {
         String especie = fieldEspecie.getText();
         int longevitat = Integer.parseInt(fieldLongevitat.getText());
         int numeropotes = Integer.parseInt(fieldPotes.getText());
@@ -64,7 +64,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void deleteAction(ActionEvent event) {
+    private void actionDelete(ActionEvent event) {
         AnimalsModel selectedAnimal = animalsTable.getSelectionModel().getSelectedItem();
         if (selectedAnimal != null) {
             AnimalsDAO.deleteItem(selectedAnimal.getEspecie());
@@ -73,7 +73,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void refreshAction(ActionEvent event) {
+    private void actionRefresh(ActionEvent event) {
         animalsList.setAll(AnimalsDAO.getAll());
     }
 

@@ -33,7 +33,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void addAction(ActionEvent event) {
+    private void actionAdd(ActionEvent event) {
         // Generar una posició i mida aleatòria per a la forma
         double size = 20 + random.nextInt(31); // Mida entre 20 i 50
         double x = random.nextDouble() * (canvas.getWidth() - size);
@@ -55,7 +55,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void clearAction(ActionEvent event) {
+    private void actionClear(ActionEvent event) {
         // Netejar tot el Canvas
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }

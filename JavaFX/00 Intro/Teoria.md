@@ -49,7 +49,7 @@ El codi FXML està basat en arxius de text amb format XML, per tant, es poden ed
             <Font name="Lato Black" size="55.0" />
          </font>
       </Text>
-      <Button fx:id="buttonAdd" layoutX="417.0" layoutY="187.0" mnemonicParsing="false" onAction="#addAction" text="Add" />
+      <Button fx:id="buttonAdd" layoutX="417.0" layoutY="187.0" mnemonicParsing="false" onAction="#actionAdd" text="Add" />
    </children>
 </AnchorPane>
 ```
@@ -99,7 +99,7 @@ public class Controller {
     private int counter = 0;
 
     @FXML
-    private void addAction(ActionEvent event) {
+    private void actionAdd(ActionEvent event) {
         counter++;
         textCounter.setText(String.valueOf(counter));
     }
@@ -146,8 +146,8 @@ La vista està definida a l'arxiu *src/resources/assets/layout.fxml*:
     <!-- Per poder modificar el text que mostra, defineix fx:id  -->
     <Text fx:id="textCounter" ...></Text>
     <!-- Per identificar el botó dels del codi, defineix fx:id -->
-    <!-- Per executar la funció 'addAction' quan s'apreta el botó, defineix 'onAction' -->
-    <Button fx:id="buttonAdd" ... onAction="#addAction"/>
+    <!-- Per executar la funció 'actionAdd' quan s'apreta el botó, defineix 'onAction' -->
+    <Button fx:id="buttonAdd" ... onAction="#actionAdd"/>
    </children>
 </AnchorPane>
 ```

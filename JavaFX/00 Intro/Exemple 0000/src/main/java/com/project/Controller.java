@@ -16,7 +16,7 @@ public class Controller {
     private int counter = 0;
 
     @FXML
-    private void addAction(ActionEvent event) {
+    private void actionAdd(ActionEvent event) {
         counter++;
         textCounter.setText(String.valueOf(counter));
     }

@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 import javafx.animation.AnimationTimer;
 
-public class UtilsFps extends AnimationTimer {
+public class GameTimer extends AnimationTimer {
     private long lastNanoTime;
     private int frameCount;
     private double fps;
@@ -13,7 +13,11 @@ public class UtilsFps extends AnimationTimer {
     private Consumer<Double> runFunction;
     private Runnable drawFunction;
 
-    public UtilsFps(Consumer<Double> runFunction, Runnable drawFunction) {
+    public GameTimer() {
+    }
+
+    public void startWith(Consumer<Double> runFunction, Runnable drawFunction) {
+        this.start();
         this.runFunction = runFunction;
         this.drawFunction = drawFunction;
         lastNanoTime = System.nanoTime();

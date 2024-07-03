@@ -8,12 +8,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
-public class DrawObjNumeros implements DrawObj {
+public class GameObjNumeros implements GameObj {
 
-    public void run(Canvas cnv, double fps) {
+    @Override
+    public void run(Canvas cnv, double fps, GameData data) {
+        // Update object attributes if any
     }
 
-    public void draw(GraphicsContext gc) {
+    @Override
+    public void draw(GraphicsContext gc, GameData data) {
+        gc.save(); // Guardar el context de gràfics
+
         int canvasHeight = (int) gc.getCanvas().getHeight();
         int canvasWidth = (int) gc.getCanvas().getWidth();
         int diameter = Math.min(canvasWidth, canvasHeight) - 25;
@@ -54,10 +59,12 @@ public class DrawObjNumeros implements DrawObj {
             int numY = y + (int) (radiusMin * Math.sin(radians)) + 8;
             gc.fillText(String.valueOf(cnt), numX, numY);
         }
+
+        gc.restore(); // Restaurar el context de gràfics
     }
 
     private void drawCircleLine(GraphicsContext gc, Color color, double size, int x, int y, int radiusMin,
-            int radiusMax, double radians) {
+                                int radiusMax, double radians) {
         gc.setStroke(color);
         gc.setLineWidth(size);
         gc.setLineCap(StrokeLineCap.ROUND);

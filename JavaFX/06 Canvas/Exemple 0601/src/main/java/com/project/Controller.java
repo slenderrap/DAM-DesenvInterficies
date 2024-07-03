@@ -8,10 +8,18 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import com.project.GameObjAgulles;
+import com.project.GameObjNumeros;
+import com.project.GameObjWatch;
+import com.project.GameTimer;
 
 public class Controller implements Initializable {
 
@@ -21,13 +29,18 @@ public class Controller implements Initializable {
     @FXML
     public Canvas canvas;
 
-    private GraphicsContext gc;
-    private AnimationTimer animationTimer;
+    private static GameData data = new GameData();
 
-    public static ArrayList<DrawObj> drawingList = new ArrayList<>();
-    public static DrawObjNumeros numeros = new DrawObjNumeros();
-    public static DrawObjAgulles agulles = new DrawObjAgulles();
-    public static DrawObjWatch watch = new DrawObjWatch();
+    private GraphicsContext gc;
+    private GameTimer animationTimer = new GameTimer();
+
+    private boolean showFps = true; 
+    private double fps = 0;
+
+    public static ArrayList<GameObj> drawingList = new ArrayList<>();
+    public static GameObjNumeros numeros = new GameObjNumeros();
+    public static GameObjAgulles agulles = new GameObjAgulles();
+    public static GameObjWatch watch = new GameObjWatch();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,10 +57,12 @@ public class Controller implements Initializable {
 
     public void updateCanvasSize() {
         // Start Canvas size
-        canvas.setWidth(UtilsViews.parentContainer.getWidth());
-        canvas.setHeight(UtilsViews.parentContainer.getHeight());
+        double width = UtilsViews.parentContainer.getWidth();
+        double height = UtilsViews.parentContainer.getHeight();
+        canvas.setWidth(width);
+        canvas.setHeight(height);
     }
-
+    
     public void keyEvent(KeyEvent evt) {
         // Quan apretem una tecla
         if (evt.getEventType() == KeyEvent.KEY_PRESSED) {
@@ -65,8 +80,7 @@ public class Controller implements Initializable {
     // Iniciar el context i bucle de dibuix
     public void start(Canvas canvas) {
         gc = canvas.getGraphicsContext2D();
-        animationTimer = new UtilsFps(this::run, this::draw);
-        animationTimer.start();
+        animationTimer.startWith(this::run, this::draw);
         drawingList.add(numeros);
         drawingList.add(agulles);
         drawingList.add(watch);
@@ -81,8 +95,11 @@ public class Controller implements Initializable {
     private void run(double fps) {
         if (fps < 1)
             return;
-        for (DrawObj obj : drawingList) {
-            obj.run(canvas, fps);
+
+        data.run();
+        this.fps = fps;
+        for (GameObj obj : drawingList) {
+            obj.run(canvas, fps, data);
         }
     }
 
@@ -92,8 +109,15 @@ public class Controller implements Initializable {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         // Dibuixar tots els objectes de la 'drawingList'
-        for (DrawObj obj : drawingList) {
-            obj.draw(gc);
+        for (GameObj obj : drawingList) {
+            obj.draw(gc, data);
         }
+
+        // Dibuixar els FPS si està indicat
+        if (showFps) {
+            gc.setFill(Color.RED);
+            gc.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+            gc.fillText(String.format("FPS: %.2f", fps), 8, 20);
+        }       
     }
 }

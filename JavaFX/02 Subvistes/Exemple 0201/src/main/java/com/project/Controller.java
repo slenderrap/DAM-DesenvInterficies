@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 
 import javafx.event.ActionEvent;
+import main.java.com.project.DrawObjWatch;
+import main.java.com.project.UtilsFps;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

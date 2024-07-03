@@ -28,7 +28,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void startAction(ActionEvent event) {
+    private void actionStart(ActionEvent event) {
         if (taskThread == null || !taskThread.isAlive()) {
             createTask();
             startBackgroundTask();
@@ -42,12 +42,12 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void pauseAction(ActionEvent event) {
+    private void actionPause(ActionEvent event) {
         pauseBackgroundTask();
     }
 
     @FXML
-    private void stopAction(ActionEvent event) {
+    private void actionStop(ActionEvent event) {
         stopBackgroundTask();
     }
 

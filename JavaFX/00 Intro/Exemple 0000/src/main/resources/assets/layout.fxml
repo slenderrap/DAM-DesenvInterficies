@@ -12,6 +12,6 @@
             <Font name="Lato Black" size="55.0" />
          </font>
       </Text>
-      <Button fx:id="buttonAdd" layoutX="417.0" layoutY="187.0" mnemonicParsing="false" onAction="#addAction" text="Add" />
+      <Button fx:id="buttonAdd" layoutX="417.0" layoutY="187.0" mnemonicParsing="false" onAction="#actionAdd" text="Add" />
    </children>
 </AnchorPane>
