@@ -30,15 +30,6 @@ public class Main extends Application {
             Image icon = new Image("file:icons/icon.png");
             stage.getIcons().add(icon);
         }
-
-        // Afegeix un listener per detectar canvis en les dimensions de la finestra
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            System.out.println("Width changed: " + newVal);
-        });
-
-        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            System.out.println("Height changed: " + newVal);
-        });
     }
 
     public static void main(String[] args) {
