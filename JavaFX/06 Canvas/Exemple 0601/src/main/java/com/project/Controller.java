@@ -37,10 +37,10 @@ public class Controller implements Initializable {
     private boolean showFps = true; 
     private double fps = 0;
 
-    public static ArrayList<GameObj> drawingList = new ArrayList<>();
-    public static GameObjNumeros numeros = new GameObjNumeros();
-    public static GameObjAgulles agulles = new GameObjAgulles();
-    public static GameObjWatch watch = new GameObjWatch();
+    public ArrayList<GameObj> drawingList = new ArrayList<>();
+    public GameObjNumeros numeros = new GameObjNumeros();
+    public GameObjAgulles agulles = new GameObjAgulles();
+    public GameObjWatch watch = new GameObjWatch();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

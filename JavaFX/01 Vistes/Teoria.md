@@ -104,5 +104,7 @@ En el codi anterior:
 <br/></center>
 <br/>
 
+# Posicionament
 
+Els elements més flexibles per posicionar elements són **HBOX** i **VBOX**, ja que permeten centrar o alinear els elements fills en diferents posicions. Es poden fer servir per aquest propòsit, encara que només tinguin un element fill.
 
