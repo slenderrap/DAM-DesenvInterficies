@@ -24,8 +24,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Initialize task
-        createTask();
         setButtonsIdle();
     }
 
@@ -117,6 +115,7 @@ public class Controller implements Initializable {
 
     private void stopBackgroundTask() {
         if (currentTask != null && currentTask.isRunning()) {
+            isPaused = false;
             currentTask.cancel();
             taskThread = null; // Reset the thread
             progress = 0; // Reset the progress
