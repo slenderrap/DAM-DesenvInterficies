@@ -15,7 +15,7 @@
                   <Font name="Lato Black" size="55.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fes més gran la finestra per canviar a la vista 'Desktop'">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fes més gran la finestra per canviar a la vista 'Desktop'" wrappingWidth="274.3828125">
                <font>
                   <Font size="16.0" />
                </font>
