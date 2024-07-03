@@ -112,6 +112,12 @@ private void stopBackgroundTask() {
 }
 ```
 
+<br/>
+<center><img src="./assets/ex0400.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
 ## Exemple 0401
 
 *Nota:* Per fer anar aquest exemple cal un servidor *Ollama* funcionant a *localhost:11434*
@@ -224,6 +230,8 @@ private void callStream(ActionEvent event) {
 }
 ```
 
-
-
-
+<br/>
+<center><img src="./assets/ex0401.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
