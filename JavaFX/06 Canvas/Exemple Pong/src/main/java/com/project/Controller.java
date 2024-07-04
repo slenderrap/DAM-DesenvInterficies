@@ -1,6 +1,7 @@
 package com.project;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -32,11 +33,13 @@ public class Controller implements Initializable {
         UtilsViews.parentContainer.heightProperty().addListener((observable, oldValue, newvalue) -> { actionSetSize(); });
         UtilsViews.parentContainer.widthProperty().addListener((observable, oldValue, newvalue) -> { actionSetSize(); });
 
-        // Set first canvas size
-        actionSetSize();
-
         // Initalize game controller
         gameController = new GameController(canvas);
+
+        // Listen to key events (set when scene is available)
+        Platform.runLater(() -> {
+            UtilsViews.parentContainer.getScene().addEventFilter(KeyEvent.ANY, keyEvent -> { keyEvent(keyEvent); });
+        });
     }
 
     // Define Canvas size
@@ -48,17 +51,30 @@ public class Controller implements Initializable {
         canvas.setHeight(height);
     }
     
-    public void keyEvent(KeyEvent evt) {
+    public void keyEvent (KeyEvent evt) {
+
         // Quan apretem una tecla
         if (evt.getEventType() == KeyEvent.KEY_PRESSED) {
-            if (evt.getCode() == KeyCode.UP) {
-                // Acció per la tecla amunt
+            if (evt.getCode() == KeyCode.LEFT) {
+                gameController.playerDirection = "left";
+            }
+            if (evt.getCode() == KeyCode.RIGHT) {
+                gameController.playerDirection = "right";
             }
         }
 
         // Quan deixem anar la tecla
         if (evt.getEventType() == KeyEvent.KEY_RELEASED) {
-            // Acció quan deixem anar la tecla
+            if (evt.getCode() == KeyCode.LEFT) {
+                if (gameController.playerDirection.equals("left")) {
+                    gameController.playerDirection = "none";
+                }
+            }
+            if (evt.getCode() == KeyCode.RIGHT) {
+                if (gameController.playerDirection.equals("right")) {
+                    gameController.playerDirection = "none";
+                }
+            }
         }
     }
 }

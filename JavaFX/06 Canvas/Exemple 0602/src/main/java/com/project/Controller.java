@@ -40,9 +40,6 @@ public class Controller implements Initializable {
         UtilsViews.parentContainer.heightProperty().addListener((observable, oldValue, newvalue) -> { actionSetSize(); });
         UtilsViews.parentContainer.widthProperty().addListener((observable, oldValue, newvalue) -> { actionSetSize(); });
 
-        // Set first canvas size
-        actionSetSize();
-
         // Initalize game controller
         gameController = new GameController(canvas);
 
@@ -58,19 +55,5 @@ public class Controller implements Initializable {
         double height = UtilsViews.parentContainer.getHeight() - hbox.getHeight();
         canvas.setWidth(width);
         canvas.setHeight(height);
-    }
-
-    public void keyEvent(KeyEvent evt) {
-        // Quan apretem una tecla
-        if (evt.getEventType() == KeyEvent.KEY_PRESSED) {
-            if (evt.getCode() == KeyCode.UP) {
-                // Acció per la tecla amunt
-            }
-        }
-
-        // Quan deixem anar la tecla
-        if (evt.getEventType() == KeyEvent.KEY_RELEASED) {
-            // Acció quan deixem anar la tecla
-        }
     }
 }

@@ -132,6 +132,12 @@ src/main/resources/assets
 
 ### Exemple 0000
 
+**Nota:** Per fer anar l'exemple cal 'Maven'
+
+```bash
+./run.sh com.project.Main
+```
+
 Aquest exemple mostra com: 
 
 - Es relaciona una vista i el seu controlador.
@@ -178,12 +184,21 @@ A *Gluon SceneBuilder* les configuracions anteriors es veuen a:
 <br/></center>
 <br/>
 
-# Exemple 0000
+**Nota:** A Windows fer servir './run.ps1'
 
-Per fer anar l'exemple cal 'Maven'
+# Events
 
-```bash
-./run.sh com.project.Main
+A l'escena es poden capturar events, per exemple:
+
+Executar la funció *"actionSetSize"* quan canvia la mida de la finestra:
+```java
+UtilsViews.parentContainer.heightProperty().addListener((observable, oldValue, newvalue) ->{
+           actionSetSize(); 
+});
 ```
 
-**Nota:** A Windows fer servir './run.ps1'
+Cridar a la funció *"keyEvent"* quan l'usuari prem una tecla:
+```java
+scene.addEventFilter(KeyEvent.ANY, keyEvent -> { keyEvent(keyEvent); });
+```
+
