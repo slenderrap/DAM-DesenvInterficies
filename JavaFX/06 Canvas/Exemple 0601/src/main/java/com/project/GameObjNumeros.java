@@ -11,12 +11,15 @@ import javafx.scene.text.TextAlignment;
 public class GameObjNumeros implements GameObj {
 
     @Override
-    public void run(Canvas cnv, double fps, GameData data) {
+    public void run(GameController controller) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GraphicsContext gc, GameData data) {
+    public void draw(GameController controller) {
+
+        GraphicsContext gc = controller.gc;
+
         gc.save(); // Guardar el context de gràfics
 
         int canvasHeight = (int) gc.getCanvas().getHeight();

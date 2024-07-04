@@ -9,22 +9,24 @@ import javafx.scene.shape.StrokeLineCap;
 public class GameObjQuadratsCercles implements GameObj {
 
     @Override
-    public void run(Canvas cnv, double fps, GameData data) {
+    public void run(GameController controller) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GraphicsContext gc, GameData data) {
+    public void draw(GameController controller) {
+
+        GraphicsContext gc = controller.gc;
 
         // 0
         gc.setStroke(Color.BLUE);
         gc.setLineWidth(2);
         gc.setLineCap(StrokeLineCap.ROUND);
-
         gc.beginPath();
         gc.rect(50, 60, 40, 20); 
         gc.stroke();
 
+        gc.setStroke(Color.GREEN);
         gc.beginPath();
         gc.strokeRoundRect(50, 110, 60, 30, 25, 25); 
         gc.stroke();
@@ -33,38 +35,38 @@ public class GameObjQuadratsCercles implements GameObj {
             gc.setStroke(Color.BLUE);
             gc.setLineWidth(2);
             gc.setLineCap(StrokeLineCap.ROUND);
-    
             gc.beginPath();
             gc.rect(50, 60, 40, 20); 
             // x, y, ample, alt
             gc.stroke();
     
+            gc.setStroke(Color.GREEN);
             gc.beginPath();
             gc.strokeRoundRect(50, 110, 60, 30, 25, 25); 
             // x, y, ample, alt, curvaX, curvaY
             gc.stroke();
-                """;
-        Controller.drawCodi(gc, codi, 150, 50);
+        """;
+        controller.drawText(codi, 100, 50);
 
         // 1
         gc.setFill(Color.ORANGE);
-        gc.fillRect(50, 250, 40, 20); 
+        gc.fillRect(50, 300, 40, 20); 
         gc.fill();
 
         gc.setFill(Color.PALEVIOLETRED);
-        gc.fillRoundRect(50, 300, 30, 60, 25, 25); 
+        gc.fillRoundRect(50, 350, 30, 60, 25, 25); 
         gc.fill();
        
         codi = """
             gc.setFill(Color.ORANGE);
-            gc.fillRect(50, 250, 40, 20); 
+            gc.fillRect(50, 300, 40, 20); 
             gc.fill();
     
             gc.setFill(Color.PALEVIOLETRED);
-            gc.fillRoundRect(50, 300, 30, 60, 25, 25); 
+            gc.fillRoundRect(50, 350, 30, 60, 25, 25); 
             gc.fill();
-                """;
-        Controller.drawCodi(gc, codi, 150, 250);
+        """;
+        controller.drawText(codi, 100, 300);
 
         // 2
         gc.setStroke(Color.BLUE);
@@ -88,8 +90,8 @@ public class GameObjQuadratsCercles implements GameObj {
             gc.strokeOval(400, 60, 40, 20);
             gc.stroke();
             gc.fill();
-                """;
-        Controller.drawCodi(gc, codi, 450, 50);
+        """;
+        controller.drawText(codi, 435, 50);
 
         // 3
         gc.setStroke(Color.GREY);
@@ -97,8 +99,8 @@ public class GameObjQuadratsCercles implements GameObj {
         gc.setLineWidth(5);
 
         gc.beginPath();
-        gc.fillArc(370, 250, 60, 30, 0, 90, ArcType.ROUND);
-        gc.strokeArc(370, 250, 60, 30, 0, 90, ArcType.ROUND);
+        gc.fillArc(370, 300, 60, 30, 0, 90, ArcType.ROUND);
+        gc.strokeArc(370, 300, 60, 30, 0, 90, ArcType.ROUND);
         gc.stroke();
        
         codi = """
@@ -107,11 +109,11 @@ public class GameObjQuadratsCercles implements GameObj {
             gc.setLineWidth(5);
     
             gc.beginPath();
-            gc.fillArc(370, 250, 60, 30, 0, 90, ArcType.ROUND);
-            gc.strokeArc(370, 250, 60, 30, 0, 90, ArcType.ROUND);
+            gc.fillArc(370, 300, 60, 30, 0, 90, ArcType.ROUND);
+            gc.strokeArc(370, 300, 60, 30, 0, 90, ArcType.ROUND);
             // x, y, w, h, startAngle, arcExtent, closure
             gc.stroke();
-                """;
-        Controller.drawCodi(gc, codi, 450, 260);
+        """;
+        controller.drawText(codi, 435, 300);
     }
 }

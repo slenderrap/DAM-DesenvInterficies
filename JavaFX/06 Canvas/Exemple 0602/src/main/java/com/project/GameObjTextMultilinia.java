@@ -20,12 +20,14 @@ public class GameObjTextMultilinia implements GameObj {
     public static WritableImage image = null;
 
     @Override
-    public void run(Canvas cnv, double fps, GameData data) {
+    public void run(GameController controller) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GraphicsContext gc, GameData data) {
+    public void draw(GameController controller) {
+
+        GraphicsContext gc = controller.gc;
 
         String str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
@@ -79,8 +81,7 @@ public class GameObjTextMultilinia implements GameObj {
             }
             
             gc.drawImage(image, 50, 25, image.getWidth(), image.getHeight());
-                """;
-                
-        Controller.drawCodi(gc, codi, 50, 125);
+        """;
+        controller.drawText(codi, 35, 125);
     }
 }

@@ -8,12 +8,14 @@ import javafx.scene.shape.StrokeLineCap;
 public class GameObjPoligonsEmplenats implements GameObj {
 
     @Override
-    public void run(Canvas cnv, double fps, GameData data) {
+    public void run(GameController controller) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GraphicsContext gc, GameData data) {
+    public void draw(GameController controller) {
+
+        GraphicsContext gc = controller.gc;
 
         // 0
         gc.setStroke(Color.ORANGE);
@@ -43,8 +45,8 @@ public class GameObjPoligonsEmplenats implements GameObj {
             gc.fill();
             gc.stroke();
             // El relleu (stroke) queda per sobre de l'emplenat (fill)
-                """;
-        Controller.drawCodi(gc, codi, 150, 50);
+        """;
+        controller.drawText(codi, 100, 50);
 
         // 1
         gc.setStroke(Color.GREEN);
@@ -74,8 +76,8 @@ public class GameObjPoligonsEmplenats implements GameObj {
             gc.stroke();
             gc.fill();
             // L'emplenat (fill) queda per sobre del relleu (stroke)
-                """;
-        Controller.drawCodi(gc, codi, 150, 250);
+        """;
+        controller.drawText(codi, 100, 275);
 
         // 2
         gc.setFill(Color.RED);
@@ -98,8 +100,8 @@ public class GameObjPoligonsEmplenats implements GameObj {
             gc.lineTo(420, 100);
             gc.lineTo(410, 90);
             gc.fill();
-                """;
-        Controller.drawCodi(gc, codi, 450, 50);
+        """;
+        controller.drawText(codi, 450, 50);
 
         // 3
         gc.setFill(Color.RED);
@@ -118,22 +120,23 @@ public class GameObjPoligonsEmplenats implements GameObj {
         gc.fill();
        
         codi = """
-            gc.setFill(Color.BURLYWOOD);
+            gc.setFill(Color.RED);
             gc.beginPath();
             gc.moveTo(400, 250);
             gc.lineTo(440, 290);
             gc.lineTo(390, 280);
             gc.fill();
-    
-            gc.setFill(new Color(128, 256, 128, 0.5));
+
+            gc.setFill(new Color(0.5, 1, 0.5, 0.5));
+            // Red, Green, Blue, Opacity (alpha)
             gc.beginPath();
-            gc.moveTo(400, 270);
+            gc.moveTo(400, 260);
             gc.lineTo(440, 300);
-            gc.lineTo(390, 300);
+            gc.lineTo(390, 290);
             gc.fill();
 
             // El 'fill' queda per sota del relleu
-                """;
-        Controller.drawCodi(gc, codi, 450, 250);
+        """;
+        controller.drawText(codi, 450, 275);
     }
 }

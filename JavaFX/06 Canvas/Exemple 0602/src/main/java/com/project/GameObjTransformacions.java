@@ -9,13 +9,15 @@ public class GameObjTransformacions implements GameObj {
     final static Image imgMario = new Image("assets/mario.png");
 
     @Override
-    public void run(Canvas cnv, double fps, GameData data) {
+    public void run(GameController controller) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GraphicsContext gc, GameData data) {
+    public void draw(GameController controller) {
         
+        GraphicsContext gc = controller.gc;
+
         // 0
         gc.save();
         double alt = imgMario.getHeight();
@@ -33,8 +35,8 @@ public class GameObjTransformacions implements GameObj {
             double prpAlt = prpAmple * (alt / ample);
             gc.drawImage(imgMario, 50, 50, prpAmple, prpAlt);
             gc.restore();
-                """;
-        Controller.drawCodi(gc, codi, 150, 50);
+        """;
+        controller.drawText(codi, 125, 40);
 
         // 1
         gc.save();
@@ -53,8 +55,8 @@ public class GameObjTransformacions implements GameObj {
             gc.drawImage(imgMario, 0, 0, prpAmple, prpAlt);
             gc.restore();
             gc.restore();
-                """;
-        Controller.drawCodi(gc, codi, 150, 180);
+        """;
+        controller.drawText(codi, 125, 180);
 
         // 2
         gc.save();
@@ -73,7 +75,7 @@ public class GameObjTransformacions implements GameObj {
             gc.drawImage(imgMario, 0, 0, prpAmple, prpAlt);
             gc.restore();
             gc.restore();
-                """;
-        Controller.drawCodi(gc, codi, 150, 300);
+        """;
+        controller.drawText(codi, 125, 320);
     }
 }

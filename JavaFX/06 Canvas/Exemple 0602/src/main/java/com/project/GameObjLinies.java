@@ -8,12 +8,14 @@ import javafx.scene.shape.StrokeLineCap;
 public class GameObjLinies implements GameObj {
 
     @Override
-    public void run(Canvas cnv, double fps, GameData data) {
+    public void run(GameController controller) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GraphicsContext gc, GameData data) {
+    public void draw(GameController controller) {
+
+        GraphicsContext gc = controller.gc;
 
         // 0
         gc.setStroke(Color.BLUE);
@@ -27,8 +29,8 @@ public class GameObjLinies implements GameObj {
             gc.setLineCap(StrokeLineCap.ROUND);
     
             gc.strokeLine(50, 60, 100, 75);
-                """;
-        Controller.drawCodi(gc, codi, 150, 50);
+        """;
+        controller.drawText(codi, 125, 50);
 
         // 1
         gc.setStroke(Color.GREEN);
@@ -49,8 +51,8 @@ public class GameObjLinies implements GameObj {
             gc.strokeLine(100, 275, 125, 300);
             gc.strokeLine(125, 300, 75, 300);
             gc.strokeLine(75, 300, 100, 325);
-                """;
-        Controller.drawCodi(gc, codi, 150, 250);
+        """;
+        controller.drawText(codi, 125, 250);
 
         // 2
         gc.setStroke(Color.RED);
@@ -67,8 +69,8 @@ public class GameObjLinies implements GameObj {
             // Limits de linia quadrats
     
             gc.strokeLine(400, 50, 430, 80);
-                """;
-        Controller.drawCodi(gc, codi, 450, 50);
+        """;
+        controller.drawText(codi, 450, 50);
 
         // 3
         gc.setStroke(Color.PURPLE);
@@ -85,7 +87,7 @@ public class GameObjLinies implements GameObj {
             // Limits de linia arrodonits
     
             gc.strokeLine(400, 250, 430, 280);
-                """;
-        Controller.drawCodi(gc, codi, 450, 250);
+        """;
+        controller.drawText(codi, 450, 250);
     }
 }

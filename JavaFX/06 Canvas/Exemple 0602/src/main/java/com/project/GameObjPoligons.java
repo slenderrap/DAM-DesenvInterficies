@@ -9,12 +9,14 @@ import javafx.scene.shape.StrokeLineJoin;
 public class GameObjPoligons implements GameObj {
 
     @Override
-    public void run(Canvas cnv, double fps, GameData data) {
+    public void run(GameController controller) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GraphicsContext gc, GameData data) {
+    public void draw(GameController controller) {
+
+        GraphicsContext gc = controller.gc;
 
         // 0
         gc.setStroke(Color.BLUE);
@@ -39,8 +41,8 @@ public class GameObjPoligons implements GameObj {
             gc.lineTo(100, 75);
             gc.lineTo(50, 100);
             gc.stroke();
-                """;
-        Controller.drawCodi(gc, codi, 150, 50);
+        """;
+        controller.drawText(codi, 125, 50);
 
         // 1
         gc.setStroke(Color.GREEN);
@@ -67,8 +69,8 @@ public class GameObjPoligons implements GameObj {
             gc.moveTo(75, 300);
             gc.lineTo(100, 325);
             gc.stroke();
-                """;
-        Controller.drawCodi(gc, codi, 150, 250);
+        """;
+        controller.drawText(codi, 125, 260);
 
         // 2
         gc.setStroke(Color.RED);
@@ -94,8 +96,8 @@ public class GameObjPoligons implements GameObj {
             gc.lineTo(430, 80);
             gc.lineTo(400, 110);
             gc.stroke();
-                """;
-        Controller.drawCodi(gc, codi, 450, 50);
+        """;
+        controller.drawText(codi, 450, 50);
 
         // 3
         gc.setStroke(Color.PURPLE);
@@ -121,7 +123,7 @@ public class GameObjPoligons implements GameObj {
             gc.lineTo(430, 280);
             gc.lineTo(400, 310);
             gc.stroke();
-                """;
-        Controller.drawCodi(gc, codi, 450, 250);
+        """;
+        controller.drawText(codi, 450, 260);
     }
 }
