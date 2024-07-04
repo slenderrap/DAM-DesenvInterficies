@@ -86,3 +86,13 @@ Aquest exemple mostra molts exemples amb el codi de com s'aconsegueix cada tipus
 <br/></center>
 <br/>
 <br/>
+
+## Exemple Pong
+
+Aquest exmple mostra una versió de Pong per a un sol jugador, mostra com es poden fer jocs senzills amb *Canvas* i també com capturar les tecles.
+
+<br/>
+<center><img src="./assets/exPong.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
