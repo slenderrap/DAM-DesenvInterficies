@@ -82,6 +82,6 @@ public class GameObjTextMultilinia implements GameObj {
             
             gc.drawImage(image, 50, 25, image.getWidth(), image.getHeight());
         """;
-        controller.drawText(codi, 35, 125);
+        controller.drawText(codi, 35, 130);
     }
 }

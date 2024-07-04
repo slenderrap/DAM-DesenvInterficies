@@ -79,7 +79,7 @@ Aquest exemple és un projecte on es fa servir un timer per actualitzar una anim
 
 El funcionament de *Canvas* és complex, hi ha [tutorials](https://docs.oracle.com/javafx/2/canvas/jfxpub-canvas.htm) a Internet per diferents llenguatges de programació que l'implementen. 
 
-Aquest exemple mostra molts exemples amb el codi de com s'aconsegueix el dibuix.
+Aquest exemple mostra molts exemples amb el codi de com s'aconsegueix cada tipus dibuix (linies, cercles, imatges, ...)
 
 <br/>
 <center><img src="./assets/ex0602.png" style="max-height: 400px" alt="">
