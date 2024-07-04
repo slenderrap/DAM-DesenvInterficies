@@ -54,6 +54,15 @@ private void actionClear(ActionEvent event) {
     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 }
 ```
+Com que anem canviat la configuració del canvas (amb els colors, transformacions, ...) podem guardar i recuperar l'estat de dibuix amb:
+```java
+// Guardar la configuració de dibuix actual
+gc.save();
+// Fer operacions que modifiquen la configuració de dibuix
+// com per exemple canviar el color d'emplenat, la mida d'un text, ...
+gc.restore();
+// Recuperar la configuració de dibuix previa al 'save'
+```
 
 ## Exemple 0600
 
