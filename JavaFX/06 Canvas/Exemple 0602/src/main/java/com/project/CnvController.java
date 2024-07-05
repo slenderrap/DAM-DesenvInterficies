@@ -13,26 +13,26 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.shape.StrokeLineCap;
 
-public class GameController {
+public class CnvController {
 
     public double hores = 0;
     public double minuts = 0;
     public double segons = 0;
     public double millis = 0;
 
-    public GameObj selectedObj = new GameObjLinies();
+    public CnvObj selectedObj = new CnvObjLinies();
 
     Canvas canvas;
     GraphicsContext gc;
-    GameTimer animationTimer;
+    CnvTimer animationTimer;
     boolean showFps = false; 
 
-    public GameController(Canvas canvas) {
+    public CnvController(Canvas canvas) {
 
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
 
-        animationTimer = new GameTimer(this::run, this::draw, 0);
+        animationTimer = new CnvTimer(this::run, this::draw, 0);
         start();
     }
 
@@ -76,16 +76,16 @@ public class GameController {
 
     public void actionSetSelection(String value) {
         switch (value) {
-            case "Linies":              selectedObj = new GameObjLinies(); break;
-            case "Poligons":            selectedObj = new GameObjPoligons(); break;
-            case "Poligons emplenats":  selectedObj = new GameObjPoligonsEmplenats(); break;
-            case "Quadrats i cercles":  selectedObj = new GameObjQuadratsCercles(); break;
-            case "Imatges":             selectedObj = new GameObjImatges(); break;
-            case "Gradients lineals":   selectedObj = new GameObjGradientsLineals(); break;
-            case "Gradients radials":   selectedObj = new GameObjGradientsRadials(); break;
-            case "Transformacions":     selectedObj = new GameObjTransformacions(); break;
-            case "Texts":               selectedObj = new GameObjTexts(); break;
-            case "Text multilinia":     selectedObj = new GameObjTextMultilinia(); break;
+            case "Linies":              selectedObj = new CnvObjLinies(); break;
+            case "Poligons":            selectedObj = new CnvObjPoligons(); break;
+            case "Poligons emplenats":  selectedObj = new CnvObjPoligonsEmplenats(); break;
+            case "Quadrats i cercles":  selectedObj = new CnvObjQuadratsCercles(); break;
+            case "Imatges":             selectedObj = new CnvObjImatges(); break;
+            case "Gradients lineals":   selectedObj = new CnvObjGradientsLineals(); break;
+            case "Gradients radials":   selectedObj = new CnvObjGradientsRadials(); break;
+            case "Transformacions":     selectedObj = new CnvObjTransformacions(); break;
+            case "Texts":               selectedObj = new CnvObjTexts(); break;
+            case "Text multilinia":     selectedObj = new CnvObjTextMultilinia(); break;
         }
     }
 

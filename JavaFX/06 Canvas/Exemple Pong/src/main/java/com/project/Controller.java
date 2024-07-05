@@ -14,8 +14,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.project.GameTimer;
-
 public class Controller implements Initializable {
 
     @FXML
@@ -24,7 +22,7 @@ public class Controller implements Initializable {
     @FXML
     public Canvas canvas;
 
-    private static GameController gameController;
+    private static CnvController cnvController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -34,7 +32,7 @@ public class Controller implements Initializable {
         UtilsViews.parentContainer.widthProperty().addListener((observable, oldValue, newvalue) -> { actionSetSize(); });
 
         // Initalize game controller
-        gameController = new GameController(canvas);
+        cnvController = new CnvController(canvas);
 
         // Listen to key events (set when scene is available)
         Platform.runLater(() -> {
@@ -56,23 +54,23 @@ public class Controller implements Initializable {
         // Quan apretem una tecla
         if (evt.getEventType() == KeyEvent.KEY_PRESSED) {
             if (evt.getCode() == KeyCode.LEFT) {
-                gameController.playerDirection = "left";
+                cnvController.playerDirection = "left";
             }
             if (evt.getCode() == KeyCode.RIGHT) {
-                gameController.playerDirection = "right";
+                cnvController.playerDirection = "right";
             }
         }
 
         // Quan deixem anar la tecla
         if (evt.getEventType() == KeyEvent.KEY_RELEASED) {
             if (evt.getCode() == KeyCode.LEFT) {
-                if (gameController.playerDirection.equals("left")) {
-                    gameController.playerDirection = "none";
+                if (cnvController.playerDirection.equals("left")) {
+                    cnvController.playerDirection = "none";
                 }
             }
             if (evt.getCode() == KeyCode.RIGHT) {
-                if (gameController.playerDirection.equals("right")) {
-                    gameController.playerDirection = "none";
+                if (cnvController.playerDirection.equals("right")) {
+                    cnvController.playerDirection = "none";
                 }
             }
         }

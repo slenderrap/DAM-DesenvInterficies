@@ -5,17 +5,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
 
-public class GameObjLinies implements GameObj {
+public class CnvObjLinies implements CnvObj {
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
 
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         // 0
         gc.setStroke(Color.BLUE);
@@ -30,7 +30,7 @@ public class GameObjLinies implements GameObj {
     
             gc.strokeLine(50, 60, 100, 75);
         """;
-        controller.drawText(codi, 125, 50);
+        ctrl.drawText(codi, 125, 50);
 
         // 1
         gc.setStroke(Color.GREEN);
@@ -52,7 +52,7 @@ public class GameObjLinies implements GameObj {
             gc.strokeLine(125, 300, 75, 300);
             gc.strokeLine(75, 300, 100, 325);
         """;
-        controller.drawText(codi, 125, 250);
+        ctrl.drawText(codi, 125, 250);
 
         // 2
         gc.setStroke(Color.RED);
@@ -70,7 +70,7 @@ public class GameObjLinies implements GameObj {
     
             gc.strokeLine(400, 50, 430, 80);
         """;
-        controller.drawText(codi, 450, 50);
+        ctrl.drawText(codi, 450, 50);
 
         // 3
         gc.setStroke(Color.PURPLE);
@@ -88,6 +88,6 @@ public class GameObjLinies implements GameObj {
     
             gc.strokeLine(400, 250, 430, 280);
         """;
-        controller.drawText(codi, 450, 250);
+        ctrl.drawText(codi, 450, 250);
     }
 }

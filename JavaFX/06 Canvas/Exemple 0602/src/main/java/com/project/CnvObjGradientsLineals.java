@@ -7,17 +7,17 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 
-public class GameObjGradientsLineals implements GameObj {
+public class CnvObjGradientsLineals implements CnvObj {
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
         
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         // 0
         Stop[] stops1 = new Stop[] { 
@@ -41,7 +41,7 @@ public class GameObjGradientsLineals implements GameObj {
             gc.setFill(lg1);
             gc.fillRect(50, 40, 80, 50);
         """;
-        controller.drawText(codi, 125, 50);
+        ctrl.drawText(codi, 125, 50);
 
         // 1
         Stop[] stops2 = new Stop[] { 
@@ -65,7 +65,7 @@ public class GameObjGradientsLineals implements GameObj {
             gc.setFill(lg1);
             gc.fillRect(50, 210, 80, 50);
         """;
-        controller.drawText(codi, 125, 220);
+        ctrl.drawText(codi, 125, 220);
 
         // 2
         Stop[] stops3 = new Stop[] { 
@@ -89,6 +89,6 @@ public class GameObjGradientsLineals implements GameObj {
             gc.setFill(lg3);
             gc.fillRect(50, 380, 80, 50);
         """;
-        controller.drawText(codi, 125, 390);
+        ctrl.drawText(codi, 125, 390);
     }
 }

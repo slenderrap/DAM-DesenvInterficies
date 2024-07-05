@@ -8,19 +8,19 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.image.Image;
 
-public class GameObjTexts implements GameObj {
+public class CnvObjTexts implements CnvObj {
 
     final static Image imgMario = new Image("assets/mario.png");
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
         
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         // 0
         gc.setStroke(Color.RED);
@@ -50,7 +50,7 @@ public class GameObjTexts implements GameObj {
 
             // Baseline alinea pel cos de la lletra
         """;
-        controller.drawText(codi, 125, 30);
+        ctrl.drawText(codi, 125, 30);
 
         // 1
         gc.setStroke(Color.RED);
@@ -78,7 +78,7 @@ public class GameObjTexts implements GameObj {
 
             // Bottom alinea pel peu de la lletra
         """;
-        controller.drawText(codi, 125, 275);
+        ctrl.drawText(codi, 125, 275);
 
         // 2
         gc.setStroke(Color.RED);
@@ -108,7 +108,7 @@ public class GameObjTexts implements GameObj {
             
             // Top alinear pel cap de la lletra
         """;
-        controller.drawText(codi, 520, 30);
+        ctrl.drawText(codi, 520, 30);
 
         // 3
         gc.setStroke(Color.RED);
@@ -138,6 +138,6 @@ public class GameObjTexts implements GameObj {
 
             // Center alinea pel mig de la lletra
         """;
-        controller.drawText(codi, 520, 275);
+        ctrl.drawText(codi, 520, 275);
     }
 }

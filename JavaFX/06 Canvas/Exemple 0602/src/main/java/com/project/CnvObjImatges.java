@@ -4,19 +4,19 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class GameObjImatges implements GameObj {
+public class CnvObjImatges implements CnvObj {
 
     final static Image imgMario = new Image("assets/mario.png");
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
 
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         // 0
         gc.drawImage(imgMario, 50, 50, 50, 50);
@@ -27,7 +27,7 @@ public class GameObjImatges implements GameObj {
             // imatge, x, y, ample, alt
             // no manté la proporció
         """;
-        controller.drawText(codi, 100, 50);
+        ctrl.drawText(codi, 100, 50);
 
         // 1
         gc.drawImage(imgMario, 50, 250, 50, 100);
@@ -37,7 +37,7 @@ public class GameObjImatges implements GameObj {
             // imatge, x, y, ample, alt
             // no manté la proporció
         """;
-        controller.drawText(codi, 100, 250);
+        ctrl.drawText(codi, 100, 250);
 
         // 2
         double alt = imgMario.getHeight();
@@ -54,7 +54,7 @@ public class GameObjImatges implements GameObj {
             gc.drawImage(imgMario, 400, 50, prpAmple, prpAlt);
             // Manté la proporció correcta amb ample = 50
         """;
-        controller.drawText(codi, 450, 50);
+        ctrl.drawText(codi, 450, 50);
 
         // 3
         alt = imgMario.getHeight();
@@ -71,6 +71,6 @@ public class GameObjImatges implements GameObj {
             gc.drawImage(imgMario, 400, 250, prpAmple, prpAlt);
             // Manté la proporció correcta amb alt = 50
         """;
-        controller.drawText(codi, 450, 250);
+        ctrl.drawText(codi, 450, 250);
     }
 }

@@ -78,17 +78,117 @@ Aquest exemple és un projecte bàsic que inicia un canvas amb un dibuix, i té 
 
 Aquest exemple és un projecte on es fa servir un timer per actualitzar una animació i mostar els FPS (frames per segon) de dibuix.
 
+Normalment, quan es fan servir *Canvas* amb animacions, es separa el codi en dues parts:
+
+- **Lògica de funcionament**, amb un mètode *run* que calcula les animacions a partir dels *frames per segon (FPS)
+- **Instruccions de dibuix**, amb un mètode *draw* que dibuixa els elements visuals de cada objecte
+
+Aquesta separació es fa per dos motius:
+
+- Organitzar el codi segons funcionalitat
+- Millorar el rendiment ajuntant totes les instruccions de dibuix
+
+En aquest exemple l'animació és gestionada pel mètode *animationTimer* que crida les funcions *run* i *draw* tans ràpid com pot.
+
+- El mètode **run** obté la data actual d'un objecte calendari i crida el mètode *run* de tots els objectes de la llista d'objectes
+
+- El mètode **draw** neteja l'area de dibuix i crida el mètode *draw* de tots els objectes de la llista d'objectes
+
+```java
+public CnvController(Canvas canvas) {
+
+    this.canvas = canvas;
+    this.gc = canvas.getGraphicsContext2D();
+
+    animationTimer = new CnvTimer(this::run, this::draw, 0);
+    start();
+}
+
+// Start animation timer
+public void start() {
+    animationTimer.start();
+}
+
+// Stop animation timer
+public void stop() {
+    animationTimer.stop();
+}
+
+// Run game (and animations)
+private void run(double fps) {
+
+    if (animationTimer.fps < 1) { return; }
+
+    // Compute global attributes
+    Calendar cal = Calendar.getInstance();
+    this.hores = cal.get(Calendar.HOUR_OF_DAY);
+    this.minuts = cal.get(Calendar.MINUTE);
+    this.segons = cal.get(Calendar.SECOND);
+    this.millis = cal.get(Calendar.MILLISECOND);
+
+    // Run per object logic
+    for (CnvObj obj : objects) { obj.run(this); }
+}
+
+public void draw() {
+
+    // Clean drawing area
+    gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+    // Draw objects
+    for (CnvObj obj : objects) { obj.draw(this); }
+
+    // Draw FPS if needed
+    if (showFps) { animationTimer.draw(gc); }   
+}
+```
+
 <br/>
 <center><img src="./assets/ex0601.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 <br/>
 
+
 ## Exemple 0602
 
 El funcionament de *Canvas* és complex, hi ha [tutorials](https://docs.oracle.com/javafx/2/canvas/jfxpub-canvas.htm) a Internet per diferents llenguatges de programació que l'implementen. 
 
 Aquest exemple mostra molts exemples amb el codi de com s'aconsegueix cada tipus dibuix (linies, cercles, imatges, ...)
+
+En aquest cas, enlloc de tenir una llista d'objectes a dibuixar (i dibuixar-los tots), els objectes amb les instruccions de dibuix implementen *"implements CnvObj"* per carregar gestionar un únic objecte amb moltes definicions.
+
+```java
+public void draw() {
+
+    // Clean drawing area
+    gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+    // Draw grid
+    drawGrid();
+
+    // Sempre dibuixem el mateix objecte, però la classe derivada escollida
+    selectedObj.draw(this); 
+
+    // Draw FPS if needed
+    if (showFps) { animationTimer.draw(gc); }
+}
+
+public void actionSetSelection(String value) {
+    switch (value) {
+        case "Linies":              selectedObj = new CnvObjLinies(); break;
+        case "Poligons":            selectedObj = new CnvObjPoligons(); break;
+        case "Poligons emplenats":  selectedObj = new CnvObjPoligonsEmplenats(); break;
+        case "Quadrats i cercles":  selectedObj = new CnvObjQuadratsCercles(); break;
+        case "Imatges":             selectedObj = new CnvObjImatges(); break;
+        case "Gradients lineals":   selectedObj = new CnvObjGradientsLineals(); break;
+        case "Gradients radials":   selectedObj = new CnvObjGradientsRadials(); break;
+        case "Transformacions":     selectedObj = new CnvObjTransformacions(); break;
+        case "Texts":               selectedObj = new CnvObjTexts(); break;
+        case "Text multilinia":     selectedObj = new CnvObjTextMultilinia(); break;
+    }
+}
+```
 
 <br/>
 <center><img src="./assets/ex0602.png" style="max-height: 400px" alt="">
@@ -98,7 +198,46 @@ Aquest exemple mostra molts exemples amb el codi de com s'aconsegueix cada tipus
 
 ## Exemple Pong
 
-Aquest exmple mostra una versió de Pong per a un sol jugador, mostra com es poden fer jocs senzills amb *Canvas* i també com capturar les tecles.
+Aquest exemple mostra una versió de Pong per a un sol jugador, mostra com es poden fer jocs senzills amb *Canvas* i també com capturar les tecles.
+
+Per poder escoltar l'event de tecla, primer s'ha d'haver creat l'escena. Per aquest motiu fem servir *Platform.runLater*. 
+```java
+// Listen to key events (set when scene is available)
+Platform.runLater(() -> {
+    UtilsViews.parentContainer.getScene().addEventFilter(KeyEvent.ANY, keyEvent -> { keyEvent(keyEvent); });
+});
+```
+
+Cada cop que s'apreta o deixa anar una tecla es crida la funció *keyEvent*, que rep la informació de l'event en qüestió (si s'ha apretat o alliberat una tecla, i de quina tecla es tracta):
+```java
+public void keyEvent (KeyEvent evt) {
+
+    // Quan apretem una tecla
+    if (evt.getEventType() == KeyEvent.KEY_PRESSED) {
+        if (evt.getCode() == KeyCode.LEFT) {
+            cnvController.playerDirection = "left";
+        }
+        if (evt.getCode() == KeyCode.RIGHT) {
+            cnvController.playerDirection = "right";
+        }
+    }
+
+    // Quan deixem anar la tecla
+    if (evt.getEventType() == KeyEvent.KEY_RELEASED) {
+        if (evt.getCode() == KeyCode.LEFT) {
+            if (cnvController.playerDirection.equals("left")) {
+                cnvController.playerDirection = "none";
+            }
+        }
+        if (evt.getCode() == KeyCode.RIGHT) {
+            if (cnvController.playerDirection.equals("right")) {
+                cnvController.playerDirection = "none";
+            }
+        }
+    }
+}
+```
+
 
 <br/>
 <center><img src="./assets/exPong.png" style="max-height: 400px" alt="">

@@ -28,7 +28,7 @@ public class Controller implements Initializable {
     @FXML
     private ChoiceBox<String> choiceBox = new ChoiceBox<>();
     
-    private static GameController gameController;
+    private static CnvController cnvController;
     private String choiceBoxValues[] = { "Linies", "Poligons", "Poligons emplenats",
         "Quadrats i cercles", "Imatges", "Gradients lineals", "Gradients radials",
         "Transformacions", "Texts", "Text multilinia" };
@@ -41,12 +41,12 @@ public class Controller implements Initializable {
         UtilsViews.parentContainer.widthProperty().addListener((observable, oldValue, newvalue) -> { actionSetSize(); });
 
         // Initalize game controller
-        gameController = new GameController(canvas);
+        cnvController = new CnvController(canvas);
 
         // Initialize choiceBox
         choiceBox.getItems().addAll(choiceBoxValues);
         choiceBox.setValue("Linies");
-        choiceBox.setOnAction((event) -> { gameController.actionSetSelection(choiceBox.getSelectionModel().getSelectedItem()); });
+        choiceBox.setOnAction((event) -> { cnvController.actionSetSelection(choiceBox.getSelectionModel().getSelectedItem()); });
     }
 
     public void actionSetSize() {

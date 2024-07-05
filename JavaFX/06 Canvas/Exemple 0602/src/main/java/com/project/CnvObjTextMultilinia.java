@@ -15,19 +15,19 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.image.Image;
 
-public class GameObjTextMultilinia implements GameObj {
+public class CnvObjTextMultilinia implements CnvObj {
 
     public static WritableImage image = null;
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
 
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         String str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
@@ -82,6 +82,6 @@ public class GameObjTextMultilinia implements GameObj {
             
             gc.drawImage(image, 50, 25, image.getWidth(), image.getHeight());
         """;
-        controller.drawText(codi, 35, 130);
+        ctrl.drawText(codi, 35, 130);
     }
 }

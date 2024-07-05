@@ -8,17 +8,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
-public class GameObjNumeros implements GameObj {
+public class CnvObjNumeros implements CnvObj {
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
 
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         gc.save(); // Guardar el context de gràfics
 

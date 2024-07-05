@@ -13,7 +13,7 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class GameController {
+public class CnvController {
 
     private double borderSize = 5;
 
@@ -39,15 +39,15 @@ public class GameController {
 
     public Canvas canvas;
     public GraphicsContext gc;
-    public GameTimer animationTimer;
+    public CnvTimer animationTimer;
     public boolean showFps = false; 
 
-    public GameController(Canvas canvas) {
+    public CnvController(Canvas canvas) {
 
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
 
-        animationTimer = new GameTimer(this::run, this::draw, 0);
+        animationTimer = new CnvTimer(this::run, this::draw, 0);
         start();
 
         // Set initial positions

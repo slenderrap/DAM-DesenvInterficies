@@ -5,17 +5,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
 
-public class GameObjPoligonsEmplenats implements GameObj {
+public class CnvObjPoligonsEmplenats implements CnvObj {
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
 
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         // 0
         gc.setStroke(Color.ORANGE);
@@ -46,7 +46,7 @@ public class GameObjPoligonsEmplenats implements GameObj {
             gc.stroke();
             // El relleu (stroke) queda per sobre de l'emplenat (fill)
         """;
-        controller.drawText(codi, 100, 50);
+        ctrl.drawText(codi, 100, 50);
 
         // 1
         gc.setStroke(Color.GREEN);
@@ -77,7 +77,7 @@ public class GameObjPoligonsEmplenats implements GameObj {
             gc.fill();
             // L'emplenat (fill) queda per sobre del relleu (stroke)
         """;
-        controller.drawText(codi, 100, 275);
+        ctrl.drawText(codi, 100, 275);
 
         // 2
         gc.setFill(Color.RED);
@@ -101,7 +101,7 @@ public class GameObjPoligonsEmplenats implements GameObj {
             gc.lineTo(410, 90);
             gc.fill();
         """;
-        controller.drawText(codi, 450, 50);
+        ctrl.drawText(codi, 450, 50);
 
         // 3
         gc.setFill(Color.RED);
@@ -137,6 +137,6 @@ public class GameObjPoligonsEmplenats implements GameObj {
 
             // El 'fill' queda per sota del relleu
         """;
-        controller.drawText(codi, 450, 275);
+        ctrl.drawText(codi, 450, 275);
     }
 }

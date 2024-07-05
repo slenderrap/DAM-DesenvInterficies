@@ -4,19 +4,19 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class GameObjTransformacions implements GameObj {
+public class CnvObjTransformacions implements CnvObj {
 
     final static Image imgMario = new Image("assets/mario.png");
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
         
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         // 0
         gc.save();
@@ -36,7 +36,7 @@ public class GameObjTransformacions implements GameObj {
             gc.drawImage(imgMario, 50, 50, prpAmple, prpAlt);
             gc.restore();
         """;
-        controller.drawText(codi, 125, 40);
+        ctrl.drawText(codi, 125, 40);
 
         // 1
         gc.save();
@@ -56,7 +56,7 @@ public class GameObjTransformacions implements GameObj {
             gc.restore();
             gc.restore();
         """;
-        controller.drawText(codi, 125, 180);
+        ctrl.drawText(codi, 125, 180);
 
         // 2
         gc.save();
@@ -76,6 +76,6 @@ public class GameObjTransformacions implements GameObj {
             gc.restore();
             gc.restore();
         """;
-        controller.drawText(codi, 125, 320);
+        ctrl.drawText(codi, 125, 320);
     }
 }

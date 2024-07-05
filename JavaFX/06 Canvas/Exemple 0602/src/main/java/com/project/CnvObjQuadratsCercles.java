@@ -6,17 +6,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.StrokeLineCap;
 
-public class GameObjQuadratsCercles implements GameObj {
+public class CnvObjQuadratsCercles implements CnvObj {
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
 
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         // 0
         gc.setStroke(Color.BLUE);
@@ -46,7 +46,7 @@ public class GameObjQuadratsCercles implements GameObj {
             // x, y, ample, alt, curvaX, curvaY
             gc.stroke();
         """;
-        controller.drawText(codi, 100, 50);
+        ctrl.drawText(codi, 100, 50);
 
         // 1
         gc.setFill(Color.ORANGE);
@@ -66,7 +66,7 @@ public class GameObjQuadratsCercles implements GameObj {
             gc.fillRoundRect(50, 350, 30, 60, 25, 25); 
             gc.fill();
         """;
-        controller.drawText(codi, 100, 300);
+        ctrl.drawText(codi, 100, 300);
 
         // 2
         gc.setStroke(Color.BLUE);
@@ -91,7 +91,7 @@ public class GameObjQuadratsCercles implements GameObj {
             gc.stroke();
             gc.fill();
         """;
-        controller.drawText(codi, 435, 50);
+        ctrl.drawText(codi, 435, 50);
 
         // 3
         gc.setStroke(Color.GREY);
@@ -114,6 +114,6 @@ public class GameObjQuadratsCercles implements GameObj {
             // x, y, w, h, startAngle, arcExtent, closure
             gc.stroke();
         """;
-        controller.drawText(codi, 435, 300);
+        ctrl.drawText(codi, 435, 300);
     }
 }

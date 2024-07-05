@@ -13,8 +13,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.project.GameTimer;
-
 public class Controller implements Initializable {
 
     @FXML
@@ -23,7 +21,7 @@ public class Controller implements Initializable {
     @FXML
     public Canvas canvas;
 
-    private static GameController gameController;
+    private static CnvController cnvController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -33,7 +31,7 @@ public class Controller implements Initializable {
         UtilsViews.parentContainer.widthProperty().addListener((observable, oldValue, newvalue) -> { actionSetSize(); });
 
         // Initalize game controller
-        gameController = new GameController(canvas);
+        cnvController = new CnvController(canvas);
     }
 
     // Define Canvas size

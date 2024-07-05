@@ -5,17 +5,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
 
-public class GameObjAgulles implements GameObj {
+public class CnvObjAgulles implements CnvObj {
 
     @Override
-    public void run(GameController controller) {
+    public void run(CnvController ctrl) {
         // Update object attributes if any
     }
 
     @Override
-    public void draw(GameController controller) {
+    public void draw(CnvController ctrl) {
 
-        GraphicsContext gc = controller.gc;
+        GraphicsContext gc = ctrl.gc;
 
         int canvasHeight = (int) gc.getCanvas().getHeight();
         int canvasWidth = (int) gc.getCanvas().getWidth();
@@ -28,17 +28,17 @@ public class GameObjAgulles implements GameObj {
         double radians;
 
         // Dibuixar les hores
-        radians = Math.toRadians((controller.hores + controller.minuts / 60) * 30) - sub;
+        radians = Math.toRadians((ctrl.hores + ctrl.minuts / 60) * 30) - sub;
         drawCircleLine(gc, Color.WHITE, 3, x, y, 0, 25, radians);
         drawCircleLine(gc, Color.WHITE, 8, x, y, 20, radiusHalf, radians);
 
         // Dibuixar els minuts
-        radians = Math.toRadians((controller.minuts + controller.segons / 60) * 6) - sub;
+        radians = Math.toRadians((ctrl.minuts + ctrl.segons / 60) * 6) - sub;
         drawCircleLine(gc, Color.WHITE, 3, x, y, 0, 25, radians);
         drawCircleLine(gc, Color.WHITE, 8, x, y, 20, radius - 25, radians);
 
         // Dibuixar els segons
-        radians = Math.toRadians(controller.segons * 6) + Math.toRadians(controller.millis * 0.006) - sub;
+        radians = Math.toRadians(ctrl.segons * 6) + Math.toRadians(ctrl.millis * 0.006) - sub;
         drawCircleLine(gc, Color.RED, 2, x, y, -20, radius, radians);
 
         // Dibuixar el cercle dels segons

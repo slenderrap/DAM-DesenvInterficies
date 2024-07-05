@@ -9,30 +9,30 @@ import java.util.ResourceBundle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-public class GameController {
+public class CnvController {
 
     public double hores = 0;
     public double minuts = 0;
     public double segons = 0;
     public double millis = 0;
 
-    public ArrayList<GameObj> objects = new ArrayList<>(Arrays.asList(
-        new GameObjNumeros(),
-        new GameObjAgulles(),
-        new GameObjWatch()
+    public ArrayList<CnvObj> objects = new ArrayList<>(Arrays.asList(
+        new CnvObjNumeros(),
+        new CnvObjAgulles(),
+        new CnvObjWatch()
     ));
 
     public Canvas canvas;
     public GraphicsContext gc;
-    public GameTimer animationTimer;
+    public CnvTimer animationTimer;
     public boolean showFps = true; 
 
-    public GameController(Canvas canvas) {
+    public CnvController(Canvas canvas) {
 
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
 
-        animationTimer = new GameTimer(this::run, this::draw, 0);
+        animationTimer = new CnvTimer(this::run, this::draw, 0);
         start();
     }
 
@@ -59,7 +59,7 @@ public class GameController {
         this.millis = cal.get(Calendar.MILLISECOND);
 
         // Run per object logic
-        for (GameObj obj : objects) { obj.run(this); }
+        for (CnvObj obj : objects) { obj.run(this); }
     }
 
     public void draw() {
@@ -68,7 +68,7 @@ public class GameController {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         // Draw objects
-        for (GameObj obj : objects) { obj.draw(this); }
+        for (CnvObj obj : objects) { obj.draw(this); }
 
         // Draw FPS if needed
         if (showFps) { animationTimer.draw(gc); }   

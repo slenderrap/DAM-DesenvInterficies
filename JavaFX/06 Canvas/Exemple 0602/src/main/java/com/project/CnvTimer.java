@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class GameTimer extends AnimationTimer {
+public class CnvTimer extends AnimationTimer {
 
     public double fps;
     
@@ -20,7 +20,7 @@ public class GameTimer extends AnimationTimer {
     private Consumer<Double> runFunction;
     private Runnable drawFunction;
 
-    public GameTimer(Consumer<Double> runFunction, Runnable drawFunction, double targetFPS) {
+    public CnvTimer(Consumer<Double> runFunction, Runnable drawFunction, double targetFPS) {
         this.runFunction = runFunction;
         this.drawFunction = drawFunction;
         if (targetFPS > 0) {
