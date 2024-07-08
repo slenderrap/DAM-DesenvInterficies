@@ -16,6 +16,10 @@
 
 # Arxius
 
+Documentació:
+
+- [Writing files](https://docs.flutter.dev/cookbook/persistence/reading-writing-files)
+
 Per guardar arxius en format *.json*:
 
 ```dart

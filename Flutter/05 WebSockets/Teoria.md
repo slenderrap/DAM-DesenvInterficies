@@ -16,6 +16,10 @@
 
 # WebSockets
 
+Documentació:
+
+- [WebSockets](https://docs.flutter.dev/cookbook/networking/web-sockets)
+
 ## Estats de connexió
 
 Creem un "[enum](https://dart.dev/language/enums)" per definir els possibles estats de la connexió del socket:
