@@ -21,7 +21,7 @@ Flutter és un **Framework** de programació basat en llenguatge Dart, per a des
 Permet crear aplicacions per diferents plataformes, fent servir el mateix tipus de codi i eines de programació.
 
 <br/>
-<center><img src="./assets/devices.png" style="max-height: 400px" alt="">
+<center><img src="./assets/devices.png" style="max-height: 200px" alt="">
 <br/></center>
 <br/>
 <br/>
