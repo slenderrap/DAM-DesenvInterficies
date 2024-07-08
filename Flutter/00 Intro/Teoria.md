@@ -89,7 +89,7 @@ flutter doctor
 ### Extensió a VisualStudioCode
 
 <br/>
-<center><img src="./assets/flutterextension.png" style="max-height: 400px" alt="">
+<center><img src="./assets/flutterextension.png" style="max-height: 200px" alt="">
 <br/></center>
 <br/>
 <br/>
