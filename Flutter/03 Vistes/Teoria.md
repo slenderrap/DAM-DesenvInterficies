@@ -31,7 +31,7 @@ CupertinoButton(
 ),
 ```
 
-**Nota:** Amb els widgets de *Cupertino* la barra de navegació ja mostra el botó *"<"* per tornar enrrera fent un *".pop"*
+**Nota:** Amb els widgets de *Cupertino* la barra de navegació ja mostra el botó *"<"* per tornar enrrera fent un *".pop"* de manera automàtica.
 
 **Exemple 0300:**
 
