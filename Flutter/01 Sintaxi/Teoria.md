@@ -594,7 +594,7 @@ void main() {
 }
 ```
 
-## Collections
+## Collections (llistes)
 
 Les col·leccions actuen com els arrays, però accepten tipus heterogenis.
 
@@ -619,7 +619,7 @@ Aquest exemple escriu:
 Llargada de listA: 3
 ```
 
-## Records
+## Records (semblant a mapes)
 
 Els *"Records"* són tuples que contenen elements, si es vol que continguin altres objectes s’ha de definir el tipus com *<String, dynamic>*. 
 
