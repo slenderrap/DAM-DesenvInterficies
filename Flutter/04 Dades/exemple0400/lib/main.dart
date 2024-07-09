@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AppData(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter JSON Editor',
         theme: ThemeData(
           primarySwatch: Colors.blue,

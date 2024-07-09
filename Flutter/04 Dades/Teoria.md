@@ -58,77 +58,95 @@ class AppData with ChangeNotifier {
 
 ## Arxius
 
+Per llegir i escriure arxius en Flutter calen les següents dependències a l'arxiu *"pubspec.yaml"*:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.1
+  path_provider: ^2.0.11
+  file_picker: ^8.0.6 
+```
+
 Documentació:
 
 - [Writing files](https://docs.flutter.dev/cookbook/persistence/reading-writing-files)
 
-Per guardar arxius en format *.json*:
+**Exemple 0400:**
 
-```dart
-Future<void> saveFile(String fileName, Map<String, dynamic> data) async {
-
-  file_saving = true;
-  notifyListeners();
-
-  try {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/$fileName');
-    final jsonData = jsonEncode(data);
-    await file.writeAsString(jsonData);
-  } catch (e) {
-    // ignore: avoid_print
-    print("Error saving file: $e");
-  } finally {
-    file_saving = false;
-    notifyListeners();
-  }
-}
-```
-
-Cridar la funció:
-
-```dart
-  final myData = {
-    'type': 'list',
-    'clients': clients,
-    'selectedClient': selectedClient,
-    // i més camps que vulguis guardar
-  };
-  await saveFile('myData.json', myData);
+```bash
+cd exemple0400
+flutter pub upgrade --major-versions # actualitzar dependencies
+flutter run -d macos
 ```
 
 Per llegir arxius *.json*:
 
 ```dart
-Future<Map<String, dynamic>?> readFile(String fileName) async {
-  file_loading = true;
+Future<void> loadFile(String path) async {
+  _fileLoading = true;
   notifyListeners();
 
   try {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/$fileName');
+    final file = File(path);
+    if (kDebugMode) {
+      print("Trying to read file from: ${file.path}");
+    }
     if (await file.exists()) {
-      final jsonData = await file.readAsString();
-      final data = jsonDecode(jsonData) as Map<String, dynamic>;
-      return data;
+      _jsonContent = await file.readAsString();
+      jsonController.text = _jsonContent;
+      _loadedFilePath = path; // Guarda el camí del fitxer carregat
     } else {
-      // ignore: avoid_print
-      print("File does not exist!");
-      return null;
+      _jsonContent = '{}';
+      if (kDebugMode) {
+        print("File does not exist!");
+      }
     }
   } catch (e) {
-    // ignore: avoid_print
-    print("Error reading file: $e");
-    return null;
+    if (kDebugMode) {
+      print("Error reading file: $e");
+    }
   } finally {
-    file_loading = false;
+    _fileLoading = false;
     notifyListeners();
   }
 }
 ```
 
-Cridar la funció:
+Per guardar arxius en format *.json*:
 
 ```dart
-    final data = await readFile('myData.json');
+Future<void> saveFile(String path) async {
+  _fileSaving = true;
+  notifyListeners();
+
+  try {
+    final file = File(path);
+    final jsonData = const JsonEncoder.withIndent('  ').convert(jsonDecode(
+        jsonController
+            .text)); // Utilitza el text del controlador i el formateja
+    await file.writeAsString(jsonData);
+    _loadedFilePath = path; // Actualitza el camí del fitxer guardat
+  } catch (e) {
+    if (kDebugMode) {
+      print("Error saving file: $e");
+    }
+  } finally {
+    _fileSaving = false;
+    notifyListeners();
+  }
+}
+```
+
+## Crides post
+
+**Exemple 0401:**
+
+Per fer anar aquest exemple cal un servidor 'Ollama' amb el model 'llama3' funcionant en local:
+
+```bash
+cd exemple0401
+flutter pub upgrade --major-versions # actualitzar dependencies
+flutter run -d macos
 ```
