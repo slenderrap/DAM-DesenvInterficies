@@ -165,8 +165,41 @@ child: ListView.builder(
 
 **Nota:** En aquest exemple es mostra una linia separatòria (*Divider*) entre cada element de la llista (excepte l'últim element)
 
+Per enviar dades a una subvista, es fa igual:
+
+```dart
+    onTap: () {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => ViewColorDetail(data: data),
+        ),
+      );
+    },
+```
+
+```dart
+class ViewColorDetail extends StatelessWidget {
+  final ColorData data;
+
+  const ViewColorDetail({required this.data, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(data.name),
+      ),
+      child: Center(
+        // ...
+      ),
+    );
+  }
+}
+```
+
 <br/>
-<center><img src="./assets/ex0302.png" style="max-height: 400px" alt="">
+<center><img src="./assets/ex0302.gif" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 <br/>
