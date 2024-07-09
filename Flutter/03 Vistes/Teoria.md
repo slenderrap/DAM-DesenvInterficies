@@ -79,3 +79,62 @@ flutter run -d macos
 <br/>
 <br/>
 
+## Subvistes
+
+Com que amb Flutter tot són Widgets, és fàcil crear subvistes que es fan servir en llistes.
+
+La subvista es forma com qualsevol altre widget, però se li passen els paràmetres amb la informació.
+
+**Exemple 0302:**
+
+En aquest exemple la subvista rep com a paràmtre un objecte tipus **"ColorData"** que conté la informació específica de cada element de la llista.
+
+Quan es vol fer servir la informació només cal fer *colorData.??* on ?? és l'atribut que es vol obtenir: 
+
+```dart
+class ColorListItem extends StatelessWidget {
+  final ColorData colorData;
+
+  const ColorListItem(this.colorData, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${colorData.name}, ${colorData.color}',
+              ),
+              // ...
+            ],),],),),
+    }
+}
+```
+
+Per formar una *ListView* a partir d'una llista es fa servir un *".builder"*. En aquest exemple la llista amb la informació està a *"List<ColorData> colorDataList"*:
+
+```dart
+ListView.builder(
+    itemCount: colorDataList.length,
+    itemBuilder: (context, index) {
+        return Column(
+        children: [
+            ColorListItem(colorDataList[index]),
+            if (index < colorDataList.length - 1)
+            const Divider(
+                height: 1,
+                thickness: 1,
+                color: CupertinoColors.separator,
+            ),
+        ],
+        );
+    },
+)
+```
+
+**Nota:** En aquest exemple es mostra una linia separatòria (*Divider*) entre cada element de la llista (excepte l'últim element)
