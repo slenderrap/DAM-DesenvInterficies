@@ -105,12 +105,64 @@ Gairebé tots els elements de les aplicacions s’organitzen amb **"Rows"** o **
 <center><img src="./assets/widgetstree2.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
+
+**Exemple0200:**
+
+En aquest exemple s'organitza una aplicació en una columna que conté dues files, la primera amb números i la segona amb botons:
+
+```dart
+body: Center(
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            '$_firstNumber',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(width: 20),
+          Text(
+            '$_secondNumber',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ],
+      ),
+      const SizedBox(height: 20),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ElevatedButton(
+            onPressed: _incrementFirstNumber,
+            child: const Text('Increment First Number'),
+          ),
+          const SizedBox(width: 10),
+          ElevatedButton(
+            onPressed: _decrementSecondNumber,
+            child: const Text('Decrement Second Number'),
+          ),
+          const SizedBox(width: 10),
+          ElevatedButton(
+            onPressed: _resetNumbers,
+            child: const Text('Reset Numbers'),
+          ),
+        ],
+      ),
+    ],
+  ),
+)
+```
+
+<br/>
+<center><img src="./assets/ex0200.png" style="max-height: 400px" alt="">
+<br/></center>
 <br/>
 
-Però per facilitar encara més la construcció de layouts, hi ha altres elements com: 
+Per facilitar encara més la construcció de layouts, hi ha altres elements com: 
 
-- **"ListView"** per definir una llista amb scroll
-- **"GridView"** per fer graelles d’elements també amb scroll
+- [ListView](https://api.flutter.dev/flutter/widgets/ListView-class.html) per definir una llista amb scroll
+- [GridView](https://api.flutter.dev/flutter/widgets/GridView-class.html) per fer graelles d’elements també amb scroll
 
 ## Tipus de widgets
 
@@ -143,6 +195,61 @@ Column(
     ],
 );
 ```
+
+**Exemple 0201:**
+
+Codi:
+
+```dart
+body: Center(
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: 150,
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/cat.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(width: 20),
+          Container(
+            width: 150,
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/dog.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ],
+  ),
+),
+```
+
+En aquest codi es mostren dues imatges, els widgets *ClipRRect* s'encarregen de centrar la imatge dins d'un relleu arrodonit.
+
+<br/>
+<center><img src="./assets/ex0201.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
 
 El codi flutter aprofita el fet que amb Dart els paràmetres dels constructors poden ser opcionals, per oferir centenars d’objectes amb desenes de configuracions depenent dels paràmetres que poses al constructor.
 
@@ -232,7 +339,7 @@ El widget ListView permet definir diversos widgets fills i s’encarrega de gest
 
 A vegades la llista de widgets que s’han de mostrar, depenen de la informació que hi ha en un array o llista.
 
-En aquest cas es fa servir un ‘builder’ per tal que els elements es formin automàticament a partir d’un únic exemple que s'aplica a tots els ítems de la llista
+En aquest cas es fa servir un **builder** per tal que els elements es formin automàticament a partir d’un únic exemple que s'aplica a tots els ítems de la llista
 
 En aquest l’exemple de llista es diu ‘data’ i es formen elements amb un text ‘nom’ i una imatge.
 
@@ -347,11 +454,12 @@ return ListView.builder(
 );
 ```
 
-Per compartir dades entre diferents seccions es fa servir un objecte de dades comú, que guarda tota la informació (bé sigui d’arxius o de servidors)
+### Compartir dades i notificacions
 
-Quan hi han canvis a la informació, aquest objecte comú ‘notifica’ als widgets que estan interessats en aquella informació, que cal redibuixar els seus continguts.
+En Flutter es pot fer servir un **Singleton** però no és recomanat, el motiu és que per optimitzar el rendiment i redibuix dels widgets, és més recomanable fer servir *notifyLiteners()*.
 
-La notificació es fa amb ‘notifyListeners’
+Quan hi han canvis a la informació (d'arxius o servidors), aquest l'objecte comú *"notifica"* als widgets que estan interessats en aquella informació, que cal redibuixar els seus continguts.
+
 
 ```dart
 class AppData with ChangeNotifier {
@@ -384,5 +492,9 @@ runApp(
     ),
 );
 ```
+
+**Exemple 0203:**
+
+
 
 

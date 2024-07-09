@@ -34,15 +34,26 @@ Dart pot **transpilar** el codi a JavaScript amb aquesta instrucció:
 dart compile js test.dart
 ```
 
-Això genera una sortida *"out.js"* amb el codi transformat a JavaScript, el codi generat està optimitzat, i si és molt complexe, fins i tot pot funcionar millor que escriure el codi directament amb JavaScript.
+**Nota:** Això genera una sortida *"out.js"* amb el codi transformat a JavaScript, el codi generat està optimitzat, i si és molt complexe pot funcionar millor que escriure el codi directament amb JavaScript.
 
-## Dart i la linia de comandes
+## Cos del programa
 
 Dart serveix per fer tot tipus de programes, també de línia de comandes.
 
-Per compilar i executar codi Dart simplement es pot fer:
+Els arxius de programació Dart tenen l’extensió **".dart"**, i una funció *main* que és el punt d'entrada/inici:
 
 ```dart
+void main() {
+    print('Hello, World!');
+}
+```
+
+**Exemple0100:**
+
+Per compilar i executar codi Dart simplement es pot fer:
+
+```bash
+cd exemple0100
 dart arxiu.dart
 ```
 
@@ -52,26 +63,26 @@ Si el què es vol és un arxiu “.exe” del codi, es pot fer amb:
 dart compile exe arxiu.dart
 ```
 
-## Arxius Dart
+## Comentaris
 
-Els arxius de programació Dart tenen l’extensió **".dart"**
+Els comentaris 'inline' (d'una linia) començen a partir de les dues barres //
 
-Les aplicacions dart, s’inicien a partir d’una funció main, aquest és un exemple minimalista d’arxiu “.dart”:
+Els comentaris 'multiline' (múltiples línies) es posen entre /* (per començar el comentari) i */ (per tancar el comentari)
 
 ```dart
-void main() {
-    print('Hello, World!');
-}
+// Comentari d'una sola línia
+/*
+    Comentari de
+    múltiples línies
+*/
 ```
-
-**Nota:** La funció “print” escriu a la línia de comandes.
 
 ## Variables
 
-La paraula clau *"var"* fa que automàticament s’asigni un tipus a la variable.
+La paraula clau *"var"* fa que automàticament s’asigni un tipus a la variable, també es pot definir el tipus al declarar la variable
 
 ```dart
-    var nameA = 'Bob'; // String
+    var nameA = 'Bob'; // Automàticament és String
     String nameB = 'Bob'; // String
     Object nameC = 'Bob'; // Object
 ```
@@ -81,6 +92,61 @@ Els principals tipus són:
 ```text
 	int, double, String, bool, List, Set, Map,
 	Symbol, Object, Enum, Future, Iterable
+```
+
+**Exemple0101:**
+
+```bash
+cd exemple0101
+dart arxiu.dart
+```
+
+Codi:
+
+```dart
+void main() {
+  // Crear una llista amb exemples de diferents tipus de dades
+  var dades = [
+    {"tipus": "int", "valor": 123},
+    {"tipus": "double", "valor": 3.14},
+    {"tipus": "string", "valor": "Hola, món!"},
+    {"tipus": "bool", "valor": true},
+    {
+      "tipus": "list",
+      "valor": [1, 2, 3]
+    },
+    {
+      "tipus": "tuple",
+      "valor": [1, 2, 3]
+    }, // Dart no té tuples natius, usar llistes
+    {
+      "tipus": "set",
+      "valor": {1, 2, 3}
+    },
+    {
+      "tipus": "map",
+      "valor": {"clau": "abc"}
+    }
+  ];
+
+  // Iterar a través de la llista i imprimir cada tipus de dada amb el seu valor
+  for (var item in dades) {
+    print("Tipus: ${item['tipus']}, Valor: ${item['valor']}");
+  }
+}
+```
+
+Sortida:
+
+```text
+Tipus: int, Valor: 123
+Tipus: double, Valor: 3.14
+Tipus: string, Valor: Hola, món!
+Tipus: bool, Valor: true
+Tipus: list, Valor: [1, 2, 3]
+Tipus: tuple, Valor: [1, 2, 3]
+Tipus: set, Valor: {1, 2, 3}
+Tipus: map, Valor: {clau: abc}
 ```
 
 ### Variables, exemples de números
@@ -123,7 +189,7 @@ Els principals tipus són:
      multi-line string.""";
 ```
 
-### Variables, exemples de Strings amb informació d'altres variables
+### Variables, exemples de Strings amb informació de variables
 
 ```dart
     String name = "🇩🇰Tom";
@@ -135,7 +201,7 @@ Produeix la sortida:
 
     🇩🇰 Tom is going to walk the dogs 3 times per day
 
-### Dart, null safety
+### Null safety
 
 Dart és un llenguatge **"Null safety"**, això vol dir que preveu errors produits per variables assignades a *'null'*
 
@@ -154,7 +220,7 @@ String nameB;
 // si es fa servir sense iniciar-la el compilador falla
 ```
 
-### Dart, late
+### Null safety i late
 
 A vegades, Dart interpreta que una variable no s’ha iniciat quan si que ho farem abans de fer-la servir. 
 
@@ -169,7 +235,39 @@ void main() {
 }
 ```
 
-### Dart, metadades
+## Operacions matemàtiques
+
+Les operacions matemàtiques són semblants a Java:
+
+```dart
+void main() {
+  int sum = 2 + 3;
+  print('sum = $sum');
+
+  int a = 3;
+  a += 5; // Ara el valor de 'a' serà 8
+  a -= 2; // Ara el valor de 'a' serà 6
+  print('a = $a');
+
+  int b = (2 + 3) * 4;
+  print('b = $b');
+
+  double c = (2 * 2) + (4 * 4);
+  print('c = $c');
+
+  int d = 10 * 2 ~/ 5; // En Dart, usa ~/ per a divisió sencera
+  print('d = $d');
+
+  int e = 10 % 3 % 2;
+  print('e = $e');
+
+  int f = 10 + 2 - 5;
+  print('f = $f');
+}
+
+```
+
+### Metadades
 
 Les metadades permeten posar anotacions al codi:
 
@@ -193,129 +291,87 @@ class Television extends ScreenView {
 }
 ```
 
-### Dart, libreries (aka import)
+## Operacions de text
 
-Per carregar llibreries es fa servir ‘import’
-
-Si dues llibreries coincideixen amb nom, es poden evitar conflictes amb la paraula reservada **"as"**:
-
-```dart
-import 'package:lib1/lib1.dart';
-import 'package:lib2/lib2.dart' as lib2;
-
-// Uses Element from lib1.
-Element element1 = Element();
-
-// Uses Element from lib2.
-lib2.Element element2 = lib2.Element();
-```
-
-### Dart, Collections
-
-Les col·leccions actuen com els arrays, però accepten tipus heterogenis.
-
-```dart
-void main () {
-    var listA = [1, 2, 3];
-    var listB = [1, "Hi", 3, "Bye"];
-
-    print(listA);
-    print(listB);
-    print('${listA[1]} : ${listB[3]}');
-    print('Llargada de listA: ${listA.length}');
-}
-```
-
-Aquest exemple escriu:
-
-```text
-[1, 2, 3]
-[1, Hi, 3, Bye]
-2 : Bye
-Llargada de listA: 3
-````
-
-### Dart, Records
-
-Els *"Records"* són tuples que contenen elements, si es vol que continguin altres objectes s’ha de definir el tipus com *<String, dynamic>*. 
+Dart té moltes funcions i objectes per manipular cadenes de text.
 
 ```dart
 void main() {
-    var recordA = <String, dynamic> {
-        'first': 'first',
-        'a': 2,
-        'b': true,
-        'last': {
-        'name': 'Patri',
-        'age': 24
-        },
-    };
-    recordA['last']['age'] = 25;
-
-    print('Element: ${recordA['first']},'
-        ' b: ${recordA['b']},'
-        ' age: ${recordA['last']['age']}');
+  // Cadena inicial
+  String text = "Hola Món, Món és un lloc bonic.";
+  
+  // Longitud
+  int longitud = text.length;
+  print("Longitud: $longitud");
+  
+  // Concatenació
+  String salutacio = "$text Des de Dart!";
+  print("Concatenació: $salutacio");
+  
+  // Indexació
+  String lletra = text[0];
+  print("Caràcter en índex 0: $lletra");
+  
+  // Subcadena
+  String subcadena = text.substring(0, 4);
+  print("Subcadena: $subcadena");
+  
+  // Repetició
+  String repetit = "ha" * 3;
+  print("Repetició: $repetit");
+  
+  // Conversió
+  String majuscules = text.toUpperCase();
+  print("A majúscules: $majuscules");
+  
+  // Ordenar
+  List<String> lletres = text.split('');
+  lletres.sort();
+  String ordenat = lletres.join();
+  print("Ordenat: $ordenat");
+  
+  // Substitució
+  String substituit = text.replaceAll("Món", "Dart");
+  print("Substitució: $substituit");
+  
+  // Cerca
+  int index = text.indexOf("Món");
+  print("Índex de 'Món': $index");
+  
+  // Invertir
+  String invertit = text.split('').reversed.join('');
+  print("Invertit: $invertit");
+  
+  // Canviar totes les aparicions d'una paraula
+  String canviParaula = text.replaceAll("Món", "Terra");
+  print("Canvi de paraules: $canviParaula");
 }
 ```
 
-La sortida és:
+## Random, números aleatòris
 
-```text
-Element: first, b: true, age: 25
-```
-
-### Dart, Records amb 'as'
-
-Aquests codis són equivalents, quan no s’ha definit el tipus del ‘Record’, es pot definir al final amb un ‘as’ o bé deixar que el sistema l’infereixi automàticament
+Per generar nombres aleatoris, s'utilitza la classe **Random** del paquet *dart:math*. Aquí tens una explicació i un exemple de com fer-ho en Dart:
 
 ```dart
+import 'dart:math';
+
 void main() {
-    var recordA = <String, dynamic> {
-        'first': 'first',
-        'a': 2,
-        'b': true,
-        'last': {
-            'name': 'Patri',
-            'age': 24
-        },
-    };
-}
+  // Crear una instància de Random
+  Random random = Random();
 
-```
+  // Generació de nombres aleatoris
+  double aleatori = random.nextDouble(); // Genera un número aleatori entre 0.0 i 1.0 (no inclòs)
 
-```dart
-void main() {
-    var recordA = {
-        'first': 'first',
-        'a': 2,
-        'b': true,
-        'last': {
-            'name': 'Patri',
-            'age': 24
-        },
-    } as Map<String, dynamic>;
+  // Genera un número aleatori entre 0 i 100 tots dos inclosos
+  int aleatoriEntre0i100 = random.nextInt(101); // nextInt(101) genera un número entre 0 i 100
+
+  // Imprimir resultats
+  print("Número aleatori entre 0.0 i 1.0: $aleatori");
+  print("Número aleatori entre 0 i 100: $aleatoriEntre0i100");
 }
 ```
 
-### Dart, Records, posició amb $X
-
-Els elements d’un ‘Record’ poden no tenir etiqueta, i bé tant si la tenen com si no, podem accedir-hi amb $X on X és el número que correspon a la posició.
-
-```dart
-    void main() {
-    var pair = (42, 'a', b: true, 'last');
-
-    print('Number: ${pair.$1}, String: ${pair.$2}, Boolean: ${pair.$3}');
-}
-```
-
-Aquest codi escriu:
-
-```text
-Number: 42, String: a, Boolean: last
-```
-
-### Dart, funcions
+## Funcions
 
 Per definir una funció, cal el valor de retorn i el tipus dels paràmetres.
 
@@ -341,7 +397,7 @@ Són parells?
 6: true
 ```
 
-### Dart, funcions amb paràmetres opcionals
+### Funcions amb paràmetres opcionals
 
 Dart permet posar paràmetres opcionals a les funcions.
 
@@ -367,7 +423,7 @@ Aquest codi escriu: El valor 4 és parell: true \\n El valor cinc és parell: fa
 
 **Important:** Es recomana iniciar els paràmetres opcionals amb un valor, si no es vol definir un valor per defecte es pot posar ? i s’inicien a null (com el paràmetre "extra")
 
-### Dart, funcions asíncrones
+### Funcions asíncrones
 
 Les funcions **"async"** són aquelles que no sabem quan trigaràn a executar-se, perquè depenen d’un servei extern (llegir arxius, connectar amb un servidor, un procés paral·lel, …)
 
@@ -385,9 +441,57 @@ void main() {
 }
 ```
 
-### Dart, bucles (loops)
+## Control de fluxe, if/else i switch
 
-La manera ‘clàssica’ de fer bucles.
+Pel funcionament de 'if' i 'else' cal tenir en compte que:
+
+- Si hi ha multiples línies afectades per la condició, es posen totes entre { i }
+
+- Si només hi ha una linia implicada a la condició opcionalment es pot posar al costat de la condició sense claus
+
+**Nota:** Per netedat, us recomano fer servir claus, també per si en un futur cal afegir línies de codi a la condició
+
+```dart
+void main() {
+    if (isRaining()) {
+        you.bringRainCoat();
+    } else if (isSnowing()) {
+        you.wearJacket();
+    } else {
+        car.putTopDown();
+    }
+}
+```
+
+```dart
+void main() {
+    var command = 'OPEN';
+    switch (command) {
+        case 'CLOSED':
+            executeClosed();
+        case 'PENDING':
+            executePending();
+        case 'APPROVED':
+            executeApproved();
+        case 'DENIED':
+            executeDenied();
+        case 'OPEN':
+            executeOpen();
+        default:
+            executeUnknown();
+    }
+}
+```
+
+## Control de fluxe, loops while i for
+
+El bucle 'for' té 3 paràmetres:
+
+- El comptador inicial de la variable que compte en quina posició del bucle ens trobem
+
+- La condició de sortida, és a dir la condició que mentre es compleix executem el codi del bucle
+
+- La operació que apliquem al contador, a cada iteració del bucle (a l'exemple sumem un 1 a i a cada iteració)
 
 ```dart
 void main() {
@@ -462,60 +566,272 @@ La sortida és
 8
 ```
 
-### Dart, condicions
+Exemple de *while*:
 
 ```dart
 void main() {
-    if (isRaining()) {
-        you.bringRainCoat();
-    } else if (isSnowing()) {
-        you.wearJacket();
-    } else {
-        car.putTopDown();
-    }
+  int count = 0;
+
+  // Bucle while
+  while (count < 5) {
+    print('El valor de count és: $count');
+    count++;
+  }
 }
+```
+
+Exemple de *do while*:
+
+```dart
+void main() {
+  int count = 0;
+
+  // Bucle do-while
+  do {
+    print('El valor de count és: $count');
+    count++;
+  } while (count < 5);
+}
+```
+
+## Collections
+
+Les col·leccions actuen com els arrays, però accepten tipus heterogenis.
+
+```dart
+void main () {
+    var listA = [1, 2, 3];
+    var listB = [1, "Hi", 3, "Bye"];
+
+    print(listA);
+    print(listB);
+    print('${listA[1]} : ${listB[3]}');
+    print('Llargada de listA: ${listA.length}');
+}
+```
+
+Aquest exemple escriu:
+
+```text
+[1, 2, 3]
+[1, Hi, 3, Bye]
+2 : Bye
+Llargada de listA: 3
+```
+
+## Records
+
+Els *"Records"* són tuples que contenen elements, si es vol que continguin altres objectes s’ha de definir el tipus com *<String, dynamic>*. 
+
+```dart
+void main() {
+    var recordA = <String, dynamic> {
+        'first': 'first',
+        'a': 2,
+        'b': true,
+        'last': {
+        'name': 'Patri',
+        'age': 24
+        },
+    };
+    recordA['last']['age'] = 25;
+
+    print('Element: ${recordA['first']},'
+        ' b: ${recordA['b']},'
+        ' age: ${recordA['last']['age']}');
+}
+```
+
+La sortida és:
+
+```text
+Element: first, b: true, age: 25
+```
+
+### Records amb 'as'
+
+Aquests codis són equivalents, quan no s’ha definit el tipus del ‘Record’, es pot definir al final amb un ‘as’ o bé deixar que el sistema l’infereixi automàticament
+
+```dart
+void main() {
+    var recordA = <String, dynamic> {
+        'first': 'first',
+        'a': 2,
+        'b': true,
+        'last': {
+            'name': 'Patri',
+            'age': 24
+        },
+    };
+}
+
 ```
 
 ```dart
 void main() {
-    var command = 'OPEN';
-    switch (command) {
-        case 'CLOSED':
-            executeClosed();
-        case 'PENDING':
-            executePending();
-        case 'APPROVED':
-            executeApproved();
-        case 'DENIED':
-            executeDenied();
-        case 'OPEN':
-            executeOpen();
-        default:
-            executeUnknown();
-    }
+    var recordA = {
+        'first': 'first',
+        'a': 2,
+        'b': true,
+        'last': {
+            'name': 'Patri',
+            'age': 24
+        },
+    } as Map<String, dynamic>;
 }
 ```
 
-### Dart, excepcions (try/catch)
+### Records, posició amb $X
+
+Els elements d’un ‘Record’ poden no tenir etiqueta, i bé tant si la tenen com si no, podem accedir-hi amb $X on X és el número que correspon a la posició.
+
+```dart
+    void main() {
+    var pair = (42, 'a', b: true, 'last');
+
+    print('Number: ${pair.$1}, String: ${pair.$2}, Boolean: ${pair.$3}');
+}
+```
+
+Aquest codi escriu:
+
+```text
+Number: 42, String: a, Boolean: last
+```
+
+## Llibreries (aka import)
+
+Per carregar llibreries es fa servir ‘import’
+
+Si dues llibreries coincideixen amb nom, es poden evitar conflictes amb la paraula reservada **"as"**:
+
+```dart
+import 'package:lib1/lib1.dart';
+import 'package:lib2/lib2.dart' as lib2;
+
+// Uses Element from lib1.
+Element element1 = Element();
+
+// Uses Element from lib2.
+lib2.Element element2 = lib2.Element();
+```
+
+## Excepcions (try/on/catch/finally)
 
 ```dart
 void main() {
+  try {
+    // Codi que pot llençar una excepció
+    int result = 10 ~/ 0; // Això llençarà una excepció de divisió per zero
+    print('El resultat és: $result');
+  } on IntegerDivisionByZeroException catch (e) {
+    // Aquest bloc s'executa si es llença una excepció de divisió per zero
+    print('S\'ha produït una excepció de divisió per zero: $e');
+  } catch (e) {
+    // Aquest bloc s'executa per qualsevol altra excepció
+    print('S\'ha produït una excepció: $e');
+  } finally {
+    // Aquest bloc s'executa sempre, independentment de si s'ha llençat una excepció o no
+    print('Això s\'executa sempre');
+  }
+}
+```
+
+### Llançar excepcions amb throw
+
+Per llançar excepcions es fa servir **throw**:
+
+```dart
+void main() {
+  try {
+    // Llençar una excepció
+    validarEdat(-5);
+  } on FormatException catch (e) {
+    // Capturar una excepció específica
+    print('S\'ha produït una FormatException: $e');
+  } catch (e) {
+    // Capturar qualsevol altra excepció
+    print('S\'ha produït una excepció: $e');
+  } finally {
+    // Aquest bloc s'executa sempre
+    print('Això s\'executa sempre');
+  }
+}
+
+void validarEdat(int edat) {
+  if (edat < 0) {
+    // Llençar una excepció personalitzada
+    throw FormatException('L\'edat no pot ser negativa: $edat');
+  } else {
+    print('L\'edat és vàlida: $edat');
+  }
+}
+```
+
+## Entrada de dades per consola
+
+Per llegir dades del teclat a través de la consola cal importar *dart:io*:
+
+**Exemple 0102:**
+
+```bash
+cd exemple0102
+dart arxiu.dart
+```
+
+```dart
+import 'dart:io';
+
+void main() {
+  double suma = 0.0;
+  print("Introdueix un número (decimals amb .) o escriu 'sortir' per acabar:");
+
+  while (true) {
+    stdout.write("La suma actual és $suma\nIntrodueix un número o 'sortir': ");
+    String? input = stdin.readLineSync();
+
+    if (input == null) {
+      continue;
+    }
+
+    if (input.toLowerCase() == 'sortir') {
+      print("Finalitzant l'aplicació. La suma final és $suma");
+      break;
+    }
+
     try {
-        breedMoreLlamas();
-    } on OutOfLlamasException {
-        // A specific exception
-        buyMoreLlamas();
-    } on Exception catch (e) {
-        // Anything else that is an exception
-        print('Unknown exception: $e');
+      double numero = double.parse(input);
+      suma += numero;
     } catch (e) {
-        // No specified type, handles all
-        print('Something really unknown: $e');
+      print("Error, cal escriure un número o 'sortir'");
     }
+  }
 }
 ```
 
-### Dart, classes i constructors
+La sortida és:
+
+```text
+La suma actual és 0.0
+Introdueix un número o 'sortir': 5
+La suma actual és 5.0
+Introdueix un número o 'sortir': 3
+La suma actual és 8.0
+Introdueix un número o 'sortir': 9
+La suma actual és 17.0
+Introdueix un número o 'sortir': sortir
+Finalitzant l'aplicació. La suma final és 17.0
+```
+
+## Classes
+
+Les classes són molt flexibles, hi ha diferents maneres de definir els constructors:
+
+- **Tradicional**: Amb el nom de la classe i els paràmetres
+- **Automàtica**: Amb el nom de la classe, però els paràmetres ja *setegen* els atributs
+- **Valors per defecte**: Defineix valors per defecte
+
+Aleshores cada un dels mètodes anterios dóna flexibilitat amb la manera de cridar els constructors, per exemple:
 
 ```dart
 class PointA {
@@ -566,7 +882,9 @@ p1: 2.0 és x i 5.0 és y
 p2: 5.0 és x i 2.0 és y
 ```
 
-### Dart, classes i funcions
+### Funcions de les classes
+
+Els mètodes de les classes han de definir un valor de retorn (o *void*):
 
 ```dart
 import 'dart:math';
@@ -600,7 +918,7 @@ Sortida:
 Distància entre p0 i p1: 2.8284271247461903
 ```
 
-### Dart, classes amb atributs i mètodes privats
+## Atributs i mètodes privats
 
 **Important!**, a Dart les definicions d’atributs que començen per _ són considerades privades a aquella classe.
 
@@ -618,7 +936,7 @@ mixin logicScreen0<T extends StatefulWidget> on State<T> {
 }
 ```
 
-### Dart, funcions amb @override
+## Sobreescriure mètodes amb @override
 
 **@override** permet sobreescriure funcions heretades (en aquest cas al no ser objecte fill no és estrictament necessari)
 
@@ -643,7 +961,12 @@ Sortida:
 Punts: 4.0x10.0, 2.0x8.0
 ```
 
-### Dart, getters i setters
+## Getters i Setters
+
+Hi ha flexibilitat a la hora de definir els Getters i Setters:
+
+- *"inline"* amb *"=>"* si només és una linia
+- Múltiples linies amb mètodes normals entre claus *{*, *}*
 
 ```dart
 class Rectangle {
@@ -692,7 +1015,7 @@ rect0: Left: -2.0, Top: 2.0, Width: 10.0, Height: 11.0 - Right: 8.0, Bottom: 13.
 rect1: Left: 0.0, Top: -2.0, Width: 10.0, Height: 11.0 - Right: 10.0, Bottom: 9.0
 ```
 
-### Dart, classes abstractes
+## Classes abstractes
 
 ```dart
 abstract class Vehicle {

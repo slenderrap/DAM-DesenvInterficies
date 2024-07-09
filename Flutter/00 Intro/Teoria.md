@@ -73,6 +73,12 @@ flutter upgrade
 flutter upgrade --force # Si es vol forçar algun error
 ```
 
+**Nota:** Per tenir disponible la comanda *"flutter"* s'ha de configurar el *path*. En sistemes UNIX es pot fer temporalment amb "export Path" i la carpeta on està Flutter:
+
+```bash
+export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
+```
+
 ### Dependències i validació
 
 Per cada sistema flutter té diferents dependències, cal consultar la documentació d’instal·lació.
@@ -99,19 +105,19 @@ flutter doctor
 Per crear un nou projecte amb Flutter, es pot fer servir la comanda:
 
 ```bash
-flutter create yourappname
+flutter create exemple0000
 ```
 
 O més elaborat:
 
 ```bash
-flutter create --org com.yourdomain.yourAppName -t skeleton yourappname
+flutter create --org com.yourdomain.yourAppName -t skeleton exemple0000
 ```
 
 Aleshores apareix la carpeta ‘yourAppName’ amb els arxius del projecte:
 
 ```bash
-cd yourappname
+cd exemple0000
 ```
 
 **Important:** **NO** facis servir espais als noms de carpeta de TOTA la ruta on tens l’aplicació, tampoc espais ni caràcters estranys com accents o símbols de puntuació
@@ -123,6 +129,11 @@ Per provar el codi podem executar la instrucció:
 ```bash
 flutter run
 ```
+
+<br/>
+<center><img src="./assets/ex0000.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
 
 ### Versió de desenvolupament
 
@@ -180,7 +191,9 @@ flutter run --enable-impeller -d android
 
 ## Estructura dels projectes Flutter
 
-El codi del nou projecte, està a la carpeta **‘lib’**, i per defecte només hi ha l’arxiu principal **‘main.dart’**
+**Important** 
+
+El codi del nou projecte, està a la carpeta **‘lib’**, i per defecte només hi ha l’arxiu principal **‘main.dart’**:
 
 El llenguatge Dart és molt semblant a Java, tot i que en general és més segur i ràpid.
 
@@ -337,10 +350,16 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
+**Important:**
+
+Els widgets **statefull** han de definir el mètode **build**, que és qui descriu quins altres widgets conté (formen) el widget.
+
+### Compilar i provar l'aplicació
+
 Per provar que funciona el ‘hot-reload’, amb l’aplicació funcionant en mode de desenvolupament. Posa l'aplicació en funcionament, en mode desenvolupament:
 
 ```bash
-flutter run yourappname -d linux
+flutter run -d linux
 ```
 
 Canvia la línia:
@@ -469,39 +488,49 @@ class MyApp extends StatelessWidget {
 Les aplicacions *"Cupertino"* fan servir diferents widgets que les android, per això també cal canviar el codi del mètode *"build"* de la clase *"_MyHomePageState_"*
 
 ```dart
-Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-            middle: Text(widget.title),
-        ),
-        child: Center(
-            child: Column(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(widget.title),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                    Expanded(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                                const Icon(
-                                    CupertinoIcons.bell_fill, 
-                                    color: Color(0xFF00AA00), 
-                                    size: 25.0, ),
-                                const Text(
-                                    'Button pushed:', ),
-                                Text(
-                                    ' $_counter', 
-                                    style: TextStyle(fontSize: 20), 
-                                ),
-                            ],
-                        ),
-                    ),
-                    CupertinoButton(
-                        onPressed: _incrementCounter, 
-                        child: const Text('Increment'),
-                    ),
+                  const Icon(
+                    CupertinoIcons.bell_fill,
+                    color: Color(0xFF00AA00),
+                    size: 25.0,
+                  ),
+                  const Text(
+                    'Button pushed:',
+                  ),
+                  Text(
+                    ' $_counter',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ],
+              ),
             ),
+            CupertinoButton(
+              onPressed: _incrementCounter,
+              child: const Text('Increment'),
+            ),
+          ],
         ),
+      ),
     );
-}
+  }
 ```
+
+**Exemple 0001**
+
+<br/>
+<center><img src="./assets/ex0001.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
