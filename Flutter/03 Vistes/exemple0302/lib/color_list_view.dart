@@ -39,7 +39,7 @@ class ColorListView extends StatelessWidget {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              ColorListItem(colorDataList[index]),
+              ColorListItem(data: colorDataList[index]),
               if (index < colorDataList.length - 1)
                 const Divider(
                   height: 1,

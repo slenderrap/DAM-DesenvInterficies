@@ -89,13 +89,13 @@ La subvista es forma com qualsevol altre widget, però se li passen els paràmet
 
 En aquest exemple la subvista rep com a paràmtre un objecte tipus **"ColorData"** que conté la informació específica de cada element de la llista.
 
-Quan es vol fer servir la informació només cal fer *colorData.??* on ?? és l'atribut que es vol obtenir: 
+Quan es vol fer servir la informació només cal fer *data.??* on ?? és l'atribut que es vol obtenir: 
 
 ```dart
 class ColorListItem extends StatelessWidget {
-  final ColorData colorData;
+  final ColorData data;
 
-  const ColorListItem(this.colorData, {super.key});
+  const ColorListItem({required this.data, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class ColorListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${colorData.name}, ${colorData.color}',
+                '${data.name}, ${data.color}',
               ),
               // ...
             ],),],),),
@@ -116,15 +116,28 @@ class ColorListItem extends StatelessWidget {
 }
 ```
 
-Per formar una *ListView* a partir d'una llista es fa servir un *".builder"*. En aquest exemple la llista amb la informació està a *"List<ColorData> colorDataList"*:
+Per formar una *ListView* a partir d'una llista es fa servir un *".builder"*. En aquest exemple:
+
+- La llista amb la informació està a *"List<ColorData> colorDataList"*.
+- El *builder* passa la informació a cada *ColorListItem* amb el paràmetre *"data"* del constructor.
 
 ```dart
-ListView.builder(
+class ColorListItem extends StatelessWidget {
+  final ColorData data;
+
+  const ColorListItem({required this.data, super.key});
+
+  //  ...
+}
+```
+
+```dart
+child: ListView.builder(
     itemCount: colorDataList.length,
     itemBuilder: (context, index) {
         return Column(
         children: [
-            ColorListItem(colorDataList[index]),
+            ColorListItem(data: colorDataList[index]),
             if (index < colorDataList.length - 1)
             const Divider(
                 height: 1,
@@ -134,7 +147,7 @@ ListView.builder(
         ],
         );
     },
-)
+),
 ```
 
 **Nota:** En aquest exemple es mostra una linia separatòria (*Divider*) entre cada element de la llista (excepte l'últim element)

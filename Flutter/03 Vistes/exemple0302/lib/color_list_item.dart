@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'color_data.dart';
 
 class ColorListItem extends StatelessWidget {
-  final ColorData colorData;
+  final ColorData data;
 
-  const ColorListItem(this.colorData, {super.key});
+  const ColorListItem({required this.data, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,12 @@ class ColorListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${colorData.name}, ${colorData.color}',
+                '${data.name}, ${data.color}',
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
-                colorData.type,
+                data.type,
                 style: const TextStyle(
                     fontSize: 16, color: CupertinoColors.inactiveGray),
               ),
@@ -36,7 +36,7 @@ class ColorListItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(
-                      int.parse(colorData.color.substring(1, 7), radix: 16) +
+                      int.parse(data.color.substring(1, 7), radix: 16) +
                           0xFF000000),
                 ),
               ),
