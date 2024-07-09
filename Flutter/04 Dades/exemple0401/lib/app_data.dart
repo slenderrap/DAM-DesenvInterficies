@@ -9,13 +9,15 @@ class AppData extends ChangeNotifier {
   String _responseText = "";
   bool _isLoading = false;
   bool _isWaiting = true; // Afegeix aquesta variable
+  bool _isInitial = true; // Afegeix aquesta variable
   http.Client? _client;
   IOClient? _ioClient;
   HttpClient? _httpClient;
   StreamSubscription<String>? _streamSubscription; // Afegeix aquesta variable
 
-  String get responseText =>
-      _isWaiting ? "Esperant ..." : _responseText; // Modifica el getter
+  String get responseText => _isInitial
+      ? "Cal un servidor en funcionament ..."
+      : (_isWaiting ? "Esperant ..." : _responseText); // Modifica el getter
   bool get isLoading => _isLoading;
 
   AppData() {
@@ -31,6 +33,7 @@ class AppData extends ChangeNotifier {
 
   Future<void> callStream() async {
     _responseText = "";
+    _isInitial = false; // Canvia a false quan es prem un botó
     _isWaiting = true; // Inicialitza a true
     setLoading(true);
 
@@ -77,6 +80,7 @@ class AppData extends ChangeNotifier {
 
   Future<void> callComplete() async {
     _responseText = "";
+    _isInitial = false; // Canvia a false quan es prem un botó
     _isWaiting = true; // Inicialitza a true
     setLoading(true);
 

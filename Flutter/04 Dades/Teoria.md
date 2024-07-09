@@ -139,6 +139,11 @@ Future<void> saveFile(String path) async {
 }
 ```
 
+<br/>
+<center><img src="./assets/ex0400.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
 ## Crides post
 
 **Exemple 0401:**
@@ -150,3 +155,8 @@ cd exemple0401
 flutter pub upgrade --major-versions # actualitzar dependencies
 flutter run -d macos
 ```
+
+<br/>
+<center><img src="./assets/ex0401.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
