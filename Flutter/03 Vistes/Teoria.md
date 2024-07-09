@@ -99,17 +99,30 @@ class ColorListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${data.name}, ${data.color}',
-              ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => ViewColorDetail(data: data),
+          ),
+        );
+      },
+      child: Container(
+        color: CupertinoColors
+            .white, // Color de fons per assegurar la detecció de tocs
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${data.name}, ${data.color}',
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
               // ...
             ],),],),),
     }
@@ -133,20 +146,20 @@ class ColorListItem extends StatelessWidget {
 
 ```dart
 child: ListView.builder(
-    itemCount: colorDataList.length,
-    itemBuilder: (context, index) {
-        return Column(
-        children: [
-            ColorListItem(data: colorDataList[index]),
-            if (index < colorDataList.length - 1)
-            const Divider(
-                height: 1,
-                thickness: 1,
-                color: CupertinoColors.separator,
-            ),
-        ],
-        );
-    },
+  itemCount: colorDataList.length,
+  itemBuilder: (context, index) {
+    return Column(
+      children: [
+        ColorListItem(data: colorDataList[index]),
+        if (index < colorDataList.length - 1)
+          const Divider(
+            height: 1,
+            thickness: 1,
+            color: CupertinoColors.separator,
+          ),
+      ],
+    );
+  },
 ),
 ```
 

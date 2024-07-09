@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'color_list_view.dart';
+import 'view_color_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
       title: 'Color List',
-      home: ColorListView(),
+      home: ViewColorList(),
     );
   }
 }

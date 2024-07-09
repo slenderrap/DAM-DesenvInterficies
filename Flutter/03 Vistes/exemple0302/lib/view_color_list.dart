@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'color_data.dart';
 import 'color_list_item.dart';
 
-class ColorListView extends StatelessWidget {
+class ViewColorList extends StatelessWidget {
   final List<ColorData> colorDataList = [
     ColorData('Red', 'Warm', '#FF0000'),
     ColorData('Orange', 'Warm', '#FFA500'),
@@ -26,7 +26,7 @@ class ColorListView extends StatelessWidget {
     ColorData('White', 'Neutral', '#FFFFFF'),
   ];
 
-  ColorListView({super.key});
+  ViewColorList({super.key});
 
   @override
   Widget build(BuildContext context) {
