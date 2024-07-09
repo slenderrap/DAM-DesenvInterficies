@@ -716,6 +716,12 @@ Element element1 = Element();
 lib2.Element element2 = lib2.Element();
 ```
 
+Per importar altres arxius *".dart"* que estàn a la carpeta *lib*:
+
+```dart
+import 'altrecodi.dart';
+```
+
 ## Excepcions (try/on/catch/finally)
 
 ```dart

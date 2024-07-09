@@ -72,6 +72,19 @@ Els Widgets s’organitzen en una estructura d’arbre, és a dir hi ha un widge
 </div>
 <br/>
 
+## key identificadora dels Widgets
+
+Per identificar els Widgets a l'aplicació, cada un té una referència **"key"**. Aquesta clau es posa automàticament amb el constructor al fer *{super.key}*:
+
+```dart
+class MainAnimationScreen extends StatefulWidget {
+  const MainAnimationScreen({super.key});
+
+  @override
+  MainAnimationScreenState createState() => MainAnimationScreenState();
+}
+```
+
 ## Codi Flutter, ‘childs’ i ‘children’
 
 Molts widgets de Flutter necessiten que es defineixen altres elements dins. La notació sol ser:
@@ -98,6 +111,8 @@ Widget build(BuildContext context) {
   );
 }
 ```
+
+**Nota:** Es recomana que els atributs *child* o *children* siguin els últims que es defineixen de la llista d'atributs.
 
 Gairebé tots els elements de les aplicacions s’organitzen amb **"Rows"** o **"Columns"**.
 
@@ -159,10 +174,125 @@ body: Center(
 <br/></center>
 <br/>
 
+**Nota:** El widget *"SizedBox"* permet espaiar elements entre ells de manera ràpida.
+
 Per facilitar encara més la construcció de layouts, hi ha altres elements com: 
 
 - [ListView](https://api.flutter.dev/flutter/widgets/ListView-class.html) per definir una llista amb scroll
 - [GridView](https://api.flutter.dev/flutter/widgets/GridView-class.html) per fer graelles d’elements també amb scroll
+
+## Codi Flutter, maquetació i codi
+
+Com es pot veure, flutter permet organitzar el codi de manera que coincideixi amb la presentació visual de l'aplicació. Això ho fa definirnt els nous objectes com atributs dels anteriors.
+
+També es podria fer a la manera *tradicional*, aquests dos codis són equivalents:
+
+```dart
+body: Center(
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            '$_firstNumber',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(width: 20),
+          Text(
+            '$_secondNumber',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ],
+      ),
+      const SizedBox(height: 20),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ElevatedButton(
+            onPressed: _incrementFirstNumber,
+            child: const Text('Increment First Number'),
+          ),
+          const SizedBox(width: 10),
+          ElevatedButton(
+            onPressed: _decrementSecondNumber,
+            child: const Text('Decrement Second Number'),
+          ),
+          const SizedBox(width: 10),
+          ElevatedButton(
+            onPressed: _resetNumbers,
+            child: const Text('Reset Numbers'),
+          ),
+        ],
+      ),
+    ],
+  ),
+)
+```
+
+```dart
+@override
+  Widget build(BuildContext context) {
+
+    final firstRowSizedBox = const SizedBox(height: 20);
+    final secondRowSizedBox0 = const SizedBox(height: 20);
+    final secondRowSizedBox1 = const SizedBox(height: 20);
+    final columnSizedBox = const SizedBox(height: 20);
+
+    final firstNumberText = Text(
+      '$_firstNumber',
+      style: Theme.of(context).textTheme.headlineMedium,
+    );
+
+    final secondNumberText = Text(
+      '$_secondNumber',
+      style: Theme.of(context).textTheme.headlineMedium,
+    );
+
+    final incrementFirstNumberButton = ElevatedButton(
+      onPressed: _incrementFirstNumber,
+      child: const Text('Increment First Number'),
+    );
+
+    final decrementSecondNumberButton = ElevatedButton(
+      onPressed: _decrementSecondNumber,
+      child: const Text('Decrement Second Number'),
+    );
+
+    final resetNumbersButton = ElevatedButton(
+      onPressed: _resetNumbers,
+      child: const Text('Reset Numbers'),
+    );
+
+    final firstRow = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[firstNumberText, firstRowSizedBox, secondNumberText,],
+    );
+
+    final secondRow = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[incrementFirstNumberButton, secondRowSizedBox0,
+        decrementSecondNumberButton, secondRowSizedBox1, resetNumbersButton],
+    );
+
+    final children = <Widget>[firstRow, columnSizedBox,secondRow];
+
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Number Manipulation'),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: children,
+        ),
+      ),
+    );
+  }
+```
+
+Es pot veure com és més difícil relacionar el codi amb la presentació visual en aquest segon cas.
 
 ## Tipus de widgets
 
@@ -179,7 +309,7 @@ Segons la seva funció, la [documentació](https://docs.flutter.dev/ui/widgets) 
 
 ## Codi dels widgets, estructura d’arbre
 
-Imaginem que volem posar una imatge a sobre d’un text, aleshores haurem de fer servir un widget columna.
+Imaginem que volem apilar una imatge a sobre d’un text (al damunt visualment, no sobreposada), aleshores haurem de fer servir un widget columna.
 
 **"Column"** permet definir els fills a través del paràmetre *"children"*, que ha de ser un array  de Widgets.
 
@@ -322,8 +452,8 @@ Quan un Widget sobrepassa la mida disponible, Flutter mostra una barra d’error
 
 Els widgets han d’estar ben dimensionats, o posats a dins d’altres widgets que gestionin aquesta situació:
 
-- Scrolls
-- Escalats
+- [Scrolls](https://docs.flutter.dev/ui/layout/scrolling) ([widgets amb scroll integrat](https://docs.flutter.dev/ui/widgets/scrolling))
+- [Transformacions](https://api.flutter.dev/flutter/widgets/Transform-class.html)
 - …
 
 ## Widget ListView
@@ -454,46 +584,66 @@ return ListView.builder(
 );
 ```
 
-### Compartir dades i notificacions
+## Animacions
 
-En Flutter es pot fer servir un **Singleton** però no és recomanat, el motiu és que per optimitzar el rendiment i redibuix dels widgets, és més recomanable fer servir *notifyLiteners()*.
+Flutter permet animar fàcilment propietats matemàtiques dels atributs.
 
-Quan hi han canvis a la informació (d'arxius o servidors), aquest l'objecte comú *"notifica"* als widgets que estan interessats en aquella informació, que cal redibuixar els seus continguts.
+Per fer-ho cal:
 
+- Un **AnimationController**, que permet iniciar/pausar l'animació i defineix el tipus d'animació
+- La propietat **Animation<tipus>** que es vol animar
+
+Cal sobreescriure el mètode *initState* per configurar adequadament l'animació:
 
 ```dart
-class AppData with ChangeNotifier {
-
-
-  // Escull quin arxiu cal llegir i en carrega les dades
-  void load (String type) async {
-
-    // Forcem esperar 1 segon per veure el progrés
-    await Future.delayed(const Duration(seconds: 1));
-
-    // Carreguem les dades de l'arxiu
-    var textArxiu = await rootBundle.loadString(arxiu);
-    var dadesArxiu = json.decode(textArxiu);
-
-    // Avisem que les dades estàn disponibles
-    notifyListeners();
-  }
-
+@override
+void initState() {
+  super.initState();
+  _controller = AnimationController(
+    duration: const Duration(seconds: 2),
+    vsync: this,
+    lowerBound: 0.15, // Valor mínim de l'animació
+  );
+  // Tipus d'animació
+  _animation = CurvedAnimation(parent: _controller, curve: Curves.ease)
+    ..addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _wasGrowing = false;
+        _controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        _wasGrowing = true;
+        _controller.forward();
+      }
+    });
 }
 ```
 
-Per tal que funcionin els **"Notifiers"**, cal encapsular tota l’aplicació dins d’un **"ChangeNotifierProvider"** i definir quin objecte és el que s’encarrega de gestionar les dades.
+Cal sobreescriure el mètode *dispose* per lliberar la memòria correctament quan el widget ja no està disponible:
 
 ```dart
-runApp(
-    ChangeNotifierProvider(
-        create: (context) => AppData(),
-            child: const App(),
-    ),
-);
+@override
+void dispose() {
+  _controller.dispose();
+  super.dispose();
+}
 ```
 
-**Exemple 0203:**
+**Exemple 0202:**
+
+En aquest exemple es veu com fer una animació que modifica l'escalat d'un widget, fent-lo més gran o més petit. Té dos botons per iniciar i pausar l'animació.
+
+```bash
+cd exemple0202
+flutter run -d macos
+```
+
+<br/>
+<center><img src="./assets/ex0202.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
+
 
 
 
