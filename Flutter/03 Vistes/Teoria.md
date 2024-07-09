@@ -138,3 +138,9 @@ ListView.builder(
 ```
 
 **Nota:** En aquest exemple es mostra una linia separatòria (*Divider*) entre cada element de la llista (excepte l'últim element)
+
+<br/>
+<center><img src="./assets/ex0302.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
