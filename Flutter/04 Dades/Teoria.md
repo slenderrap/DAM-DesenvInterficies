@@ -14,7 +14,49 @@
 <br/>
 <br/>
 
-# Arxius
+# Dades
+
+Flutter pot fer servir un **Singleton** però no és recomanat, el motiu és que per optimitzar el rendiment i redibuix dels widgets, és més recomanable fer servir *notifyLiteners()*.
+
+Quan hi han canvis a la informació (d'arxius o servidors), aquest l'objecte comú *"notifica"* als widgets que estan interessats en aquella informació, que cal redibuixar els seus continguts.
+
+Així, enlloc de que el controlador hagi de decidir quins widgets cal actualitzar, aquests es redibuixen automàticament només si és necessari.
+
+Per tal que funcionin els **"Notifiers"**, cal encapsular tota l’aplicació dins d’un **"ChangeNotifierProvider"** i definir quin objecte és el que s’encarrega de gestionar les dades.
+
+```dart
+runApp(
+    ChangeNotifierProvider(
+        create: (context) => AppData(),
+            child: const App(),
+    ),
+);
+```
+
+I la classe que s'encarrega de gestionar les dades (conceptualment que fa la feina del *singleton*) fa servir el *mixin* **ChangeNotifier** per poder fer crides a *notifyListeners()*. I així redibuixar els widgets que depenen d'aquelles dades.
+
+```dart
+class AppData with ChangeNotifier {
+
+
+  // Escull quin arxiu cal llegir i en carrega les dades
+  void load (String type) async {
+
+    // Forcem esperar 1 segon per veure el progrés
+    await Future.delayed(const Duration(seconds: 1));
+
+    // Carreguem les dades de l'arxiu
+    var textArxiu = await rootBundle.loadString(arxiu);
+    var dadesArxiu = json.decode(textArxiu);
+
+    // Avisem que les dades estàn disponibles
+    notifyListeners();
+  }
+
+}
+```
+
+## Arxius
 
 Documentació:
 
@@ -89,43 +131,4 @@ Cridar la funció:
 
 ```dart
     final data = await readFile('myData.json');
-```
-
-### Compartir dades entre widgets i vistes
-
-En Flutter es pot fer servir un **Singleton** però no és recomanat, el motiu és que per optimitzar el rendiment i redibuix dels widgets, és més recomanable fer servir *notifyLiteners()*.
-
-Quan hi han canvis a la informació (d'arxius o servidors), aquest l'objecte comú *"notifica"* als widgets que estan interessats en aquella informació, que cal redibuixar els seus continguts.
-
-
-```dart
-class AppData with ChangeNotifier {
-
-
-  // Escull quin arxiu cal llegir i en carrega les dades
-  void load (String type) async {
-
-    // Forcem esperar 1 segon per veure el progrés
-    await Future.delayed(const Duration(seconds: 1));
-
-    // Carreguem les dades de l'arxiu
-    var textArxiu = await rootBundle.loadString(arxiu);
-    var dadesArxiu = json.decode(textArxiu);
-
-    // Avisem que les dades estàn disponibles
-    notifyListeners();
-  }
-
-}
-```
-
-Per tal que funcionin els **"Notifiers"**, cal encapsular tota l’aplicació dins d’un **"ChangeNotifierProvider"** i definir quin objecte és el que s’encarrega de gestionar les dades.
-
-```dart
-runApp(
-    ChangeNotifierProvider(
-        create: (context) => AppData(),
-            child: const App(),
-    ),
-);
 ```
