@@ -23,7 +23,6 @@ class ViewColorList extends StatelessWidget {
     ColorData('Lime', 'Cool', '#00FF00'),
     ColorData('Teal', 'Cool', '#008080'),
     ColorData('Indigo', 'Cool', '#4B0082'),
-    ColorData('White', 'Neutral', '#FFFFFF'),
   ];
 
   ViewColorList({super.key});
