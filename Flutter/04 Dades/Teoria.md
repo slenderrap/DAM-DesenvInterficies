@@ -91,7 +91,6 @@ Cridar la funció:
     final data = await readFile('myData.json');
 ```
 
-
 ### Compartir dades entre widgets i vistes
 
 En Flutter es pot fer servir un **Singleton** però no és recomanat, el motiu és que per optimitzar el rendiment i redibuix dels widgets, és més recomanable fer servir *notifyLiteners()*.

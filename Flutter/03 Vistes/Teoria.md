@@ -35,7 +35,47 @@ CupertinoButton(
 
 **Exemple 0300:**
 
+```bash
+cd exemple0300
+flutter run -d macos
+```
+
 <br/>
 <center><img src="./assets/ex0300.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
+
+## Vistes segons la mida de la pantalla
+
+Es pot comprovar la mida de la pantalla, per mostrar les vistes segons calgui:
+
+**Exemple 0301:**
+
+En aquest exemple s'escull la vista segons si l'espai disponible és superior o inferior a 600 píxels:
+
+```dart
+  @override
+Widget build(BuildContext context) {
+return LayoutBuilder(
+    builder: (context, constraints) {
+    if (constraints.maxWidth > 600) {
+        return ViewDesktop();
+    } else {
+        return ViewMobile();
+    }
+    },
+);
+}
+```
+
+```bash
+cd exemple0301
+flutter run -d macos
+```
+
+<br/>
+<center><img src="./assets/ex0301.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
