@@ -120,7 +120,14 @@ private void stopBackgroundTask() {
 
 ## Exemple 0401
 
-*Nota:* Per fer anar aquest exemple cal un servidor *Ollama* funcionant a *localhost:11434*
+Per fer anar aquest exemple cal un servidor Ollama amb el model 'phi3':
+
+En un terminal diferent:
+
+```bash
+cd Exemple\ 0401
+./run.sh com.project.Main
+```
 
 Molt sovint enlloc d'una tasca completa únicament necessitem fer una crida a una API externa, o a una base de dades. **També cal fer-ho amb un thread** però de manera més senzilla fent servir **"httpClient.sendAsync"**.
 

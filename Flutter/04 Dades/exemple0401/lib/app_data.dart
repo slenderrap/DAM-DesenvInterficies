@@ -44,11 +44,8 @@ class AppData extends ChangeNotifier {
       );
 
       request.headers.addAll({'Content-Type': 'application/json'});
-      request.body = jsonEncode({
-        'model': 'llama3',
-        'prompt': 'Why is the sky blue?',
-        'stream': true
-      });
+      request.body = jsonEncode(
+          {'model': 'phi3', 'prompt': 'Why is the sky blue?', 'stream': true});
 
       var streamedResponse = await _client!.send(request);
       _streamSubscription =
@@ -89,7 +86,7 @@ class AppData extends ChangeNotifier {
         Uri.parse('http://localhost:11434/api/generate'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(
-            {'model': 'llama3', 'prompt': 'Tell me a haiku.', 'stream': false}),
+            {'model': 'phi3', 'prompt': 'Tell me a haiku.', 'stream': false}),
       );
 
       var jsonResponse = jsonDecode(response.body);

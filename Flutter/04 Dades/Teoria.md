@@ -148,7 +148,7 @@ Future<void> saveFile(String path) async {
 
 **Exemple 0401:**
 
-Per fer anar aquest exemple cal un servidor 'Ollama' amb el model 'llama3' funcionant en local:
+Per fer anar aquest exemple cal un servidor ollama amb el model 'phi3'
 
 ```bash
 cd exemple0401
