@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 
@@ -30,38 +31,30 @@ public class Controller implements Initializable {
         random = new Random();
 
         firstDrawing();
+
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            drawPolygon(event.getX(), event.getY());
+        });
     }
 
     @FXML
     private void actionAdd(ActionEvent event) {
-        // Generar una posició i mida aleatòria per a la forma
-        double size = 20 + random.nextInt(31); // Mida entre 20 i 50
-        double x = random.nextDouble() * (canvas.getWidth() - size);
-        double y = random.nextDouble() * (canvas.getHeight() - size);
+        // Generar una posició aleatòria per a la forma
+        double x = random.nextDouble() * (canvas.getWidth() - 50);
+        double y = random.nextDouble() * (canvas.getHeight() - 50);
 
-        // Generar un color aleatori
-        Color color = getRandomColor();
-
-        // Decidir aleatòriament si dibuixar un quadrat o un cercle
-        if (random.nextBoolean()) {
-            // Dibuixar un quadrat
-            gc.setFill(color);
-            gc.fillRect(x, y, size, size);
-        } else {
-            // Dibuixar un cercle
-            gc.setFill(color);
-            gc.fillOval(x, y, size, size);
-        }
+        drawPolygon(x, y);
     }
 
     @FXML
     private void actionClear(ActionEvent event) {
         // Netejar tot el Canvas
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        firstDrawing();
     }
 
     private Color getRandomColor() {
-        Color[] colors = { Color.RED, Color.CYAN, Color.MAGENTA, Color.YELLOW, Color.ORANGE, Color.BLACK, Color.WHITE };
+        Color[] colors = { Color.RED, Color.CYAN, Color.MAGENTA, Color.YELLOW, Color.ORANGE, Color.BLACK };
         return colors[random.nextInt(colors.length)];
     }
 
@@ -75,5 +68,24 @@ public class Controller implements Initializable {
 
         gc.setFill(Color.GREEN);
         gc.fillOval(100, 100, 200, 200);
+    }
+
+    private void drawPolygon(double x, double y) {
+        gc.setFill(getRandomColor());
+
+        Color color = getRandomColor();
+        double size = 15 + random.nextInt(36);
+        double half = size / 2;
+
+        // Decidir aleatòriament si dibuixar un quadrat o un cercle
+        if (random.nextBoolean()) {
+            // Dibuixar un quadrat
+            gc.setFill(color);
+            gc.fillRect(x - half, y - half, size, size);
+        } else {
+            // Dibuixar un cercle
+            gc.setFill(color);
+            gc.fillOval(x - half, y - half, size, size);
+        }
     }
 }

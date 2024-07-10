@@ -68,6 +68,15 @@ gc.restore();
 
 Aquest exemple és un projecte bàsic que inicia un canvas amb un dibuix, i té un botó per afegir cercles i quadres de manera aleatòria.
 
+Els polígons es poden afegir amb el botó *"Add"* o bé fent click sobre l'àrea de dibuix. Per detectar la posició, es fa servir un gestor d'events sobre el canvas:
+
+```java
+    canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        drawPolygon(event.getX(), event.getY());
+        // Crida la funció 'drawPolygon' amb la posició (x,y) on s'ha fet click
+    });
+```
+
 <br/>
 <center><img src="./assets/ex0600.png" style="max-height: 400px" alt="">
 <br/></center>
