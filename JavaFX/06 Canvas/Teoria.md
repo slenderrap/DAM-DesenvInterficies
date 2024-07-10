@@ -73,7 +73,7 @@ Els polígons es poden afegir amb el botó *"Add"* o bé fent click sobre l'àre
 ```java
     canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
         drawPolygon(event.getX(), event.getY());
-        // Crida la funció 'drawPolygon' amb la posició (x,y) on s'ha fet click
+        // Crida la funció 'drawPolygon' amb la posició (x,y) on s'ha
     });
 ```
 

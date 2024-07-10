@@ -43,10 +43,10 @@ CustomPaint(
 
 Per definir el *painter* hem de crear un objecte amb *"extends CustomPainter"*.
 
-L'objecte estès de *CustomPainter* ha de tenir almenys dos mètodes *"@override"*:
+L'objecte (Widget) estès de *CustomPainter* ha de tenir almenys dos mètodes *"@override"*:
 
 - **paint** que diu com s'ha de fer el dibuix
-- **shouldRepaint** retorna *true* si s'ha de tornar a dibuixar perquè han canviat les propietats o *false* si no cal tornar a dibuixar perquè serà el mateix dibuix que l'anterior cop que s'ha dibuixat
+- **shouldRepaint** retorna *true* si s'ha de tornar a dibuixar perquè han canviat o *false* si no cal tornar a dibuixar perquè serà el mateix dibuix que l'anterior cop que s'ha dibuixat
 
 Exemple:
 
@@ -119,5 +119,139 @@ La llista de *shapes* es gestiona des de l'aplicació, al *CustomPaint* només s
 
 <br/>
 <center><img src="./assets/ex0500.png" style="max-height: 500px" alt="">
+<br/></center>
+<br/>
+
+## Animacions
+
+Per tal de poder animar els Widgets que fan ús de *CustomPaint* es pot fer servir un **AnimationController**.
+
+Per iniciar l'animació:
+
+```dart
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+          ..repeat();
+    _lastDrawTime = DateTime.now();
+  }
+```
+
+Per esborrar correctament l'animació de la memòria:
+
+```dart
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+```
+
+Per passar la informació de l'animació al painter:
+
+```dart
+CustomPaint(
+    painter: ClockPainter(_controller, _calculateFps),
+    size: Size(constraints.maxWidth, constraints.maxHeight),
+);
+```
+
+**Exemple 0501:**
+
+Aquest exemple mostra un Widget personalitzat amb *CustomPaint* que és un rellotge animat mostrant els Frames Per Segon (FPS) de dibuix.
+
+
+<br/>
+<center><img src="./assets/ex0501.png" style="max-height: 500px" alt="">
+<br/></center>
+<br/>
+
+## Imatges al Canvas
+
+Respecte les imatges s'han de tenir en compte dos punts:
+
+- Les imatges han d'estar pregarregades per dibuixar-les al canvas
+- El format d'imatge del canvas és diferent al dels widgets
+
+### Pre carregar les imatges
+
+Hi ha diversos mètodes, un d'ells és fer servir **"FutureBuilder"** que mostra un Widget alternatiu (per exemple de càrrega) fins que les imatges s'han carregat correctament:
+
+```dart
+  Future<ui.Image?>? imageFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    imageFuture = _loadImage('assets/images/mario.png');
+  }
+
+  void _setSelection(String value) {
+    setState(() {
+      selectedOption = value;
+    });
+  }
+```
+
+El *Future<ui.Image?>* és un objecte que indica que un cop disponible el tipus serà *ui.Image*, però que inicialment no se sap quan estarà disponible.
+
+```dart
+Expanded(
+    child: LayoutBuilder(
+        builder: (context, constraints) {
+        return FutureBuilder<ui.Image?>(
+            future: imageFuture,
+            builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+                // Carregant ...
+                return const Center(child: CupertinoActivityIndicator());
+            } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data == null) {
+                return const Center(child: Text('Image not available'));
+            }
+            // Mostrar el CustomPaint si ja s'han carregat els arxius
+            return CustomPaint(
+                painter: DrawingPainter(selectedOption, snapshot.data!),
+                size: Size(constraints.maxWidth, constraints.maxHeight),
+            );
+            },
+        );
+        },
+    ),
+),
+```
+
+### Imatges amb format ui.Image
+
+El canvas necessita carregar les imatges en format *ui.Image*, per fer-ho:
+
+```dart
+static Future<ui.Image?> _loadImage(String asset) async {
+    try {
+        final ByteData data = await rootBundle.load(asset);
+        final Uint8List bytes = Uint8List.view(data.buffer);
+        final Completer<ui.Image> completer = Completer();
+        ui.decodeImageFromList(bytes, (ui.Image img) {
+        completer.complete(img);
+        });
+        return completer.future;
+    } catch (e) {
+        if (kDebugMode) {
+        print('Error loading image: $e');
+        }
+        return null;
+    }
+}
+```
+
+**Exemple 0502:**
+
+Aquest exemple mostra diversos exemples de dibuix amb CustomPaint i el codi per aconseguir aquell tipus de dibuix.
+
+<br/>
+<center><img src="./assets/ex0502.png" style="max-height: 500px" alt="">
 <br/></center>
 <br/>
