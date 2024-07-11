@@ -205,6 +205,42 @@ public void actionSetSelection(String value) {
 <br/>
 <br/>
 
+## Exemple 0603
+
+En aquest exemple s'escolten els events del ratolí per arrossegar els elements que es dibuixen al canvas.
+
+Els *listeners* s'inicien a la funció *initialize*:
+
+```java
+    canvas.setOnMousePressed(this::onMousePressed);
+    canvas.setOnMouseDragged(this::onMouseDragged);
+    canvas.setOnMouseReleased(this::onMouseReleased);
+```
+
+Quan succeeix l'event, per exemple arrossegar el mouse, es canvia la posició de l'element seleccionat (segons la posició del mouse):
+
+```java
+private void onMouseDragged(MouseEvent event) {
+    if (dragging) {
+        if (selectedShape == greenSquare) {
+            greenSquare.setX(event.getX() - offsetX);
+            greenSquare.setY(event.getY() - offsetY);
+        } else if (selectedShape == blueCircle) {
+            blueCircle.setCenterX(event.getX() - offsetX);
+            blueCircle.setCenterY(event.getY() - offsetY);
+        }
+        drawShapes();
+    }
+}
+```
+
+**Nota:** En aquest exemple també s'escolta l'event de canvi de mida de finestra per assegurar que els objectes sempre són visibles, encara que la finestra es faci petita.
+
+<br/>
+<center><img src="./assets/ex0603.gif" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
 ## Exemple Pong
 
 Aquest exemple mostra una versió de Pong per a un sol jugador, mostra com es poden fer jocs senzills amb *Canvas* i també com capturar les tecles.
@@ -246,7 +282,6 @@ public void keyEvent (KeyEvent evt) {
     }
 }
 ```
-
 
 <br/>
 <center><img src="./assets/exPong.png" style="max-height: 400px" alt="">
