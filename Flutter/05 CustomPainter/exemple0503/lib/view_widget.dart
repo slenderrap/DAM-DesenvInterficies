@@ -25,38 +25,56 @@ class ViewWidgetState extends State<ViewWidget> {
     blueCircle = const Rect.fromLTWH(250, 250, 100, 100);
   }
 
-  void onPanUpdate(DragUpdateDetails details) {
+  void onPanStart(DragStartDetails details) {
     final RenderBox renderBox = context.findRenderObject() as RenderBox;
-    final Offset localPosition =
-        renderBox.globalToLocal(details.globalPosition);
+    final Offset globalPosition = details.globalPosition;
+    final Offset localPosition = renderBox.globalToLocal(globalPosition);
+
+    // Adjusting the local position based on the height of CupertinoNavigationBar and SafeArea
+    final double navigationBarHeight =
+        const CupertinoNavigationBar().preferredSize.height;
+    final double safeAreaHeight = MediaQuery.of(context).padding.top;
+    final Offset adjustedLocalPosition = Offset(localPosition.dx,
+        localPosition.dy - navigationBarHeight - safeAreaHeight);
 
     setState(() {
-      if (offset.dx == -1 && offset.dy == -1) {
-        if (greenSquare.contains(localPosition)) {
-          isGreenSquareDragged = true;
-          isCircleOnTop = false;
-          offset = localPosition - greenSquare.topLeft;
-        }
+      if (greenSquare.contains(adjustedLocalPosition)) {
+        isGreenSquareDragged = true;
+        isCircleOnTop = false;
+        offset = adjustedLocalPosition - greenSquare.topLeft;
+      } else if (blueCircle.contains(adjustedLocalPosition)) {
+        isBlueCircleDragged = true;
+        isCircleOnTop = true;
+        offset = adjustedLocalPosition - blueCircle.topLeft;
+      } else {}
+    });
+  }
 
-        if (blueCircle.contains(localPosition)) {
-          isBlueCircleDragged = true;
-          isCircleOnTop = true;
-          offset = localPosition - blueCircle.topLeft;
-        }
-      } else {
-        if (isGreenSquareDragged) {
-          greenSquare = Rect.fromLTWH(
-              localPosition.dx - offset.dx,
-              localPosition.dy - offset.dy,
-              greenSquare.width,
-              greenSquare.height);
-        } else if (isBlueCircleDragged) {
-          blueCircle = Rect.fromLTWH(
-              localPosition.dx - offset.dx,
-              localPosition.dy - offset.dy,
-              blueCircle.width,
-              blueCircle.height);
-        }
+  void onPanUpdate(DragUpdateDetails details) {
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final Offset globalPosition = details.globalPosition;
+    final Offset localPosition = renderBox.globalToLocal(globalPosition);
+
+    // Adjusting the local position based on the height of CupertinoNavigationBar and SafeArea
+    final double navigationBarHeight =
+        const CupertinoNavigationBar().preferredSize.height;
+    final double safeAreaHeight = MediaQuery.of(context).padding.top;
+    final Offset adjustedLocalPosition = Offset(localPosition.dx,
+        localPosition.dy - navigationBarHeight - safeAreaHeight);
+
+    setState(() {
+      if (isGreenSquareDragged) {
+        greenSquare = Rect.fromLTWH(
+            adjustedLocalPosition.dx - offset.dx,
+            adjustedLocalPosition.dy - offset.dy,
+            greenSquare.width,
+            greenSquare.height);
+      } else if (isBlueCircleDragged) {
+        blueCircle = Rect.fromLTWH(
+            adjustedLocalPosition.dx - offset.dx,
+            adjustedLocalPosition.dy - offset.dy,
+            blueCircle.width,
+            blueCircle.height);
       }
     });
   }
@@ -112,6 +130,7 @@ class ViewWidgetState extends State<ViewWidget> {
           ),
           child: SafeArea(
             child: GestureDetector(
+              onPanStart: onPanStart,
               onPanUpdate: onPanUpdate,
               onPanEnd: onPanEnd,
               child: Container(
