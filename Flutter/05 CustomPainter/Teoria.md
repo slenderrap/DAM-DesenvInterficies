@@ -285,34 +285,34 @@ child: GestureDetector(
 Cal definir què passa quan s'arrossega per sobre la pantalla. En aquest cas, canviar la posició dels objectes si cal:
 
 ```dart
-  void onPanUpdate(DragUpdateDetails details) {
-    final RenderBox renderBox = context.findRenderObject() as RenderBox;
-    final Offset globalPosition = details.globalPosition;
-    final Offset localPosition = renderBox.globalToLocal(globalPosition);
+void onPanUpdate(DragUpdateDetails details) {
+  final RenderBox renderBox = context.findRenderObject() as RenderBox;
+  final Offset globalPosition = details.globalPosition;
+  final Offset localPosition = renderBox.globalToLocal(globalPosition);
 
-    // Adjusting the local position based on the height of CupertinoNavigationBar and SafeArea
-    final double navigationBarHeight =
-        const CupertinoNavigationBar().preferredSize.height;
-    final double safeAreaHeight = MediaQuery.of(context).padding.top;
-    final Offset adjustedLocalPosition = Offset(localPosition.dx,
-        localPosition.dy - navigationBarHeight - safeAreaHeight);
+  // Adjusting the local position based on the height of CupertinoNavigationBar and SafeArea
+  final double navigationBarHeight =
+      const CupertinoNavigationBar().preferredSize.height;
+  final double safeAreaHeight = MediaQuery.of(context).padding.top;
+  final Offset adjustedLocalPosition = Offset(localPosition.dx,
+      localPosition.dy - navigationBarHeight - safeAreaHeight);
 
-    setState(() {
-      if (isGreenSquareDragged) {
-        greenSquare = Rect.fromLTWH(
-            adjustedLocalPosition.dx - offset.dx,
-            adjustedLocalPosition.dy - offset.dy,
-            greenSquare.width,
-            greenSquare.height);
-      } else if (isBlueCircleDragged) {
-        blueCircle = Rect.fromLTWH(
-            adjustedLocalPosition.dx - offset.dx,
-            adjustedLocalPosition.dy - offset.dy,
-            blueCircle.width,
-            blueCircle.height);
-      }
-    });
-  }
+  setState(() {
+    if (isGreenSquareDragged) {
+      greenSquare = Rect.fromLTWH(
+          adjustedLocalPosition.dx - offset.dx,
+          adjustedLocalPosition.dy - offset.dy,
+          greenSquare.width,
+          greenSquare.height);
+    } else if (isBlueCircleDragged) {
+      blueCircle = Rect.fromLTWH(
+          adjustedLocalPosition.dx - offset.dx,
+          adjustedLocalPosition.dy - offset.dy,
+          blueCircle.width,
+          blueCircle.height);
+    }
+  });
+}
 ```
 
 Cal fixar-se que al objecte de dibuix se li passen els objectes *greenSquare* i *blueCirle* que tenen la informació de la posició dels objectes a dibuixar: 
