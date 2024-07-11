@@ -2,16 +2,224 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class ExamplesDrawer {
+  static const styleNormal = TextStyle(
+      color: ui.Color.fromARGB(255, 59, 59, 59),
+      fontSize: 14,
+      fontFamily: 'Arial');
+  static const styleKeywordTypes = TextStyle(
+      color: ui.Color.fromARGB(255, 6, 80, 126),
+      fontSize: 14,
+      fontFamily: 'Arial');
+  static const styleKeywordAttributes = TextStyle(
+      color: ui.Color.fromARGB(255, 33, 140, 161),
+      fontSize: 14,
+      fontFamily: 'Arial');
+  static const styleKeywordMethods = TextStyle(
+      color: ui.Color.fromARGB(255, 118, 13, 159),
+      fontSize: 14,
+      fontFamily: 'Arial');
+  static const styleComment = TextStyle(
+      color: ui.Color.fromARGB(255, 50, 113, 52),
+      fontSize: 14,
+      fontFamily: 'Arial');
+  static const styleKeywordObjects = TextStyle(
+      color: ui.Color.fromARGB(255, 3, 84, 171),
+      fontSize: 14,
+      fontFamily: 'Arial');
+
+  List<TextSpan> spans = [];
+  String word = '';
+  bool isComment = false;
+  bool lastCharWasDot = false;
+
+// Lists of words to be highlighted in specific colors
+  static const Set<String> keywordsTypes = {
+    'void',
+    'final',
+    'double',
+    'const',
+    'class',
+    'import',
+    'if',
+    'else',
+    'for',
+    'while'
+  };
+  static const Set<String> keywordsAttributes = {
+    'color',
+    'style',
+    'height',
+    'width',
+    'strokeWidth',
+    'strokeJoin',
+    'strokeCap',
+    'circular',
+    'fill',
+    'stroke',
+    'round',
+    'square',
+    'miter',
+    'topLeft',
+    'bottomRight',
+    'bottomCenter',
+    'centerLeft',
+    'center',
+    'infinity',
+    'ltr',
+    'alphabetic',
+  };
+  static const Set<String> keywordsMethods = {
+    'drawLine',
+    'drawRect',
+    'drawRRect',
+    'fromRectAndRadius',
+    'fromRGBO',
+    'drawImageRect',
+    'fromLTWH',
+    'close',
+    'lineTo',
+    'moveTo',
+    'createShader',
+    'drawArc',
+    'drawPath',
+    'drawOval',
+    'save',
+    'translate',
+    'scale',
+    'rotate',
+    'restore',
+    'toDouble',
+    'layout',
+    'computeDistanceToActualBaseline',
+    'paint',
+    'linear',
+    'shader'
+  };
+  static const Set<String> keywordsObjects = {
+    'Canvas',
+    'Radius',
+    'RRect',
+    'Path',
+    'Rect',
+    'TextPainter',
+    'TextSpan',
+    'TextDirection',
+    'Offset',
+    'Color',
+    'Colors',
+    'StrokeCap',
+    'PaintingStyle',
+    'StrokeJoin',
+    'Paint',
+    'Gradient',
+    'LinearGradient',
+    'Alignment',
+    'RadialGradient',
+    'Size',
+    'Image',
+    'TextAlign',
+    'TextStyle'
+  };
+
+  static const Map<String, Color> colorMap = {
+    'orange': Color.fromARGB(255, 255, 165, 0),
+    'green': Color.fromARGB(255, 0, 128, 0),
+    'blue': Color.fromARGB(255, 0, 0, 255),
+    'purple': Color.fromARGB(255, 128, 0, 128),
+    'red': Color.fromARGB(255, 255, 0, 0),
+    'grey': Color.fromARGB(255, 128, 128, 128),
+  };
+
+  static List<TextSpan> syntaxHighlight(String text) {
+    List<TextSpan> spans = [];
+    String word = '';
+    bool isComment = false;
+    String lastWord = '';
+    bool lastCharWasDot = false;
+
+    void addSpan(String text, TextStyle style) {
+      if (text.isNotEmpty) {
+        spans.add(TextSpan(text: text, style: style));
+      }
+    }
+
+    List<String> lines = text.split('\n');
+    for (int lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+      String line = lines[lineIndex];
+      isComment = false;
+      word = '';
+      lastCharWasDot = false;
+
+      for (int i = 0; i < line.length; i++) {
+        if (!isComment && line.startsWith('//', i)) {
+          addSpan(word, styleNormal);
+          word = '';
+          addSpan(line.substring(i), styleComment);
+          isComment = true;
+          break;
+        }
+
+        if (RegExp(r'\w').hasMatch(line[i])) {
+          word += line[i];
+        } else {
+          if (word.isNotEmpty) {
+            TextStyle style = styleNormal;
+            if (lastWord == 'Colors' &&
+                colorMap.containsKey(word.toLowerCase())) {
+              style = TextStyle(
+                color: colorMap[word.toLowerCase()]!,
+                fontSize: 14,
+                fontFamily: 'Arial',
+              );
+            } else if (keywordsTypes.contains(word)) {
+              style = styleKeywordTypes;
+            } else if (lastCharWasDot && keywordsAttributes.contains(word)) {
+              style = styleKeywordAttributes;
+            } else if (lastCharWasDot && keywordsMethods.contains(word)) {
+              style = styleKeywordMethods;
+            } else if (keywordsObjects.contains(word)) {
+              style = styleKeywordObjects;
+            }
+            addSpan(word, style);
+            lastWord = word;
+            word = '';
+          }
+          addSpan(line[i], styleNormal);
+          lastCharWasDot = line[i] == '.';
+          if (!lastCharWasDot) {
+            lastWord = '';
+          }
+        }
+      }
+
+      if (word.isNotEmpty) {
+        TextStyle style = styleNormal;
+        if (lastWord == 'Colors' && colorMap.containsKey(word.toLowerCase())) {
+          style = TextStyle(
+            color: colorMap[word.toLowerCase()]!,
+            fontSize: 14,
+            fontFamily: 'Arial',
+          );
+        } else if (lastCharWasDot && keywordsAttributes.contains(word)) {
+          style = styleKeywordAttributes;
+        } else if (lastCharWasDot && keywordsMethods.contains(word)) {
+          style = styleKeywordMethods;
+        }
+        addSpan(word, style);
+      }
+
+      if (lineIndex < lines.length - 1) {
+        addSpan('\n', styleNormal);
+      }
+    }
+
+    return spans;
+  }
+
+// Function to draw syntax highlighted text
   static void drawText(Canvas canvas, String text, double x, double y) {
     final textPainter = TextPainter(
-      text: TextSpan(
-        text: text.replaceAll("      ", ""),
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-          fontFamily: 'Arial',
-        ),
-      ),
+      text: TextSpan(children: syntaxHighlight(text.replaceAll("      ", ""))),
       textDirection: TextDirection.ltr,
     );
     textPainter.layout(minWidth: 0, maxWidth: double.infinity);

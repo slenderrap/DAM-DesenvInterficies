@@ -59,7 +59,6 @@ public class CnvObjTextMultilinia implements CnvObj {
         String codi = """
             // Crea un node \"Text\" amb un ample màxim i mira l'alçada final 'height'
             // Dibuixa el text en una imatge que finalment pinta al canvas
-            
             String str = \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\";
             if (image == null) {
     

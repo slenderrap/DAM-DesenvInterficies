@@ -53,14 +53,17 @@ class DrawingPainter extends CustomPainter {
         TextStyle(color: CupertinoColors.systemGrey, fontSize: 10);
     final textPainter = TextPainter(textDirection: TextDirection.ltr);
 
+    const lineDark = ui.Color.fromARGB(255, 210, 210, 210);
+    const lineLight = ui.Color.fromARGB(255, 220, 220, 220);
+
     // Primer dibuixem totes les línies
     for (double x = 0; x <= size.width; x += 10) {
       if (x % 50 == 0) {
         paint.strokeWidth = 1.5;
-        paint.color = CupertinoColors.systemGrey.withOpacity(0.7); // Més clar
+        paint.color = lineDark;
       } else {
         paint.strokeWidth = 1;
-        paint.color = CupertinoColors.lightBackgroundGray;
+        paint.color = lineLight;
       }
       canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
     }
@@ -68,10 +71,10 @@ class DrawingPainter extends CustomPainter {
     for (double y = 0; y <= size.height; y += 10) {
       if (y % 50 == 0) {
         paint.strokeWidth = 1.5;
-        paint.color = CupertinoColors.systemGrey.withOpacity(0.5); // Més clar
+        paint.color = lineDark;
       } else {
         paint.strokeWidth = 1;
-        paint.color = CupertinoColors.lightBackgroundGray;
+        paint.color = lineLight;
       }
       canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
     }

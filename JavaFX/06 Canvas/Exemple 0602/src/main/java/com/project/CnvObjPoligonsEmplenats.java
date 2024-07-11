@@ -126,15 +126,14 @@ public class CnvObjPoligonsEmplenats implements CnvObj {
             gc.lineTo(440, 290);
             gc.lineTo(390, 280);
             gc.fill();
-
             gc.setFill(new Color(0.5, 1, 0.5, 0.5));
             // Red, Green, Blue, Opacity (alpha)
+
             gc.beginPath();
             gc.moveTo(400, 260);
             gc.lineTo(440, 300);
             gc.lineTo(390, 290);
             gc.fill();
-
             // El 'fill' queda per sota del relleu
         """;
         ctrl.drawText(codi, 450, 275);

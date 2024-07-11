@@ -65,7 +65,6 @@ public class CnvObjLinies implements CnvObj {
             gc.setStroke(Color.RED);
             gc.setLineWidth(10);
             gc.setLineCap(StrokeLineCap.SQUARE);
-            
             // Limits de linia quadrats
     
             gc.strokeLine(400, 50, 430, 80);
@@ -83,7 +82,6 @@ public class CnvObjLinies implements CnvObj {
             gc.setStroke(Color.PURPLE);
             gc.setLineWidth(10);
             gc.setLineCap(StrokeLineCap.ROUND);
-
             // Limits de linia arrodonits
     
             gc.strokeLine(400, 250, 430, 280);

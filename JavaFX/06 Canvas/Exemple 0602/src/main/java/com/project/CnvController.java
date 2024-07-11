@@ -94,40 +94,51 @@ public class CnvController {
 
         double cnvHeight = canvas.heightProperty().doubleValue();
         double cnvWidth = canvas.widthProperty().doubleValue();
-
+    
         gc.setFill(Color.BLACK);
         gc.save();
         gc.setFont(new Font("Arial", 12));
         gc.setLineCap(StrokeLineCap.BUTT);
+    
+        // Draw the grid lines first
         for (int x = 0; x < cnvWidth; x = x + 10) {
             if (x % 50 == 0) {
                 gc.setStroke(Color.LIGHTGRAY);
                 gc.setLineWidth(2);
                 gc.strokeLine(x, 0, x, cnvHeight);
-                gc.fillText("" + x, x, 10);
             } else {
                 gc.setStroke(Color.LIGHTGRAY);
                 gc.setLineWidth(1);
                 gc.strokeLine(x, 0, x, cnvHeight);
             }
         }
-
+    
         for (int y = 0; y < cnvHeight; y = y + 10) {
             if (y % 50 == 0) {
                 gc.setStroke(Color.LIGHTGRAY);
                 gc.setLineWidth(2);
                 gc.strokeLine(0, y, cnvWidth, y);
-                gc.fillText("" + y, 0, y + 10);
             } else {
                 gc.setStroke(Color.LIGHTGRAY);
                 gc.setLineWidth(1);
                 gc.strokeLine(0, y, cnvWidth, y);
             }
         }
+    
+        // Draw the texts on top of the grid lines
+        for (int x = 0; x < cnvWidth; x = x + 50) {
+            gc.fillText("" + x, x, 10);
+        }
+    
+        for (int y = 0; y < cnvHeight; y = y + 50) {
+            gc.fillText("" + y, 0, y + 10);
+        }
+    
         gc.restore();
     }
-
+  
     // Draws text
+    /*
     public void drawText(String codi, double x, double y) {
         gc.save();
         gc.setFont(new Font("Arial", 14));
@@ -135,4 +146,10 @@ public class CnvController {
         gc.fillText(codi, x, y);
         gc.restore();
     }
+    */
+    public void drawText(String codi, double x, double y) {
+        CnvSyntaxHighlighter highlighter = new CnvSyntaxHighlighter(gc);
+        highlighter.drawText(codi, x, y);
+    }
+
 }

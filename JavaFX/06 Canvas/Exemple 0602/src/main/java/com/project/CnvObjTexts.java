@@ -47,7 +47,6 @@ public class CnvObjTexts implements CnvObj {
             gc.setTextAlign(TextAlignment.LEFT);
             gc.setTextBaseline(VPos.BASELINE);
             gc.fillText(\"Agc\", 50, 50);
-
             // Baseline alinea pel cos de la lletra
         """;
         ctrl.drawText(codi, 125, 30);
@@ -75,7 +74,6 @@ public class CnvObjTexts implements CnvObj {
             gc.setTextAlign(TextAlignment.RIGHT);
             gc.setTextBaseline(VPos.BOTTOM);
             gc.fillText(\"Agc\", 100, 275);
-
             // Bottom alinea pel peu de la lletra
         """;
         ctrl.drawText(codi, 125, 275);
@@ -105,7 +103,6 @@ public class CnvObjTexts implements CnvObj {
             gc.setTextBaseline(VPos.TOP);
             gc.fillText(\"Àgc\", 450, 50);
             gc.restore();
-            
             // Top alinear pel cap de la lletra
         """;
         ctrl.drawText(codi, 520, 30);
@@ -135,7 +132,6 @@ public class CnvObjTexts implements CnvObj {
             gc.setTextBaseline(VPos.CENTER);
             gc.fillText(\"Agc\", 475, 275);
             gc.restore();
-
             // Center alinea pel mig de la lletra
         """;
         ctrl.drawText(codi, 520, 275);
