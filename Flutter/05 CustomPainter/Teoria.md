@@ -118,7 +118,7 @@ Dins del *GestureDetector* és on es posa el *CustomPaint*, per detectar els eve
 La llista de *shapes* es gestiona des de l'aplicació, al *CustomPaint* només se li passa aquesta llista com a paràmetre perquè la pogui dibuixar.
 
 <br/>
-<center><img src="./assets/ex0500.png" style="max-height: 500px" alt="">
+<center><img src="./assets/ex0500.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
@@ -164,7 +164,7 @@ Aquest exemple mostra un Widget personalitzat amb *CustomPaint* que és un rello
 
 
 <br/>
-<center><img src="./assets/ex0501.png" style="max-height: 500px" alt="">
+<center><img src="./assets/ex0501.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
@@ -252,6 +252,91 @@ static Future<ui.Image?> _loadImage(String asset) async {
 Aquest exemple mostra diversos exemples de dibuix amb CustomPaint i el codi per aconseguir aquell tipus de dibuix.
 
 <br/>
-<center><img src="./assets/ex0502.png" style="max-height: 500px" alt="">
+<center><img src="./assets/ex0502.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
+
+**Exemple 0503:**
+
+Aquest exemple mostra com fer servir [GestureDetector](https://docs.flutter.dev/ui/interactivity/gestures) per arrossegar elements d'un canvas.
+
+Cal definir les funcions que observen l'arrossegament (*onPanUpdate* i *onPanEnd*):
+
+```dart
+child: GestureDetector(
+  onPanUpdate: onPanUpdate,
+  onPanEnd: onPanEnd,
+  child: Container(
+    width: constraints.maxWidth,
+    height: constraints.maxHeight,
+    color: CupertinoColors.lightBackgroundGray,
+    child: CustomPaint(
+      painter: ShapePainter(
+        greenSquare: greenSquare,
+        blueCircle: blueCircle,
+        isCircleOnTop: isCircleOnTop,
+      ),
+      child: Container(),
+    ),
+  ),
+),
+```
+
+Cal definir què passa quan s'arrossega per sobre la pantalla. En aquest cas, canviar la posició dels objectes si cal:
+
+```dart
+void onPanUpdate(DragUpdateDetails details) {
+  final RenderBox renderBox = context.findRenderObject() as RenderBox;
+  final Offset localPosition =
+      renderBox.globalToLocal(details.globalPosition);
+
+  setState(() {
+    if (offset.dx == -1 && offset.dy == -1) {
+      if (greenSquare.contains(localPosition)) {
+        isGreenSquareDragged = true;
+        isCircleOnTop = false;
+        offset = localPosition - greenSquare.topLeft;
+      }
+
+      if (blueCircle.contains(localPosition)) {
+        isBlueCircleDragged = true;
+        isCircleOnTop = true;
+        offset = localPosition - blueCircle.topLeft;
+      }
+    } else {
+      if (isGreenSquareDragged) {
+        greenSquare = Rect.fromLTWH(
+            localPosition.dx - offset.dx,
+            localPosition.dy - offset.dy,
+            greenSquare.width,
+            greenSquare.height);
+      } else if (isBlueCircleDragged) {
+        blueCircle = Rect.fromLTWH(
+            localPosition.dx - offset.dx,
+            localPosition.dy - offset.dy,
+            blueCircle.width,
+            blueCircle.height);
+      }
+    }
+  });
+}
+```
+
+Cal fixar-se que al objecte de dibuix se li passen els objectes *greenSquare* i *blueCirle* que tenen la informació de la posició dels objectes a dibuixar: 
+
+```dart
+child: CustomPaint(
+  painter: ShapePainter(
+    greenSquare: greenSquare,
+    blueCircle: blueCircle,
+    isCircleOnTop: isCircleOnTop,
+  ),
+  child: Container(),
+)
+```
+
+<br/>
+<center><img src="./assets/ex0503.gif" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
