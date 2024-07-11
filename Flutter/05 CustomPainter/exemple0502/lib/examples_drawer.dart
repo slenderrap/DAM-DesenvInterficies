@@ -5,7 +5,7 @@ class ExamplesDrawer {
   static void drawText(Canvas canvas, String text, double x, double y) {
     final textPainter = TextPainter(
       text: TextSpan(
-        text: text,
+        text: text.replaceAll("      ", ""),
         style: const TextStyle(
           color: Colors.black,
           fontSize: 14,
@@ -134,7 +134,7 @@ class ExamplesDrawer {
             const Rect.fromLTWH(50, 110, 60, 30), 
             const Radius.circular(25)), paint);
     ''',
-      100,
+      120,
       50,
     );
 
@@ -164,7 +164,7 @@ class ExamplesDrawer {
             const Rect.fromLTWH(50, 350, 30, 60), 
             const Radius.circular(25)), paint);
     ''',
-      100,
+      120,
       300,
     );
 
@@ -192,20 +192,31 @@ class ExamplesDrawer {
       canvas.drawOval(
           const Rect.fromLTWH(400, 60, 40, 20), paint);
     ''',
-      435,
+      450,
       50,
     );
 
     // 3
-    paint.color = Colors.grey;
-    paint.style = PaintingStyle.stroke;
+    paint.color = Colors.blue;
+    paint.style = PaintingStyle.fill;
     paint.strokeWidth = 5;
-    paint.color = Colors.green;
 
     canvas.drawArc(
       const Rect.fromLTWH(370, 300, 60, 30),
       0,
-      90 * (3.141592653589793 / 180),
+      -90 * (3.141592653589793 / 180),
+      true,
+      paint,
+    );
+
+    paint.color = Colors.grey;
+    paint.style = PaintingStyle.stroke;
+    paint.strokeWidth = 5;
+
+    canvas.drawArc(
+      const Rect.fromLTWH(370, 300, 60, 30),
+      0,
+      -90 * (3.141592653589793 / 180),
       true,
       paint,
     );
@@ -213,17 +224,24 @@ class ExamplesDrawer {
     drawText(
       canvas,
       '''
-      paint.color = Colors.grey;
-      paint.style = PaintingStyle.stroke;
-      paint.strokeWidth = 5;
-      paint.color = Colors.green;
+        paint.color = Colors.blue;
+        paint.style = PaintingStyle.fill;
+        paint.strokeWidth = 5;
 
-      canvas.drawArc(
-        const Rect.fromLTWH(370, 300, 60, 30),
-        0, 90 * (3.141592653589793 / 180), true, paint);
+        canvas.drawArc(
+          const Rect.fromLTWH(370, 300, 60, 30),
+          0, -90 * (3.141592653589793 / 180), true, paint);
+
+        paint.color = Colors.grey;
+        paint.style = PaintingStyle.stroke;
+        paint.strokeWidth = 5;
+
+        canvas.drawArc(
+          const Rect.fromLTWH(370, 300, 60, 30),
+          0, -90 * (3.141592653589793 / 180), true, paint);
     ''',
-      435,
-      300,
+      450,
+      260,
     );
   }
 
@@ -309,6 +327,7 @@ class ExamplesDrawer {
 
     // 3
     paint.color = Colors.purple;
+    paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.miter;
     final path3 = Path();
     path3.moveTo(400, 250);
@@ -319,6 +338,7 @@ class ExamplesDrawer {
         canvas,
         '''
       paint.color = Colors.purple;
+      paint.strokeCap = StrokeCap.round;
       paint.strokeJoin = StrokeJoin.miter;
       final path3 = Path();
       path3.moveTo(400, 250);
@@ -332,42 +352,43 @@ class ExamplesDrawer {
 
   static void filledPolygons(Canvas canvas, Size size) {
     // 0
-    final paint0 = Paint()
+    final paintFill = Paint()
       ..color = Colors.green
       ..style = PaintingStyle.fill;
-    final borderPaint0 = Paint()
+
+    final paintStroke = Paint()
       ..color = Colors.orange
       ..strokeWidth = 8
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    final path0 = Path()
+    final path = Path()
       ..moveTo(50, 60)
       ..lineTo(100, 75)
       ..lineTo(75, 100)
-      ..lineTo(50, 75)
-      ..close();
-    canvas.drawPath(path0, paint0);
-    canvas.drawPath(path0, borderPaint0);
+      ..lineTo(50, 75);
+
+    canvas.drawPath(path, paintFill);
+    canvas.drawPath(path, paintStroke);
     drawText(
       canvas,
       '''
-      final paint0 = Paint()
-        ..color = Colors.green..style = PaintingStyle.fill;
-      final borderPaint0 = Paint()
+      final paintFill = Paint()
+        ..color = Colors.green
+        ..style = PaintingStyle.fill;
+      final paintStroke = Paint()
         ..color = Colors.orange
         ..strokeWidth = 8
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;
-
-      final path0 = Path()
-        ..moveTo(50, 60)..lineTo(100, 75)..lineTo(75, 100)
-        ..lineTo(50, 75)..close();
-      canvas.drawPath(path0, paint0);
-      canvas.drawPath(path0, borderPaint0);
+      final path = Path()
+        ..moveTo(50, 60)..lineTo(100, 75)
+        ..lineTo(75, 100)..lineTo(50, 75);
+      canvas.drawPath(path, paintFill);
+      canvas.drawPath(path, paintStroke);
     ''',
-      100,
-      50,
+      120,
+      30,
     );
 
     // 1
@@ -384,10 +405,9 @@ class ExamplesDrawer {
       ..moveTo(50, 260)
       ..lineTo(100, 275)
       ..lineTo(100, 300)
-      ..lineTo(50, 275)
-      ..close();
-    canvas.drawPath(path1, paint1);
+      ..lineTo(50, 275);
     canvas.drawPath(path1, borderPaint1);
+    canvas.drawPath(path1, paint1);
     drawText(
       canvas,
       '''
@@ -402,12 +422,12 @@ class ExamplesDrawer {
 
       final path1 = Path()
         ..moveTo(50, 260)..lineTo(100, 275)
-        ..lineTo(100, 300)..lineTo(50, 275)..close();
-      canvas.drawPath(path1, paint1);
+        ..lineTo(100, 300)..lineTo(50, 275);
       canvas.drawPath(path1, borderPaint1);
+      canvas.drawPath(path1, paint1);
     ''',
-      100,
-      275,
+      120,
+      260,
     );
 
     // 2
@@ -435,7 +455,7 @@ class ExamplesDrawer {
       canvas.drawPath(path2, paint2);
     ''',
       450,
-      50,
+      30,
     );
 
     // 3
@@ -478,7 +498,7 @@ class ExamplesDrawer {
       canvas.drawPath(path4, semiTransparentPaint);
     ''',
       450,
-      275,
+      260,
     );
   }
 
@@ -504,8 +524,8 @@ class ExamplesDrawer {
       final paint0 = Paint()..shader = gradient0.createShader(rect0);
       canvas.drawRect(rect0, paint0);
     ''',
-      125,
-      50,
+      150,
+      30,
     );
 
     // 1
@@ -528,14 +548,14 @@ class ExamplesDrawer {
       final paint1 = Paint()..shader = gradient1.createShader(rect1);
       canvas.drawRect(rect1, paint1);
     ''',
-      125,
-      220,
+      150,
+      200,
     );
 
     // 2
     const rect2 = Rect.fromLTWH(50, 380, 80, 50);
     const gradient2 = LinearGradient(
-      begin: Alignment.topLeft,
+      begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [Colors.blue, Colors.grey, Colors.purple],
       stops: [0.2, 0.7, 1],
@@ -552,8 +572,8 @@ class ExamplesDrawer {
       final paint2 = Paint()..shader = gradient2.createShader(rect2);
       canvas.drawRect(rect2, paint2);
     ''',
-      125,
-      390,
+      150,
+      360,
     );
   }
 
@@ -561,32 +581,36 @@ class ExamplesDrawer {
     // 0
     const rect0 = Rect.fromLTWH(50, 40, 80, 50);
     const gradient0 = RadialGradient(
-      center: Alignment(0.5, 0.5),
+      center: Alignment.center, // Centrat dins del rectangle
       radius: 0.8,
       colors: [Colors.orange, Colors.green, Colors.blue],
       stops: [0.2, 0.5, 0.8],
     );
+
     final paint0 = Paint()..shader = gradient0.createShader(rect0);
     canvas.drawRect(rect0, paint0);
+
     drawText(
       canvas,
       '''
-      final rect0 = Rect.fromLTWH(50, 40, 80, 50);
-      final gradient0 = RadialGradient(
-        center: Alignment(0.5, 0.5), radius: 0.8,
-        colors: [Colors.orange, Colors.green, Colors.blue], stops: [0.2, 0.5, 0.8]);
+      const rect0 = Rect.fromLTWH(50, 40, 80, 50);
+      const gradient0 = RadialGradient(
+        center: Alignment.center, radius: 0.8,
+        colors: [Colors.orange, Colors.green, Colors.blue],
+        stops: [0.2, 0.5, 0.8],
+      );
       final paint0 = Paint()..shader = gradient0.createShader(rect0);
       canvas.drawRect(rect0, paint0);
     ''',
-      125,
-      50,
+      150,
+      30,
     );
 
     // 1
     const rect1 = Rect.fromLTWH(50, 210, 80, 50);
     const gradient1 = RadialGradient(
-        center: Alignment(0, 0.5),
-        radius: 1,
+        center: Alignment.centerLeft,
+        radius: 1.5,
         colors: [Colors.red, Colors.orange, Colors.purple],
         stops: [0, 0.25, 0.8]);
     final paint1 = Paint()..shader = gradient1.createShader(rect1);
@@ -594,21 +618,22 @@ class ExamplesDrawer {
     drawText(
       canvas,
       '''
-      final rect1 = Rect.fromLTWH(50, 210, 80, 50);
-      final gradient1 = RadialGradient(
-        center: Alignment(0, 0.5), radius: 1,
-        colors: [Colors.red, Colors.orange, Colors.purple], stops: [0, 0.25, 0.8]);
-      final paint1 = Paint()..shader = gradient1.createShader(rect1);
-      canvas.drawRect(rect1, paint1);
+        const rect1 = Rect.fromLTWH(50, 210, 80, 50);
+        const gradient1 = RadialGradient(
+          center: Alignment.centerLeft, radius: 1.5,
+          colors: [Colors.red, Colors.orange, Colors.purple],
+          stops: [0, 0.25, 0.8]);
+        final paint1 = Paint()..shader = gradient1.createShader(rect1);
+        canvas.drawRect(rect1, paint1);
     ''',
-      125,
-      220,
+      150,
+      200,
     );
 
     // 2
     const rect2 = Rect.fromLTWH(50, 380, 80, 50);
     const gradient2 = RadialGradient(
-      center: Alignment(0.5, 1),
+      center: Alignment(0, 1),
       radius: 1,
       colors: [Colors.blue, Colors.grey, Colors.purple],
       stops: [0.2, 0.7, 1],
@@ -620,13 +645,13 @@ class ExamplesDrawer {
       '''
       final rect2 = Rect.fromLTWH(50, 380, 80, 50);
       final gradient2 = RadialGradient(
-        center: Alignment(0.5, 1), radius: 1,
+        center: Alignment(0, 1), radius: 1,
         colors: [Colors.blue, Colors.grey, Colors.purple], stops: [0.2, 0.7, 1]);
       final paint2 = Paint()..shader = gradient2.createShader(rect2);
       canvas.drawRect(rect2, paint2);
     ''',
-      125,
-      390,
+      150,
+      360,
     );
   }
 
@@ -657,8 +682,8 @@ class ExamplesDrawer {
       );
       // No manté la proporció
       ''',
-      100,
-      50,
+      110,
+      30,
     );
 
     // 1
@@ -684,8 +709,8 @@ class ExamplesDrawer {
       );
       // No manté la proporció
       ''',
-      100,
-      300,
+      110,
+      285,
     );
 
     // 2
@@ -719,8 +744,8 @@ class ExamplesDrawer {
       );
       // Manté la proporció correcta amb ample = 50
       ''',
-      450,
-      50,
+      460,
+      30,
     );
 
     // 3
@@ -750,8 +775,8 @@ class ExamplesDrawer {
       );
       // Manté la proporció correcta amb alt = 50
       ''',
-      450,
-      300,
+      460,
+      285,
     );
   }
 
@@ -788,7 +813,7 @@ class ExamplesDrawer {
         Rect.fromLTWH(50, 30, prpAmple, prpAlt), paint);
       canvas.restore();
       ''',
-      125,
+      140,
       20,
     );
 
@@ -820,7 +845,7 @@ class ExamplesDrawer {
         Rect.fromLTWH(0, 0, prpAmple, prpAlt), paint);
       canvas.restore(); canvas.restore();
       ''',
-      125,
+      140,
       195,
     );
 
@@ -852,7 +877,7 @@ class ExamplesDrawer {
         Rect.fromLTWH(0, 0, prpAmple, prpAlt), paint);
       canvas.restore(); canvas.restore();
       ''',
-      125,
+      140,
       350,
     );
   }
@@ -863,7 +888,6 @@ class ExamplesDrawer {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    // 0
     canvas.drawLine(const Offset(50, 50), const Offset(100, 50), paint);
     canvas.drawLine(const Offset(50, 30), const Offset(50, 50), paint);
 
@@ -880,17 +904,24 @@ class ExamplesDrawer {
       textDirection: TextDirection.ltr,
     );
     textPainter0.layout(minWidth: 0, maxWidth: double.infinity);
-    textPainter0.paint(canvas, const Offset(50, 50));
+
+    // Calcula la posició vertical perquè la línia de base coincideixi amb la línia vermella
+    final offsetY = 50 -
+        textPainter0.computeDistanceToActualBaseline(TextBaseline.alphabetic);
+    textPainter0.paint(canvas, Offset(50, offsetY));
 
     drawText(
       canvas,
       '''
+      final paint = Paint()
+        ..color = Colors.red
+        ..strokeWidth = 2
+        ..style = PaintingStyle.stroke;
+
       canvas.drawLine(
-          const Offset(50, 50), 
-          const Offset(100, 50), paint);
+        const Offset(50, 50), const Offset(100, 50), paint);
       canvas.drawLine(
-          const Offset(50, 30), 
-          const Offset(50, 50), paint);
+        const Offset(50, 30), const Offset(50, 50), paint);
 
       final textPainter0 = TextPainter(
         text: const TextSpan(
@@ -904,14 +935,15 @@ class ExamplesDrawer {
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
       );
-      textPainter0.layout(
-          minWidth: 0, 
-          maxWidth: double.infinity);
-      textPainter0.paint(
-          canvas, 
-          const Offset(50, 50));
+      textPainter0.layout(minWidth: 0, maxWidth: double.infinity);
+
+      // Calcula la posició vertical perquè la línia de 
+      // base coincideixi amb la línia vermella
+      final offsetY = 50 -
+          textPainter0.computeDistanceToActualBaseline(TextBaseline.alphabetic);
+      textPainter0.paint(canvas, Offset(50, offsetY));
       ''',
-      125,
+      120,
       30,
     );
 
@@ -974,7 +1006,6 @@ class ExamplesDrawer {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    // 0
     canvas.drawLine(const Offset(50, 250), const Offset(100, 250), paint);
     canvas.drawLine(const Offset(100, 225), const Offset(100, 250), paint);
 
@@ -990,45 +1021,55 @@ class ExamplesDrawer {
       textAlign: TextAlign.right,
       textDirection: TextDirection.ltr,
     );
-    textPainter1.layout(minWidth: 0, maxWidth: double.infinity);
-    textPainter1.paint(canvas, const Offset(100, 250));
+    textPainter1.layout(minWidth: 100, maxWidth: 100);
+
+    // Posicionar respecte la caixa (layout) del textPainter
+    final yPosition = 250 -
+        textPainter1.computeDistanceToActualBaseline(TextBaseline.alphabetic);
+    textPainter1.paint(canvas, Offset(0, yPosition));
 
     drawText(
       canvas,
       '''
+      final paint = Paint()
+        ..color = Colors.red
+        ..strokeWidth = 2
+        ..style = PaintingStyle.stroke;
       canvas.drawLine(
-          const Offset(50, 250), 
-          const Offset(100, 250), paint);
+        const Offset(50, 250), 
+        const Offset(100, 250), paint);
       canvas.drawLine(
-          const Offset(100, 225), 
-          const Offset(100, 250), paint);
+        const Offset(100, 225), 
+        const Offset(100, 250), paint);
 
       final textPainter1 = TextPainter(
         text: const TextSpan(
           text: "Agc",
           style: TextStyle(
-            color: Colors.blue,
-            fontSize: 25,
+            color: Colors.blue, fontSize: 25,
             fontFamily: 'Verdana',
           ),
         ),
         textAlign: TextAlign.right,
         textDirection: TextDirection.ltr,
       );
-      textPainter1.layout(
-          minWidth: 0, 
-          maxWidth: double.infinity);
-      textPainter1.paint(
-          canvas, 
-          const Offset(100, 250));
-      ''',
-      125,
+      textPainter1.layout(minWidth: 100, maxWidth: 100);
+
+      // Posicionar respecte la caixa (layout) del textPainter
+      final yPosition = 250 -
+          textPainter1.computeDistanceToActualBaseline(
+            TextBaseline.alphabetic);
+      textPainter1.paint(canvas, Offset(0, yPosition));
+    ''',
+      120,
       30,
     );
 
     // 1
-    canvas.drawLine(const Offset(450, 250), const Offset(500, 250), paint);
-    canvas.drawLine(const Offset(475, 225), const Offset(475, 275), paint);
+
+    // Dibuixar les línies horitzontal i vertical de la creu
+    canvas.drawLine(const Offset(425, 250), const Offset(475, 250), paint);
+    canvas.drawLine(const Offset(450, 225), const Offset(450, 275), paint);
 
     final textPainter3 = TextPainter(
       text: const TextSpan(
@@ -1043,24 +1084,28 @@ class ExamplesDrawer {
       textDirection: TextDirection.ltr,
     );
     textPainter3.layout(minWidth: 0, maxWidth: double.infinity);
-    textPainter3.paint(canvas, const Offset(475, 250));
+
+    // Calcular la posició per centrar el text a la creu
+    final xOffset = 450.0 - (textPainter3.width / 2);
+    final yOffset = 250.0 -
+        textPainter3.computeDistanceToActualBaseline(TextBaseline.alphabetic);
+    textPainter3.paint(canvas, Offset(xOffset, yOffset));
 
     drawText(
       canvas,
       '''
       canvas.drawLine(
-          const Offset(450, 250), 
-          const Offset(500, 250), paint);
+        const Offset(450, 250), 
+        const Offset(500, 250), paint);
       canvas.drawLine(
-          const Offset(475, 225), 
-          const Offset(475, 275), paint);
+        const Offset(475, 225), 
+        const Offset(475, 275), paint);
 
       final textPainter3 = TextPainter(
         text: const TextSpan(
           text: "Agc",
           style: TextStyle(
-            color: Colors.blue,
-            fontSize: 25,
+            color: Colors.blue, fontSize: 25,
             fontFamily: 'Verdana',
           ),
         ),
@@ -1068,13 +1113,18 @@ class ExamplesDrawer {
         textDirection: TextDirection.ltr,
       );
       textPainter3.layout(
-          minWidth: 0, 
-          maxWidth: double.infinity);
-      textPainter3.paint(
-          canvas, 
-          const Offset(475, 250));
+        minWidth: 0, 
+        maxWidth: double.infinity);
+
+      // Calcular la posició
+      final xOffset = 475.0 - (textPainter3.width / 2);
+      final yOffset = 250.0 -
+        textPainter3.computeDistanceToActualBaseline(
+          TextBaseline.alphabetic);
+      textPainter3.paint(canvas, 
+        Offset(xOffset, yOffset));
       ''',
-      520,
+      490,
       30,
     );
   }
@@ -1143,7 +1193,7 @@ class ExamplesDrawer {
       textPainter.layout(maxWidth: 600);
       textPainter.paint(canvas, Offset(50, 25));
       ''',
-      35,
+      50,
       80,
     );
   }
