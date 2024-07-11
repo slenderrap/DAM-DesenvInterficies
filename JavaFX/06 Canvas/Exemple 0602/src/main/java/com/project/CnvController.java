@@ -138,15 +138,6 @@ public class CnvController {
     }
   
     // Draws text
-    /*
-    public void drawText(String codi, double x, double y) {
-        gc.save();
-        gc.setFont(new Font("Arial", 14));
-        gc.setFill(Color.BLACK);
-        gc.fillText(codi, x, y);
-        gc.restore();
-    }
-    */
     public void drawText(String codi, double x, double y) {
         CnvSyntaxHighlighter highlighter = new CnvSyntaxHighlighter(gc);
         highlighter.drawText(codi, x, y);
