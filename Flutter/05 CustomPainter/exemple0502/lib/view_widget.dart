@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 import 'drawing_painter.dart';
 
 class ViewWidget extends StatefulWidget {
@@ -13,57 +14,32 @@ class ViewWidget extends StatefulWidget {
 }
 
 class ViewWidgetState extends State<ViewWidget> {
-  String selectedOption = 'Linies';
-  Future<ui.Image?>? imageFuture;
+  Future<ui.Image?>? _imageFuture;
+  int _selectedOption = 0;
+  final List<String> _options = [
+    'Linies',
+    'Quadrats i cercles',
+    'Poligons',
+    'Poligons emplenats',
+    'Gradients lineals',
+    'Gradients radials',
+    'Imatges',
+    'Transformacions',
+    'Texts posicionats 0',
+    'Texts posicionats 1',
+    'Texts multilínia',
+  ];
 
   @override
   void initState() {
     super.initState();
-    imageFuture = _loadImage('assets/images/mario.png');
+    _imageFuture = _loadImage('assets/images/mario.png');
   }
 
-  void _setSelection(String value) {
+  void _onSelected(int value) {
     setState(() {
-      selectedOption = value;
+      _selectedOption = value;
     });
-  }
-
-  void _showActionSheet(BuildContext context) {
-    final List<String> options = [
-      'Linies',
-      'Quadrats i cercles',
-      'Poligons',
-      'Poligons emplenats',
-      'Gradients lineals',
-      'Gradients radials',
-      'Imatges',
-      'Transformacions',
-      'Texts posicionats 0',
-      'Texts posicionats 1',
-      'Texts multilínia',
-    ];
-
-    showCupertinoModalPopup(
-      context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        title: const Text('Select Option'),
-        actions: options.map((String option) {
-          return CupertinoActionSheetAction(
-            child: Text(option),
-            onPressed: () {
-              _setSelection(option);
-              Navigator.pop(context);
-            },
-          );
-        }).toList(),
-        cancelButton: CupertinoActionSheetAction(
-          child: const Text('Cancel'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-    );
   }
 
   static Future<ui.Image?> _loadImage(String asset) async {
@@ -99,7 +75,7 @@ class ViewWidgetState extends State<ViewWidget> {
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return FutureBuilder<ui.Image?>(
-                  future: imageFuture,
+                  future: _imageFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Carregant ...
@@ -111,7 +87,8 @@ class ViewWidgetState extends State<ViewWidget> {
                     }
                     // Mostrar el CustomPaint si ja s'han carregat els arxius
                     return CustomPaint(
-                      painter: DrawingPainter(selectedOption, snapshot.data!),
+                      painter: DrawingPainter(
+                          _options[_selectedOption], snapshot.data!),
                       size: Size(constraints.maxWidth, constraints.maxHeight),
                     );
                   },
@@ -119,10 +96,14 @@ class ViewWidgetState extends State<ViewWidget> {
               },
             ),
           ),
-          CupertinoButton(
-            child: Text('Selected: $selectedOption'),
-            onPressed: () => _showActionSheet(context),
-          ),
+          Container(
+              padding: const EdgeInsets.all(8),
+              child: CDKButtonSelect(
+                  selectedIndex: _selectedOption,
+                  isTranslucent: true,
+                  isFlat: false,
+                  options: _options,
+                  onSelected: _onSelected)),
         ],
       ),
     );

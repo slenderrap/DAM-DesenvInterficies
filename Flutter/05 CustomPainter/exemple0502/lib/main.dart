@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 import 'view_widget.dart';
 
 void main() {
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
-      debugShowCheckedModeBanner: false,
-      home: ViewWidget(),
-    );
+    return const CDKApp(
+        defaultAppearance: "system", // system, light, dark
+        defaultColor: "systemBlue",
+        child: ViewWidget());
   }
 }
