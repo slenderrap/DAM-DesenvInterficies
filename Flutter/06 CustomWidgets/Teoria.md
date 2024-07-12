@@ -83,7 +83,7 @@ Row(
 
 **Exemple 0600**
 
-Aquest exemple mostre un widget personalitzat anomenat *Picker360*:
+Aquest exemple mostra un widget personalitzat anomenat *Picker360*:
 
 <br/>
 <center><img src="./assets/ex0600.gif" style="max-height: 400px" alt="">
