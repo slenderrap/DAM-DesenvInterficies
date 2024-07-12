@@ -160,3 +160,99 @@ flutter run -d macos
 <center><img src="./assets/ex0401.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
+
+## SQLite
+
+Documentació: [SQLite a Flutter](https://docs.flutter.dev/cookbook/persistence/sqlite)
+
+Cal importar el paquet 'sqflite' per fer anar una base de dades *SQLite* a flutter:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  sqflite: ^2.0.0+3
+  path: ^1.8.0
+```
+
+A part d'iniciar el *Notifier*, s'ha d'inicar la base de dades al iniciar l'aplicació:
+
+```dart
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppData()..initializeDatabase(),
+      child: const MyApp(),
+    ),
+  );
+}
+```
+
+Per iniciar la connexió amb la base de dades:
+
+```dart
+_db = await openDatabase(
+  path,
+  onCreate: (db, version) {
+    return db.execute(
+      'CREATE TABLE animals(especie TEXT PRIMARY KEY, longevitat INTEGER, numeropotes INTEGER)',
+    );
+  },
+  version: 1,
+);
+```
+
+Després ja es poden fer crides, enlloc de fer un *DAO* es fa que els objectes que modelen les files de la taula tinguin funcions per transformar a *Map<String, dynamic>*:
+
+```dart
+class AnimalsModel {
+  final String especie;
+  final int longevitat;
+  final int numeropotes;
+
+  AnimalsModel({
+    required this.especie,
+    required this.longevitat,
+    required this.numeropotes,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'especie': especie,
+      'longevitat': longevitat,
+      'numeropotes': numeropotes,
+    };
+  }
+
+  factory AnimalsModel.fromMap(Map<String, dynamic> map) {
+    return AnimalsModel(
+      especie: map['especie'],
+      longevitat: map['longevitat'],
+      numeropotes: map['numeropotes'],
+    );
+  }
+}
+```
+
+```dart
+  Future<void> addAnimal(AnimalsModel animal) async {
+    if (_db != null) {
+      await _db!.rawInsert(
+        'INSERT INTO animals (especie, longevitat, numeropotes) VALUES (?, ?, ?)',
+        [animal.especie, animal.longevitat, animal.numeropotes],
+      );
+      _animals.add(animal);
+      notifyListeners();
+    }
+  }
+```
+
+**Exemple 0401:**
+
+En aquest exemple senzill es gestiona una taula SQLite:
+
+<br/>
+<center><img src="./assets/ex0402.gif" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
