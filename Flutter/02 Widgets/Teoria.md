@@ -18,6 +18,8 @@
 
 A Flutter tot el codi s’organitza en ‘widgets’ o ‘components’, es tracta d’objectes Dart que permeten definir la interfície i el codi al mateix temps.
 
+[**Vídeo:** Widget of the week](https://youtu.be/b_sQ9bMltGU?si=wiXBiHsV3wY5vycc)
+
 Com que Flutter és molt flexible, es poden fer aplicacions amb estètica Material (Android) o bé Cupertino (iOS), però són dos conjunts de widgets diferents.
 
 La [documentació](https://api.flutter.dev/) té molts exemples de com fer servir els objectes, i un munt de mini tutorials al seu canal de [YouTube](https://www.youtube.com/@flutterdev)
@@ -588,7 +590,9 @@ return ListView.builder(
 
 Flutter permet animar fàcilment propietats matemàtiques dels atributs.
 
-Per fer-ho cal:
+[**Vídeo:** Animations](https://youtu.be/HHzAJdlEj1c?si=VqwJi7RreLQYmtQo)
+
+Per fer animacions cal:
 
 - Un **AnimationController**, que permet iniciar/pausar l'animació i defineix el tipus d'animació
 - La propietat **Animation<tipus>** que es vol animar

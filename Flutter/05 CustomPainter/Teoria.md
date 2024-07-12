@@ -18,10 +18,7 @@
 
 **CustomPainter** és la versió del **Canvas** implementada per Flutter. Proporciona una superfície de dibuix sobre la qual es poden renderitzar formes, imatges i text. És similar a un llenç de pintura on es poden dibuixar diferents elements gràfics utilitzant operacions de dibuix proporcionades per Flutter.
 
-Mirarem aquests videos:
-
-- [GestureDetector](https://www.youtube.com/watch?v=WhVXkCFPmK4)
-- [CustomPainter](https://www.youtube.com/watch?v=kp14Y4uHpHs)
+[**Vídeo:** Custom Painter](https://www.youtube.com/watch?v=kp14Y4uHpHs)
 
 Guies sobre Canvas:
 
@@ -90,6 +87,8 @@ Aquest exemple mostra un *"CustomPainter"* que té una llista de *"Shapes"* a di
 - Fent click sobre l'àrea de dibuix
 
 Per detectar la posició on l'usuari ha fet 'click' es fa servir el widget **"GestureDetector"**, que obté la posició on s'ha fet click amb el mètode *"onTapDown"*:
+
+[**Vídeo:** GestureDetector](https://www.youtube.com/watch?v=WhVXkCFPmK4)
 
 ```dart
 GestureDetector(
@@ -178,6 +177,8 @@ Respecte les imatges s'han de tenir en compte dos punts:
 ### Pre carregar les imatges
 
 Hi ha diversos mètodes, un d'ells és fer servir **"FutureBuilder"** que mostra un Widget alternatiu (per exemple de càrrega) fins que les imatges s'han carregat correctament:
+
+[**Vídeo:** Future Builder](https://youtu.be/zEdw_1B7JHY?si=x_T8CFh7eH8ft69i)
 
 ```dart
   Future<ui.Image?>? imageFuture;
