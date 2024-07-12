@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 import 'view_widget.dart';
 
+// https://pub.dev/packages/flutter_cupertino_desktop_kit
+
 void main() {
   runApp(const MyApp());
 }
