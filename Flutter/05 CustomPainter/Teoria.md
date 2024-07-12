@@ -25,7 +25,7 @@ Guies sobre Canvas:
 - [Kodeco](https://www.kodeco.com/26483389-flutter-canvas-api-getting-started)
 - [Getstream](https://getstream.io/blog/definitive-flutter-painting-guide/)
 
-## Widgets personalitzats
+## Painter/Canvas
 
 Com que a Flutter tots els compontents són widgets, quan necessitem una superfície de dibuix també ho hem de fer en un Widget anomenat **CustomPaint**.
 
@@ -333,4 +333,3 @@ child: CustomPaint(
 <center><img src="./assets/ex0503.gif" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
-
