@@ -54,6 +54,18 @@ El codi FXML està basat en arxius de text amb format XML, per tant, es poden ed
 </AnchorPane>
 ```
 
+## Exemple 0000
+
+Feu anar l'exemple amb:
+```bash
+./run.sh com.project.Main
+```
+
+O bé a Windows PowerShell:
+```bash
+.\run.ps1 com.project.Main
+```
+
 ## Gluon SceneBuilder
 
 Editar interfícies FXML manualment és complicat, ja que cal conèixer els components del llenguatge. 
