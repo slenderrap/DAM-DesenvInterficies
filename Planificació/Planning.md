@@ -9,8 +9,16 @@
 
 06/11 - 27/11 Projecte 1
 
+04/12 Flutter - Intro + Sintaxi
+11/12 Flutter - Widgets
+18/12 Flutter - Vistes+ Dades
+08/01 Flutter - CustomPainter
+15/01 Flutter - CustomPainter
+22/01 Flutter - WebSockets
+29/01 Flutter - WebSockets
 
 22/01 - 12/02 Projecte 2
+
 
 
 26/03 - 09/04 Projecte 3
