@@ -118,11 +118,16 @@ private void stopBackgroundTask() {
 <br/>
 <br/>
 
-## Exemple 0401
+## Exemple 0402
 
-Per fer anar aquest exemple cal un servidor Ollama amb el model 'phi3':
+Per fer anar aquest exemple cal un servidor Ollama amb el model 'llama3.2':
 
-En un terminal diferent:
+```bash
+ollama pull llama3.2:1b
+ollama run llama3.2:1b
+```
+
+Quan estigui carregat, en un terminal diferent:
 
 ```bash
 cd Exemple\ 0401

@@ -1,8 +1,8 @@
 ```text
 18/09 Intro
 25/09 JavaFX - Vistes + Subvistes
-02/10 JavaFX - Estils + Processos + Dades
-09/10 JavaFX - Canvas
+02/10 JavaFX - Processos + Dades
+09/10 JavaFX - Estils + Canvas
 16/10 JavaFX - Canvas
 23/10 JavaFX - Servidors
 30/10 JavaFX - Servidors

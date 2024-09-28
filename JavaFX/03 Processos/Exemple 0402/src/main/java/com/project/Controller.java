@@ -55,7 +55,7 @@ public class Controller implements Initializable {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:11434/api/generate"))
                 .header("Content-Type", "application/json")
-                .POST(BodyPublishers.ofString("{\"model\": \"phi3\", \"prompt\": \"Why is the sky blue?\", \"stream\": true}"))
+                .POST(BodyPublishers.ofString("{\"model\": \"llama3.2:1b\", \"prompt\": \"Why is the sky blue?\", \"stream\": true}"))
                 .build();
 
         Platform.runLater(() -> textInfo.setText("Wait stream ..."));
@@ -120,7 +120,7 @@ public class Controller implements Initializable {
                 .uri(URI.create("http://localhost:11434/api/generate"))
                 .header("Content-Type", "application/json")
                 .POST(BodyPublishers.ofString(
-                        "{\"model\": \"phi3\", \"prompt\": \"Tell me a haiku.\", \"stream\": false}"))
+                        "{\"model\": \"llama3.2:1b\", \"prompt\": \"Tell me a haiku.\", \"stream\": false}"))
                 .build();
 
         Platform.runLater(() -> textInfo.setText("Wait complete ..."));
