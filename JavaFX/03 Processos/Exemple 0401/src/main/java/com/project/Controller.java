@@ -2,11 +2,12 @@ package com.project;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -20,14 +21,18 @@ public class Controller {
     private ImageView img;
 
     @FXML
-    private Text txt;
+    private TextArea txt; // Changed from Text to TextArea
 
     @FXML
     private Button btn;
 
     @FXML
     private void actionLoad() {
+        File initialDirectory = new File("./");
         FileChooser fileChooser = new FileChooser();
+        if (initialDirectory.exists()) {
+            fileChooser.setInitialDirectory(initialDirectory);
+        }
         fileChooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
         );
@@ -56,7 +61,7 @@ public class Controller {
                 Image image = new Image(selectedFile.toURI().toString());
                 img.setImage(image);
 
-                // Set the Base64 string in the Text component
+                // Set the Base64 string in the TextArea (was previously a Text element)
                 txt.setText(base64Image);
 
                 outputStream.close();

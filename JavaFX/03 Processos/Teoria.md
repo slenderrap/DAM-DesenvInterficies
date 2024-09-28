@@ -118,6 +118,16 @@ private void stopBackgroundTask() {
 <br/>
 <br/>
 
+## Exemple 0401
+
+En aquest exemple podeu veure com es carrega una imatge des del navegador d'arxius, i es transforma a format **base64**
+
+<br/>
+<center><img src="./assets/ex0401.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
 ## Exemple 0402
 
 Per fer anar aquest exemple cal un servidor Ollama amb el model 'llama3.2':
@@ -243,7 +253,7 @@ private void callStream(ActionEvent event) {
 ```
 
 <br/>
-<center><img src="./assets/ex0401.png" style="max-height: 400px" alt="">
+<center><img src="./assets/ex0402.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 <br/>
