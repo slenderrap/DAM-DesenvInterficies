@@ -14,9 +14,5 @@ El següent repositori GitHub conté un exemple que combina JavaFX amb crides a 
 
 [DAM-JavaFXNodeJSExemplePostWebsockets](https://github.com/optimisme/DAM-JavaFXNodeJSExemplePostWebsockets)
 
-El següent repositori GitHub conté un exemple d'un *Chat* que funciona a través d'un servidor NodeJS amb diferents tecnologíes: Java, JavaFX, Flutter
-
-[DAM-WebSockets](https://github.com/optimisme/DAM-WebSockets)
-
 
 
