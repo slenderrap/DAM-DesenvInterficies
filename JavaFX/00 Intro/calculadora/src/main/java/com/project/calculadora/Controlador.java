@@ -1,4 +1,4 @@
-package com.project.calculadora;
+package project.calculadora;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

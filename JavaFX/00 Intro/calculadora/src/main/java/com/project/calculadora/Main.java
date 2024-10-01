@@ -1,4 +1,4 @@
-package com.project.calculadora;
+package project.calculadora;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
