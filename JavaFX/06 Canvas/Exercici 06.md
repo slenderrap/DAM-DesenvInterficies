@@ -12,7 +12,7 @@ A l'esquerra:
 A la dreta:
 
 - Amb un *Canvas* visualitza gràficament l'espai de les carpetes i arxius per poder detectar carpetes o arxius grans ràpidament.
-- Fent click a una element del canvas, s'ha de mostrat la carpeta o arxiu de la part esquerra com a sel·leccionat
+- Fent click a una element del canvas, s'ha de mostrar i sel·leccionar la carpeta o arxiu de la part esquerra
 
 Un exemple és l'aplicació [Baobab, disk usage analyzer](https://apps.gnome.org/ca/Baobab/) de Gnome
 
