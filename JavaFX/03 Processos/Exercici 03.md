@@ -25,3 +25,11 @@ Quan es processa una imatge has de poder fer preguntes tipus:
 ...
 
 Les imatges s'han d'escollir amb la eina de gestió d'arxius de JavaFX i enviar-se a Ollama amb format **base64**
+
+Exemple:
+
+<br/>
+<center><img src="./assets/xatIeti.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
