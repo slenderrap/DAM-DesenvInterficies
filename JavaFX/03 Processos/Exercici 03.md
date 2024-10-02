@@ -16,8 +16,7 @@ Les condicions són:
 
 - En el cas d'una petició de text, la resposta s'ha de mostrar a mida que es va rebent
 - En el cas d'una petició d'imatge, la resposta s'ha de mostrar un cop completada i mentresant l'usuari veu un 'thinking...'
-
-L'usuari ha de poder aturar la última petició en qualsevol moment.
+- L'usuari **ha de poder aturar la última petició** en qualsevol moment.
 
 Quan es processa una imatge has de poder fer preguntes tipus: 
 
