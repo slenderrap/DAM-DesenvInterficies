@@ -7,10 +7,12 @@ A l'esquerra:
 - Mostri l'espai que ocupa la carpeta escollida
 - Mostri l'espai que ocupen les seves subcarpetes de manera recursiva
 - Mostri l'espai que ocupen els arxius de totes les carpetes anteriors
+- Sel·leccionant un arxiu o carpeta, s'ha de mostrar aquesta sel·lecció amb una diferència visual al dibuix/poligon que li correspon del canvas
 
 A la dreta:
 
 - Amb un *Canvas* visualitza gràficament l'espai de les carpetes i arxius per poder detectar carpetes o arxius grans ràpidament.
+- Fent click a una element del canvas, s'ha de mostrat la carpeta o arxiu de la part esquerra com a sel·leccionat
 
 Un exemple és l'aplicació [Baobab, disk usage analyzer](https://apps.gnome.org/ca/Baobab/) de Gnome
 
