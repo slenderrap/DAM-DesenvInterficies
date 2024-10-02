@@ -4,8 +4,8 @@
 02/10 JavaFX - Processos + Dades
 09/10 JavaFX - Estils + Canvas
 16/10 JavaFX - Canvas
-23/10 JavaFX - Servidors
-30/10 JavaFX - Servidors
+23/10 JavaFX - Canvas + WebSockets
+30/10 JavaFX - Canvas
 
 06/11 - 27/11 Projecte 1
 
