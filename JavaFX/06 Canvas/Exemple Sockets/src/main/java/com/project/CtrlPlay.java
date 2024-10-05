@@ -120,7 +120,6 @@ public class CtrlPlay implements Initializable {
         for (PlayMousePosition mousePosition : allMousePositions) {
             int row = mousePosition.getRow();
             int col = mousePosition.getCol();
-            System.out.println(row + "X" + col);
 
             // Comprovar si està dins dels límits de la graella
             if (row >= 0 && col >= 0) {
