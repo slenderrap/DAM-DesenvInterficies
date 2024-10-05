@@ -108,6 +108,7 @@ public class CtrlPlay implements Initializable {
 
         if (animationTimer.fps < 1) { return; }
 
+        // Update objects and animations here
     }
 
     // Draw game to canvas
