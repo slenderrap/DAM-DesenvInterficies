@@ -123,16 +123,13 @@ public class CtrlPlay implements Initializable {
 
             // Comprovar si està dins dels límits de la graella
             if (row >= 0 && col >= 0) {
-                double cellX = playGrid.getStartX() + col * playGrid.getCellSize();
-                double cellY = playGrid.getStartY() + row * playGrid.getCellSize();
-    
                 if ("A".equals(mousePosition.getClientId())) {
                     gc.setFill(Color.LIGHTBLUE); 
                 } else {
                     gc.setFill(Color.LIGHTGREEN); 
                 }
                 // Emplenar la casella amb el color clar
-                gc.fillRect(cellX, cellY, playGrid.getCellSize(), playGrid.getCellSize());
+                gc.fillRect(playGrid.getCellX(col), playGrid.getCellY(row), playGrid.getCellSize(), playGrid.getCellSize());
             }
         }
 

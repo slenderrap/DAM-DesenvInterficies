@@ -49,6 +49,14 @@ public class PlayGrid {
         }
         return (int) ((mouseX - startX) / cellSize);
     }
+
+    public int getCellX(int col) {
+        return (int) (getStartX() + col * getCellSize());
+    }
+
+    public int getCellY(int row) {
+        return (int) (getStartY() + row * getCellSize());
+    }
     
     public void draw(GraphicsContext gc) {
         gc.setStroke(Color.BLACK);
