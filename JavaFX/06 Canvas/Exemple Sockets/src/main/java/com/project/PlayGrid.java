@@ -1,27 +1,24 @@
 package com.project;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-
 public class PlayGrid {
 
     private final double startX;
     private final double startY;
     private final double cellSize;
-    private final int rows;
     private final int cols;
+    private final int rows;
 
     public PlayGrid(double startX, double startY, double cellSize, int rows, int cols) {
         this.startX = startX;
         this.startY = startY;
         this.cellSize = cellSize;
-        this.rows = rows;
         this.cols = cols;
+        this.rows = rows;
     }
 
-    public boolean isMouseInsideGrid(double mouseX, double mouseY) {
-        return mouseX >= startX && mouseX < startX + cols * cellSize &&
-               mouseY >= startY && mouseY < startY + rows * cellSize;
+    public boolean isPositionInsideGrid(double x, double y) {
+        return x >= startX && x < startX + cols * cellSize &&
+               y >= startY && y < startY + rows * cellSize;
     }  
 
     public double getStartX() {
@@ -36,18 +33,26 @@ public class PlayGrid {
         return cellSize;
     }
 
-    public int getRow(double mouseY) {
-        if (mouseY < startY || mouseY >= startY + rows * cellSize) {
-            return -1; // Fora de la graella
-        }
-        return (int) ((mouseY - startY) / cellSize);
+    public double getCols() {
+        return cols;
     }
-    
-    public int getCol(double mouseX) {
-        if (mouseX < startX || mouseX >= startX + cols * cellSize) {
+
+    public double getRows() {
+        return rows;
+    }
+
+    public int getCol(double x) {
+        if (x < startX || x >= startX + cols * cellSize) {
             return -1; // Fora de la graella
         }
-        return (int) ((mouseX - startX) / cellSize);
+        return (int) ((x - startX) / cellSize);
+    }
+
+    public int getRow(double y) {
+        if (y < startY || y >= startY + rows * cellSize) {
+            return -1; // Fora de la graella
+        }
+        return (int) ((y - startY) / cellSize);
     }
 
     public int getCellX(int col) {
@@ -56,17 +61,5 @@ public class PlayGrid {
 
     public int getCellY(int row) {
         return (int) (getStartY() + row * getCellSize());
-    }
-    
-    public void draw(GraphicsContext gc) {
-        gc.setStroke(Color.BLACK);
-
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                double x = startX + col * cellSize;
-                double y = startY + row * cellSize;
-                gc.strokeRect(x, y, cellSize, cellSize);
-            }
-        }
     }
 }

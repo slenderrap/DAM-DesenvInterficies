@@ -22,16 +22,8 @@ public class CtrlConfig implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    private Runnable callbackConnectToServer;
-
     @FXML
     private void connectToServer() {
-        if (callbackConnectToServer != null) {
-            callbackConnectToServer.run();
-        }
-    }
-
-    public void setCallbackConnectToServer(Runnable callback) {
-        this.callbackConnectToServer = callback;
+        ClientFX.connectToServer();
     }
 }

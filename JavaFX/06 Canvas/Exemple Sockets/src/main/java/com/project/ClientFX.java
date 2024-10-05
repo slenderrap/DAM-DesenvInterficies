@@ -65,10 +65,6 @@ public class ClientFX extends Application {
             Image icon = new Image("file:/icons/icon.png");
             stage.getIcons().add(icon);
         }
-
-        // Add view callbacks
-        ctrlConfig.setCallbackConnectToServer(() -> { this.connectToServer(); });
-        ctrlPlay.setCallbackMouseTracking(() -> { this.mouseTracking(); });
     }
 
     @Override
@@ -94,7 +90,7 @@ public class ClientFX extends Application {
         return list;
     }
 
-    public void connectToServer() {
+    public static void connectToServer() {
 
         ctrlConfig.txtMessage.setTextFill(Color.BLACK);
         ctrlConfig.txtMessage.setText("Connecting ...");
@@ -109,23 +105,8 @@ public class ClientFX extends Application {
             wsClient.onError((response) -> { Platform.runLater(() -> { wsError(response); }); });
         });
     }
-
-    public void mouseTracking() {
    
-        JSONObject msgObj = new JSONObject();
-        msgObj.put("type", "clientMouseTracking");
-        msgObj.put("clientId", clientId);
-        msgObj.put("x", ctrlPlay.lastMousePosition.getX());
-        msgObj.put("y", ctrlPlay.lastMousePosition.getY());
-        msgObj.put("row", ctrlPlay.lastMousePosition.getRow());
-        msgObj.put("col", ctrlPlay.lastMousePosition.getCol());
-    
-        if (wsClient != null) {
-            wsClient.safeSend(msgObj.toString());
-        }
-    }
-    
-    void wsMessage(String response) {
+    private static void wsMessage(String response) {
         // System.out.println(response);
         JSONObject msgObj = new JSONObject(response);
         switch (msgObj.getString("type")) {
@@ -151,13 +132,16 @@ public class ClientFX extends Application {
                 }
                 ctrlWait.txtTitle.setText(txt);
                 break;
-            case "serverMouseTracking":
+            case "serverMouseMoving":
                 ctrlPlay.setPlayersMousePositions(msgObj.getJSONObject("positions"));
+                break;
+            case "serverSelectableObjects":
+                ctrlPlay.setSelectableObjects(msgObj.getJSONObject("selectableObjects"));
                 break;
         }
     }
 
-    void wsError(String response) {
+    private static void wsError(String response) {
 
         String connectionRefused = "Connection refused";
         if (response.indexOf(connectionRefused) != -1) {

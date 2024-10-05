@@ -22,6 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 
+
+
 public class Server extends WebSocketServer {
 
     private static final List<String> PLAYER_NAMES = Arrays.asList("A", "B");
@@ -29,6 +31,8 @@ public class Server extends WebSocketServer {
     private Map<WebSocket, String> clients;
     private List<String> availableNames;
     private Map<String, JSONObject> clientMousePositions = new HashMap<>();
+
+    private static Map<String, JSONObject> selectableObjects = new HashMap<>();
 
     public Server(InetSocketAddress address) {
         super(address);
@@ -70,21 +74,30 @@ public class Server extends WebSocketServer {
     public void onMessage(WebSocket conn, String message) {
         JSONObject obj = new JSONObject(message);
     
+        
         if (obj.has("type")) {
             String type = obj.getString("type");
     
-            if (type.equals("clientMouseTracking")) {
-                // Obtenim el clientId del missatge
-                String clientId = obj.getString("clientId");   
-                clientMousePositions.put(clientId, obj);
-    
-                // Prepara el missatge de tipus 'serverMouseTracking' amb les posicions de tots els clients
-                JSONObject rst = new JSONObject();
-                rst.put("type", "serverMouseTracking");
-                rst.put("positions", clientMousePositions);
-    
-                // Envia el missatge a tots els clients connectats
-                broadcastMessage(rst.toString(), null);
+            switch (type) {
+                case "clientMouseMoving":
+                    // Obtenim el clientId del missatge
+                    String clientId = obj.getString("clientId");   
+                    clientMousePositions.put(clientId, obj);
+        
+                    // Prepara el missatge de tipus 'serverMouseMoving' amb les posicions de tots els clients
+                    JSONObject rst0 = new JSONObject();
+                    rst0.put("type", "serverMouseMoving");
+                    rst0.put("positions", clientMousePositions);
+        
+                    // Envia el missatge a tots els clients connectats
+                    broadcastMessage(rst0.toString(), null);
+                    break;
+                case "clientSelectbleObjectMoving":
+                    String objectId = obj.getString("objectId");
+                    selectableObjects.put(objectId, obj);
+
+                    sendServerSelectableObjects();
+                    break;
             }
         }
     }
@@ -185,14 +198,28 @@ public class Server extends WebSocketServer {
                 msg.put("type", "countdown");
                 msg.put("value", i);
                 broadcastMessage(msg.toString(), null);
-                
-                try {
-                    Thread.sleep(750);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (i == 0) {
+                    sendServerSelectableObjects();
+                } else {
+                    try {
+                        Thread.sleep(750);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
+    }
+
+    public void sendServerSelectableObjects() {
+
+        // Prepara el missatge de tipus 'serverObjects' amb les posicions de tots els clients
+        JSONObject rst1 = new JSONObject();
+        rst1.put("type", "serverSelectableObjects");
+        rst1.put("selectableObjects", selectableObjects);
+
+        // Envia el missatge a tots els clients connectats
+        broadcastMessage(rst1.toString(), null);
     }
    
     @Override
@@ -213,8 +240,26 @@ public class Server extends WebSocketServer {
         server.start();
 
         LineReader reader = LineReaderBuilder.builder().build();
-
         System.out.println("Server running. Type 'exit' to gracefully stop it.");
+
+        // Add objects
+        String name0 = "O0";
+        JSONObject obj0 = new JSONObject();
+        obj0.put("objectId", name0);
+        obj0.put("x", 300);
+        obj0.put("y", 50);
+        obj0.put("cols", 4);
+        obj0.put("rows", 1);
+        selectableObjects.put(name0, obj0);
+
+        String name1 = "O1";
+        JSONObject obj1 = new JSONObject();
+        obj1.put("objectId", name1);
+        obj1.put("x", 300);
+        obj1.put("y", 100);
+        obj1.put("cols", 1);
+        obj1.put("rows", 3);
+        selectableObjects.put(name1, obj1);
 
         try {
             while (true) {
