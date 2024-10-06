@@ -303,3 +303,31 @@ public void keyEvent (KeyEvent evt) {
 <center><img src="./assets/exPong.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
+
+## Exemple Sockets
+
+Aquest exemple mostra com poden interactuar dos clients sobre un *Canvas* a través de WebSockets.
+
+Per fer-lo anar, cal obrir tres terminals diferents. Una pel servidor i dues pels clients:
+
+Mantenir el servidor funcionant:
+```bash
+cd "Exemple Sockets"
+./run.sh com.project.Server
+```
+
+Un cop el servidor està llest, obrir dos clients:
+```bash
+cd "Exemple Sockets"
+./run.sh com.project.ClientFX
+```
+
+<br/>
+<center>
+<video width="100%" controls allowfullscreen>
+  <source src="./assets/exSockets.mov" type="video/mp4">
+</video>
+</center>
+<br/>
+
+**Nota**: Per sortir del servidor escriure 'exit' a la consola.
