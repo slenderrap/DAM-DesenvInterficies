@@ -24,7 +24,6 @@ public class ClientFX extends Application {
     public static String host = "localhost";
     public static String protocolWS = "ws";
 
-    public static String view = "CtrlConfig";
     public static String clientId = "";
     public static CtrlConfig ctrlConfig;
     public static CtrlWait ctrlWait;
@@ -114,9 +113,8 @@ public class ClientFX extends Application {
                 if (clientId == "") {
                     clientId = msgObj.getString("id");
                 }
-                if (view != "ViewWait") {
-                    view = "ViewWait";
-                    UtilsViews.setViewAnimating(view);
+                if (UtilsViews.getActiveView() != "ViewWait") {
+                    UtilsViews.setViewAnimating("ViewWait");
                 }
                 List<String> stringList = jsonArrayToList(msgObj.getJSONArray("list"), String.class);
                 if (stringList.size() > 0) { ctrlWait.txtPlayer0.setText(stringList.get(0)); }
@@ -126,8 +124,7 @@ public class ClientFX extends Application {
                 int value = msgObj.getInt("value");
                 String txt = String.valueOf(value);
                 if (value == 0) {
-                    view = "ViewPlay";
-                    UtilsViews.setViewAnimating(view);
+                    UtilsViews.setViewAnimating("ViewPlay");
                     txt = "GO";
                 }
                 ctrlWait.txtTitle.setText(txt);
