@@ -16,6 +16,6 @@ A la dreta:
 
 Un exemple és l'aplicació [Baobab, disk usage analyzer](https://apps.gnome.org/ca/Baobab/) de Gnome
 
-<center><img src="./assets/gnomedua.png" style="max-width: 90%; max-height: 400px;" alt="">
+<center><img src="./assets/gnomeDUA.png" style="max-width: 90%; max-height: 400px;" alt="">
 <br/></center>
 <br/>

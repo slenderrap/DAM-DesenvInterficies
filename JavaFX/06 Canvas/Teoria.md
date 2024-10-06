@@ -10,9 +10,25 @@
 
 # Canvas
 
-El **Canvas** és una classe en JavaFX que proporciona una superfície de dibuix sobre la qual es poden renderitzar formes, imatges i text. És similar a un llenç de pintura on es poden dibuixar diferents elements gràfics utilitzant operacions de dibuix proporcionades per la classe GraphicsContext.
+El **Canvas** és una classe en JavaFX que proporciona una superfície de dibuix sobre la qual es poden fer formes, imatges i text. És similar a un llenç de pintura on es poden dibuixar diferents elements gràfics utilitzant operacions de dibuix proporcionades per la classe *GraphicsContext*.
 
-El **Canvas** s'utilitza quan es necessita un control de dibuix flexible i personalitzable dins d'una aplicació JavaFX. És especialment útil per a aplicacions que requereixen dibuixos dinàmics, gràfics en temps real, jocs, visualitzacions personalitzades, i qualsevol altra situació on els elements gràfics es generen programàticament.
+El **Canvas** és útil per fer dibuixos dinàmics, gràfics en temps real, jocs, situacions on els elements gràfics es generen programàticament.
+
+El **Canvas** o objectes similars existeixen en gairebé tots els llenguatges de programació amb interfícies visuals, també en pàgines web.
+
+Exemples d'aplicacions amb dibuixos personalitzats:
+
+<br/>
+<center><img src="./assets/exCanvas00.png" style="max-height: 400px" alt="">
+<br/></center>
+<center><img src="./assets/exCanvas01.png" style="max-height: 400px" alt="">
+<br/></center>
+<center><img src="./assets/exCanvas02.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
+## Canvas a JavaFX
 
 Per fer servir el *Canvas* cal definir un objecte **"Canvas"** a la vista:
 
