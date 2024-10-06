@@ -1,4 +1,4 @@
-package com.project;
+package com.project; // X
 
 public class PlayMousePosition {
     private String clientId;
