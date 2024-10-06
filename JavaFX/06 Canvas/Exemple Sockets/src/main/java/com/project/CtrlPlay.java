@@ -1,4 +1,4 @@
-package com.project; // X
+package com.project;
 
 import java.net.URL;
 import java.util.HashMap;

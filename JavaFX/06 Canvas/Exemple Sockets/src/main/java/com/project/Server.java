@@ -1,4 +1,4 @@
-package com.project; // X
+package com.project;
 
 import org.java_websocket.server.WebSocketServer;
 import org.jline.reader.EndOfFileException;
