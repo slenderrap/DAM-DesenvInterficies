@@ -63,6 +63,12 @@ Quan volem dibuixar al *Canvas* fem servir el context anterior:
 
 El canvas va 'pintant' els objectes a sobre dels antics, així si volem netejar-lo i començar de nou:
 
+<br/>
+<center><img src="./assets/context00.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
 ```java
 @FXML
 private void actionClear(ActionEvent event) {
