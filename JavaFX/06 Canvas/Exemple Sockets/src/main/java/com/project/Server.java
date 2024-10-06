@@ -92,7 +92,7 @@ public class Server extends WebSocketServer {
                     // Envia el missatge a tots els clients connectats
                     broadcastMessage(rst0.toString(), null);
                     break;
-                case "clientSelectbleObjectMoving":
+                case "clientSelectableObjectMoving":
                     String objectId = obj.getString("objectId");
                     selectableObjects.put(objectId, obj);
 
