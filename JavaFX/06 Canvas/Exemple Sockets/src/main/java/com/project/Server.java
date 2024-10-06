@@ -193,7 +193,7 @@ public class Server extends WebSocketServer {
     public void sendCowntdown() {
         int requiredNumberOfClients = 2;
         if (clients.size() == requiredNumberOfClients) {
-            for (int i = requiredNumberOfClients; i >= 0; i--) {
+            for (int i = 5; i >= 0; i--) {
                 JSONObject msg = new JSONObject();
                 msg.put("type", "countdown");
                 msg.put("value", i);
