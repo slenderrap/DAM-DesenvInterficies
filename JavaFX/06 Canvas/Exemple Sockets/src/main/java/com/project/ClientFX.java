@@ -19,11 +19,6 @@ public class ClientFX extends Application {
 
     public static UtilsWS wsClient;
 
-    public static int port = 3000;
-    public static String protocol = "http";
-    public static String host = "localhost";
-    public static String protocolWS = "ws";
-
     public static String clientId = "";
     public static CtrlConfig ctrlConfig;
     public static CtrlWait ctrlWait;
@@ -96,9 +91,10 @@ public class ClientFX extends Application {
     
         pauseDuring(1500, () -> { // Give time to show connecting message ...
 
+            String protocol = ctrlConfig.txtProtocol.getText();
             String host = ctrlConfig.txtHost.getText();
             String port = ctrlConfig.txtPort.getText();
-            wsClient = UtilsWS.getSharedInstance(ClientFX.protocolWS + "://" + host + ":" + port);
+            wsClient = UtilsWS.getSharedInstance(protocol + "://" + host + ":" + port);
     
             wsClient.onMessage((response) -> { Platform.runLater(() -> { wsMessage(response); }); });
             wsClient.onError((response) -> { Platform.runLater(() -> { wsError(response); }); });
