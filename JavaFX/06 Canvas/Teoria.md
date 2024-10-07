@@ -357,3 +357,9 @@ Des d'un terminal SSH del Proxmox:
 ```bash
 sudo java -jar server-package.jar
 ```
+
+Apagueu el servidor des del terminal SSH:
+
+```bash
+exit
+```
