@@ -1,5 +1,8 @@
 package com.project;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import org.java_websocket.server.WebSocketServer;
 import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
@@ -234,8 +237,39 @@ public class Server extends WebSocketServer {
         setConnectionLostTimeout(100);
     }
 
+    public static String askSystemName() {
+        StringBuilder resultat = new StringBuilder();
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("uname", "-r");
+            Process process = processBuilder.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                resultat.append(line).append("\n");
+            }
+
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                return "Error: El procés ha finalitzat amb codi " + exitCode;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
+        return resultat.toString().trim();
+    }
+
     public static void main(String[] args) {
+
+        String systemName = askSystemName();
+        System.out.println(systemName);
+
         int port = 3000; 
+        if (cadena.endsWith("-pve")) {
+            port = 80;
+        }
+
         Server server = new Server(new InetSocketAddress(port));
         server.start();
 
