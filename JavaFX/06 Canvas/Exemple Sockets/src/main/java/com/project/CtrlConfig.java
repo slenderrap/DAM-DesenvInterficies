@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 public class CtrlConfig implements Initializable {
 
     @FXML
+    public TextField txtProtocol;
+
+    @FXML
     public TextField txtHost;
 
     @FXML
@@ -25,5 +28,19 @@ public class CtrlConfig implements Initializable {
     @FXML
     private void connectToServer() {
         ClientFX.connectToServer();
+    }
+
+    @FXML
+    private void setConfigLocal() {
+        txtProtocol.setText("ws");
+        txtHost.setText("localhost");
+        txtPort.setText("3000");
+    }
+
+    @FXML
+    private void setConfigProxmox() {
+        txtProtocol.setText("wss");
+        txtHost.setText("user.ieti.site");
+        txtPort.setText("443");
     }
 }

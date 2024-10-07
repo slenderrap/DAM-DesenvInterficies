@@ -337,3 +337,23 @@ cd "Exemple Sockets"
 <br/>
 
 **Nota**: Per sortir del servidor escriure 'exit' a la consola.
+
+### Servidors remots
+
+En un servidor remot, cal pujar un arxiu .jar amb totes les dependències. Per fer-ho:
+
+```bash
+./run.sh com.project.Server build
+```
+
+Per pujar-lo al Proxmox de l'institut:
+
+```bash
+scp -i id_rsa -P 20127 ./target/server-package.jar usuariProxmox@ieticloudpro.ieti.cat:~/
+```
+
+Des d'un terminal SSH del Proxmox:
+
+```bash
+sudo java -jar server-package.jar
+```

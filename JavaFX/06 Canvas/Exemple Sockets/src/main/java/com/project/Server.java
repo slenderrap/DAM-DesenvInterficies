@@ -25,8 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 
-
-
 public class Server extends WebSocketServer {
 
     private static final List<String> PLAYER_NAMES = Arrays.asList("A", "B");
@@ -263,16 +261,18 @@ public class Server extends WebSocketServer {
     public static void main(String[] args) {
 
         String systemName = askSystemName();
-        System.out.println(systemName);
 
         int port = 3000; 
-        if (cadena.endsWith("-pve")) {
+        if (systemName.endsWith("-pve")) {
+            System.out.println("Proxmox detected!");
             port = 80;
         }
-
+        System.out.println("Trying to run server at port: " + port);
+        
+        // WebSockets server
         Server server = new Server(new InetSocketAddress(port));
         server.start();
-
+        
         LineReader reader = LineReaderBuilder.builder().build();
         System.out.println("Server running. Type 'exit' to gracefully stop it.");
 
