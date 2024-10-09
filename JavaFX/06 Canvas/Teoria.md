@@ -10,9 +10,25 @@
 
 # Canvas
 
-El **Canvas** és una classe en JavaFX que proporciona una superfície de dibuix sobre la qual es poden renderitzar formes, imatges i text. És similar a un llenç de pintura on es poden dibuixar diferents elements gràfics utilitzant operacions de dibuix proporcionades per la classe GraphicsContext.
+El **Canvas** és una classe en JavaFX que proporciona una superfície de dibuix sobre la qual es poden fer formes, imatges i text. És similar a un llenç de pintura on es poden dibuixar diferents elements gràfics utilitzant operacions de dibuix proporcionades per la classe *GraphicsContext*.
 
-El **Canvas** s'utilitza quan es necessita un control de dibuix flexible i personalitzable dins d'una aplicació JavaFX. És especialment útil per a aplicacions que requereixen dibuixos dinàmics, gràfics en temps real, jocs, visualitzacions personalitzades, i qualsevol altra situació on els elements gràfics es generen programàticament.
+El **Canvas** és útil per fer dibuixos dinàmics, gràfics en temps real, jocs, situacions on els elements gràfics es generen programàticament.
+
+El **Canvas** o objectes similars existeixen en gairebé tots els llenguatges de programació amb interfícies visuals, també en pàgines web.
+
+Exemples d'aplicacions amb dibuixos personalitzats:
+
+<br/>
+<center><img src="./assets/exCanvas00.png" style="max-height: 400px" alt="">
+<br/></center>
+<center><img src="./assets/exCanvas01.png" style="max-height: 400px" alt="">
+<br/></center>
+<center><img src="./assets/exCanvas02.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
+
+## Canvas a JavaFX
 
 Per fer servir el *Canvas* cal definir un objecte **"Canvas"** a la vista:
 
@@ -46,6 +62,12 @@ Quan volem dibuixar al *Canvas* fem servir el context anterior:
 ```
 
 El canvas va 'pintant' els objectes a sobre dels antics, així si volem netejar-lo i començar de nou:
+
+<br/>
+<center><img src="./assets/context00.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+<br/>
 
 ```java
 @FXML
@@ -287,3 +309,85 @@ public void keyEvent (KeyEvent evt) {
 <center><img src="./assets/exPong.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
+
+## Exemple Sockets
+
+Aquest exemple mostra com poden interactuar dos clients sobre un *Canvas* a través de WebSockets.
+
+Per fer-lo anar, cal obrir tres terminals diferents. Una pel servidor i dues pels clients:
+
+Mantenir el servidor funcionant:
+```bash
+cd "Exemple Sockets"
+./run.sh com.project.Server
+```
+
+Un cop el servidor està llest, obrir dos clients:
+```bash
+cd "Exemple Sockets"
+./run.sh com.project.ClientFX
+```
+
+<br/>
+<center>
+<video width="100%" controls allowfullscreen>
+  <source src="./assets/exSockets.mov" type="video/mp4">
+</video>
+</center>
+<br/>
+
+**Nota**: Per sortir del servidor escriure 'exit' a la consola.
+
+### Servidors remots (mirar teoria Serveis i processos)
+
+Configurar els arxius:
+
+```text
+proxmoxRun.sh
+proxmoxStop.sh
+```
+
+Amb els vostres paràmetres del proxmox:
+
+* Nom d'usuari per accedir al Proxmox
+* Arxiu amb la clau privada RSA
+* Port al que funciona el servidor
+
+```bash
+DEFAULT_USER="nomUsuari"
+DEFAULT_RSA_PATH="$HOME/Desktop/Proxmox IETI/id_rsa"
+DEFAULT_SERVER_PORT="3000"
+```
+
+Per pujar i arrencar el servidor al Proxmox, executar:
+
+```bash
+proxmoxRun.sh
+```
+
+Per aturar el servidor del Proxmox, executar:
+
+```bash
+proxmoxStop.sh
+```
+
+**Nota**: Abans d'executar el servidor al Proxmox, cal asseguar-se que té el port 80 redireccionat cap al 3000:
+
+Connectar-se per SSH al proxmox:
+
+```bash
+ssh -i id_rsa -p 20127 nomUsuari@ieticloudpro.ieti.cat
+```
+
+Redireccionar el port 80 cap al 3000:
+
+```bash
+sudo iptables-save -t nat | grep -q -- "--dport 80" || sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+```
+
+Per desfer la redirecció anterior:
+
+```bash
+sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+sudo iptables -t nat -L -n -v
+```
