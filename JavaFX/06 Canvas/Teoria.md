@@ -376,7 +376,7 @@ proxmoxStop.sh
 Connectar-se per SSH al proxmox:
 
 ```bash
-ssh -i id_rsa -p 20127 apalaci8@ieticloudpro.ieti.cat
+ssh -i id_rsa -p 20127 nomUsuari@ieticloudpro.ieti.cat
 ```
 
 Redireccionar el port 80 cap al 3000:
