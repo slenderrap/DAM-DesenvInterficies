@@ -338,28 +338,52 @@ cd "Exemple Sockets"
 
 **Nota**: Per sortir del servidor escriure 'exit' a la consola.
 
-### Servidors remots
+### Servidors remots (mirar teoria Serveis i processos)
 
-En un servidor remot, cal pujar un arxiu .jar amb totes les dependències. Per fer-ho:
+Configurar els arxius:
 
-```bash
-./run.sh com.project.Server build
+```text
+proxmoxRun.sh
+proxmoxStop.sh
 ```
 
-Per pujar-lo al Proxmox de l'institut:
+Amb els vostres paràmetres del proxmox:
 
 ```bash
-scp -i id_rsa -P 20127 ./target/server-package.jar usuariProxmox@ieticloudpro.ieti.cat:~/
+DEFAULT_USER="nomUsuari"
+DEFAULT_RSA_PATH="$HOME/Desktop/Proxmox IETI/id_rsa"
+DEFAULT_SERVER_PORT="3000"
 ```
 
-Des d'un terminal SSH del Proxmox:
+Per pujar i arrencar el servidor al Proxmox, executar:
 
 ```bash
-sudo java -jar server-package.jar
+proxmoxRun.sh
 ```
 
-Apagueu el servidor des del terminal SSH:
+Per aturar el servidor del Proxmox, executar:
 
 ```bash
-exit
+proxmoxStop.sh
+```
+
+**Nota**: Abans d'executar el servidor al Proxmox, cal asseguar-se que té el port 80 redireccionat cap al 3000:
+
+Connectar-se per SSH al proxmox:
+
+```bash
+ssh -i id_rsa -p 20127 apalaci8@ieticloudpro.ieti.cat
+```
+
+Redireccionar el port 80 cap al 3000:
+
+```bash
+sudo iptables-save -t nat | grep -q -- "--dport 80" || sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+```
+
+Per desfer la redirecció anterior:
+
+```bash
+sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+sudo iptables -t nat -L -n -v
 ```

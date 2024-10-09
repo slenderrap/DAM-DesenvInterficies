@@ -262,15 +262,8 @@ public class Server extends WebSocketServer {
 
         String systemName = askSystemName();
 
-        int port = 3000; 
-        if (systemName.endsWith("-pve")) {
-            System.out.println("Proxmox detected!");
-            port = 80;
-        }
-        System.out.println("Trying to run server at port: " + port);
-        
         // WebSockets server
-        Server server = new Server(new InetSocketAddress(port));
+        Server server = new Server(new InetSocketAddress(3000));
         server.start();
         
         LineReader reader = LineReaderBuilder.builder().build();
