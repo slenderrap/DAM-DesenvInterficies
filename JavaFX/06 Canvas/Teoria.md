@@ -349,6 +349,10 @@ proxmoxStop.sh
 
 Amb els vostres paràmetres del proxmox:
 
+* Nom d'usuari per accedir al Proxmox
+* Arxiu amb la clau privada RSA
+* Port al que funciona el servidor
+
 ```bash
 DEFAULT_USER="nomUsuari"
 DEFAULT_RSA_PATH="$HOME/Desktop/Proxmox IETI/id_rsa"
