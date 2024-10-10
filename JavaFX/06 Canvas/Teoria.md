@@ -338,56 +338,38 @@ cd "Exemple Sockets"
 
 **Nota**: Per sortir del servidor escriure 'exit' a la consola.
 
-### Servidors remots (mirar teoria Serveis i processos)
+# Servidors remots
 
-Configurar els arxius:
+**Important!**: Mireu la teoria de serveis i processos
 
-```text
-proxmoxRun.sh
-proxmoxStop.sh
-```
+Aquests scripts ajuden a fer tots els passos d'interacció amb Proxmox de manera senzilla
 
-Amb els vostres paràmetres del proxmox:
+## Definir la configuració
 
-* Nom d'usuari per accedir al Proxmox
-* Arxiu amb la clau privada RSA
-* Port al que funciona el servidor
+Editar l'arxiu **./proxmox/config.env** segons la teva configuració
 
-```bash
+```txt
 DEFAULT_USER="nomUsuari"
-DEFAULT_RSA_PATH="$HOME/Desktop/Proxmox IETI/id_rsa"
+DEFAULT_RSA_PATH="$HOME/.ssh/id_rsa"
 DEFAULT_SERVER_PORT="3000"
 ```
 
-Per pujar i arrencar el servidor al Proxmox, executar:
+Executar els arxius a la carpeta **proxmox**
 
 ```bash
-proxmoxRun.sh
+cd proxmox
+./proxmoxRedirect80.sh    # Redirecciona el port 80 cap al SERVER_PORT
+./proxmoxRedirectUndo.sh  # Desfà la redirecció anterior
+
+./proxmoxRun.sh           # Compila el servidor i el puja al servidor remot
+./proxmoxStop.sh          # Atura el servidor remot
 ```
 
-Per aturar el servidor del Proxmox, executar:
+També podeu pasar la configuració per paràmetres:
 
 ```bash
-proxmoxStop.sh
+cd proxmox
+./proxmoxRedirect80.sh nomUsuari "$HOME/Desktop/Proxmox IETI/id_rsa" 3001
 ```
 
-**Nota**: Abans d'executar el servidor al Proxmox, cal asseguar-se que té el port 80 redireccionat cap al 3000:
-
-Connectar-se per SSH al proxmox:
-
-```bash
-ssh -i id_rsa -p 20127 nomUsuari@ieticloudpro.ieti.cat
-```
-
-Redireccionar el port 80 cap al 3000:
-
-```bash
-sudo iptables-save -t nat | grep -q -- "--dport 80" || sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
-```
-
-Per desfer la redirecció anterior:
-
-```bash
-sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
-sudo iptables -t nat -L -n -v
-```
+**Nota:** Recordeu a aturar el servidor abans de pujar-lo!
