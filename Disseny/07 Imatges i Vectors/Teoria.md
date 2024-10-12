@@ -250,6 +250,39 @@ Del procés de transformar una imatge ‘raster’ en un dibuix vectorial, se’
 
 **Important:** Idealment, els logotips de les empreses tenen una versió vectorial. A més, a les aplicacions s’ha d’intentar fer servir la versió vectorial enlloc de la versió “raster”
 
+## Exemple, mapes!
+
+Al principi de Google Maps, els servidors de Google generaven les imatges dels mapes al servidor i enviaven aquestes imatges als clients.
+
+**Apple va demanar a Google** que canviés la tecnologia de l'aplicació Maps per tal que fós amb dibuixos vectorials enlloc d'imatges descarregades del navegador.
+
+Les avantatges de fer el dibuix amb gràfics vectorials enlloc d'imatges:
+
+- Menys intercanvi de dades, més ràpid de carregar a telèfons mòbils ([fins a un 80% menys](https://bgr.com/general/apple-maps-data-consumption-80-percent-less-than-google-maps/))
+- Dibuixios més nítids, adaptats a la densitat de pantalla de cada dispositiu
+
+Google no ho volia, perquè no volia donar les coordenades de les localitzacions dels seus mapes. I s'hi va negar.
+
+Canv, [Apple va fer]((https://appleinsider.com/articles/12/08/03/inside_apples_new_vector_based_maps_in_ios_6)) la seva pròpia "Apple Maps".
+
+<div class="image-container">
+    <div class="image-item">
+        <img src="./assets/mapGoogle.png" alt="">
+        <div>Google Maps</div>
+    </div>
+    <div class="image-item">
+        <img src="./assets/mapApple.png" alt="">
+        <div>Apple Maps</div>
+    </div>
+</div>
+<br/>
+<br/>
 
 
+I ara, Google Maps també és vectorial:
+
+<center><img src="./assets/mapCanvas.png" style="max-height: 500px; max-width: 90%;" alt=""> 
+<br/></center>
+<br/> 
+<br/> 
 
