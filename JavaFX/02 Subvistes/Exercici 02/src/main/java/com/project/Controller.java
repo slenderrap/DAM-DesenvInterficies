@@ -1,23 +1,36 @@
 package com.project;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.text.Text;
+/*import org.json.JSONArray;
+import org.json.JSONObject;*/
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
-public class Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
 
+public class Controller implements Initializable {
+    //private JSONArray jsonInfo;
+    public Label text;
     @FXML
-    private Button buttonAdd;
+    private ChoiceBox<String> seleccion;
 
-    @FXML
-    private Text textCounter;
 
-    private int counter = 0;
+    private final String[] opciones = {"Jocs","Personatges","Consola"};
 
-    @FXML
-    private void actionAdd(ActionEvent event) {
-        counter++;
-        textCounter.setText(String.valueOf(counter));
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        seleccion.getItems().addAll(opciones);
+        seleccion.setOnAction(this::cambiarVista);
+
     }
+
+    private void cambiarVista(ActionEvent event) {
+        String opcion = seleccion.getValue();
+        if (opcion.equals("Jocs")){
+
+        }
+    }
+
 }
