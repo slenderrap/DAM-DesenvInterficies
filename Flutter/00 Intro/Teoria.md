@@ -68,7 +68,7 @@ Per instal·lar flutter, a la **"Command Palette"** de **Visual Studio Code** es
 export PATH=$HOME/Documents/GitHub/flutter/bin:$PATH
 ```
 
-- Per instruccions més detallades:
+Per instruccions més detallades:
 
 [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
 
