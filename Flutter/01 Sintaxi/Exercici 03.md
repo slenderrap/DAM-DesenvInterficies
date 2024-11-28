@@ -25,7 +25,7 @@ Aquests són els tipus de casella:
 Les accions s'escriuen amb:
 
 - **Escollir casella**: la lletra de la fila i el número de la columna (B2, D5, ...)
-- **Posar bandera**: casella i paraula *bandera*
+- **Posar bandera**: casella i paraula *flag* o *bandera*
 - **Mostrar trucs**: paraules *cheat* o *trampes*
 - **Ajuda**: paraules *help* o *ajuda*, mostren la llista de comandes
 
@@ -52,7 +52,7 @@ F··········
 Escriu una comanda: C3
 ```
 
-Per posar o treure una bandera s'escriu la casella i la paraula: "bandera"
+Per posar o treure una bandera s'escriu la casella i la paraula: "bandera" o "flag"
 
 ```text
  0123456789
@@ -62,7 +62,7 @@ C··1   1···
 D··21121···
 E··········
 F··········
-Escriu una comanda: E1 bandera
+Escriu una comanda: E1 flag
 ```
 
 ```text
@@ -99,6 +99,11 @@ E··········     E····**····
 F··········     F·*·····*··
 Escriu una comanda: cheat
 ```
+
+Escriure només la posició d'una bandera l'escull, i:
+
+- Si no hi ha mina destapa les caselles adjacents
+- Si hi ha mina la fa explotar
 
 ```text
  0123456789
