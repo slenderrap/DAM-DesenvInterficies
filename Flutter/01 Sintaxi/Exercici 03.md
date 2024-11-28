@@ -100,7 +100,7 @@ F··········     F·*·····*··
 Escriu una comanda: cheat
 ```
 
-Escriure només la posició d'una bandera l'escull, i:
+Escriure només la posició d'una bandera l'escull:
 
 - Si no hi ha mina destapa les caselles adjacents
 - Si hi ha mina la fa explotar
