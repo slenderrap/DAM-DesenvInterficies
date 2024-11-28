@@ -27,6 +27,7 @@ Les accions s'escriuen amb:
 - **Escollir casella**: la lletra de la fila i el número de la columna (B2, D5, ...)
 - **Posar bandera**: casella i paraula *bandera*
 - **Mostrar trucs**: paraules *cheat* o *trampes*
+- **Ajuda**: paraules *help* o *ajuda*, mostren la llista de comandes
 
 Al escollir una casella:
 
@@ -48,7 +49,7 @@ C··········
 D··········
 E··········
 F··········
-Escull una opció: C3
+Escriu una comanda: C3
 ```
 
 Per posar o treure una bandera s'escriu la casella i la paraula: "bandera"
@@ -61,7 +62,7 @@ C··1   1···
 D··21121···
 E··········
 F··········
-Escull una opció: E1 bandera
+Escriu una comanda: E1 bandera
 ```
 
 ```text
@@ -72,7 +73,7 @@ C··1   1···
 D··21121···
 E·#········
 F··········
-Escull una opció: E1 bandera
+Escriu una comanda: E1 bandera
 ```
 
 La paraula trampa permet mostrar o amagar el tauler amb les mines, al costat del tauler de joc
@@ -85,7 +86,7 @@ C··1   1···
 D··21121···
 E··········
 F··········
-Escull una opció: trampes
+Escriu una comanda: trampes
 ```
 
 ```text
@@ -96,7 +97,7 @@ C··1   1···     C·*1   1*··
 D··21121···     D·*21121···
 E··········     E····**····
 F··········     F·*·····*··
-Escull una opció: cheat
+Escriu una comanda: cheat
 ```
 
 ```text
@@ -107,7 +108,7 @@ C··1   1···
 D··21121···
 E·#········
 F··········
-Escull una opció: F1
+Escriu una comanda: F1
 ```
 
 ```text
