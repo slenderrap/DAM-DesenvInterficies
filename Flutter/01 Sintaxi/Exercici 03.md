@@ -10,7 +10,7 @@
 
 # Exercici 03
 
-Implementa un 'Buscamines' per linia de comandes Dart. 
+Implementa un 'Buscamines' per linia de comandes amb Dart. 
 
 - Es generen 8 mines aleatòriament
 - Hi ha almenys 2 mines a cada quadrant del tauler: [0,4]-[5,9] i [A,C]-[D,F]
