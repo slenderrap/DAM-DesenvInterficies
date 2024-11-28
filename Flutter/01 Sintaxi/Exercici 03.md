@@ -8,7 +8,7 @@
 </div>
 <br/>
 
-# Exercici 0
+# Exercici 03
 
 Implementa un 'Buscamines' per linia de comandes amb NodeJS. 
 
