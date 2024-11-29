@@ -8,7 +8,7 @@
 </div>
 <br/>
 
-# Exercici 04
+# Exercici 04, DB temàtica
 
 Fes una aplicació 'Flutter' que mostri informació sobre la teva temàtica preferida. Tipus la pràctica de "Nintendo DB"
 
