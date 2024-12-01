@@ -18,9 +18,9 @@ Implementa un 'Buscamines' per linia de comandes amb Dart.
 Aquests són els tipus de casella:
 
 - Les caselles `·` estàn per descobrir
+- Les caselles buides amb ` ` indiquen que no hi ha mina (buida)
 - Les caselles numèriques indiquen la quantiat de mines al seu voltant
 - Les caselles `#`indiquen una bandera
-- Les caselles buides amb ` ` indiquen que no hi ha mina
 
 Les accions s'escriuen amb:
 
@@ -34,12 +34,43 @@ Al escollir una casella:
 - Si no té mina es destapen les caselles adjecents de manera recursiva
 - Si té mina s'acaba el joc
 
+A les posicions de bandera, NO es destapa automàticament el número de mines al seu voltant. Quan es treu la bandera aquella posició estarà per descobrir com a l'inici del joc.
+
 Al acabar el joc:
 
 - Es mostra el tauler amb les mines destapades 
 - El número de tirades que s'han fet (posar banderes i fer trampes no conten)
 
-Per exemple:
+## Destapar caselles
+
+Per destapar caselles cal implementar un algorisme recursiu, a linies generals:
+
+funció destapaCasella(tauler, x, y)
+
+    si (x, y) és fora dels límits del tauler
+        retorna
+
+    si (x, y) ja està descoberta (buida o número)
+        retorna
+
+    si (x, y) té una bandera
+        retorna
+
+    si la casella (x, y) és una bomba
+        retorna i final de partida
+
+    si la casella (x, y) conté un número
+        retorna
+
+    marca (x, y) com a descoberta (buida o número)
+
+    si la casella (x, y) està buida propagar:
+        per cada (dx, dy) al voltant de la casella (x, y)
+            novaX = x + dx
+            novaY = y + dy
+            destapaCasella(tauler, novaX, novaY)
+
+## Exemple de partida
 
 ```text
  0123456789
