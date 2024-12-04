@@ -56,11 +56,11 @@ funció destapaCasella(tauler, x, y)
     si (x, y) té una bandera
         retorna
 
-    si la casella (x, y) és una bomba
-        retorna i final de partida
-
     si la casella (x, y) conté un número
         retorna
+
+    si la casella (x, y) és una bomba
+        retorna i final de partida
 
     marca (x, y) com a descoberta (buida o número)
 
