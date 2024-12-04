@@ -65,7 +65,7 @@ funció destapaCasella(tauler, x, y, esPrimeraJugada, esJugadaUsuari)
        per cada (dx, dy) al voltant:
            destapaCasella(tauler, x + dx, y + dy, false, false)
            
-   retorna false // No explosió
+   retorna false // No explota
 ```
 ## Exemple de partida
 
