@@ -53,9 +53,9 @@ funció destapaCasella(tauler, x, y, esPrimeraJugada, esJugadaUsuari)
        si esPrimeraJugada
            mou la bomba a una posició buida aleatòria
        sinó si esJugadaUsuari
-           retorna True  # Indica explosió
+           retorna True  // Indica explosió
        sinó
-           retorna False  # No explota durant la recursivitat
+           retorna False // No explota durant la recursivitat
            
    numMines = comptaMinesAdjacents(tauler, x, y)
    marca (x, y) com descoberta amb numMines
@@ -64,7 +64,7 @@ funció destapaCasella(tauler, x, y, esPrimeraJugada, esJugadaUsuari)
        per cada (dx, dy) al voltant:
            destapaCasella(tauler, x + dx, y + dy, False, False)
            
-   retorna False  # No explosió
+   retorna False // No explosió
 ```
 ## Exemple de partida
 
