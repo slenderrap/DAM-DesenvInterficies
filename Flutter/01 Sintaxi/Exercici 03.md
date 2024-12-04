@@ -44,7 +44,7 @@ Al acabar el joc:
 ## Destapar caselles
 
 Per destapar caselles cal implementar un algorisme recursiu, a linies generals:
-
+```text
 funció destapaCasella(tauler, x, y)
 
     si (x, y) és fora dels límits del tauler
@@ -69,7 +69,7 @@ funció destapaCasella(tauler, x, y)
             novaX = x + dx
             novaY = y + dy
             destapaCasella(tauler, novaX, novaY)
-
+```
 ## Exemple de partida
 
 ```text
