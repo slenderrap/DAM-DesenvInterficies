@@ -45,26 +45,27 @@ Al acabar el joc:
 
 Per destapar caselles cal implementar un algorisme recursiu, a linies generals:
 ```text
+// Retorna 'true' si explota 'false' altrament
 funció destapaCasella(tauler, x, y, esPrimeraJugada, esJugadaUsuari)
    si (x, y) és fora dels límits o ja descoberta o té bandera
-       retorna False
+       retorna false
        
    si (x, y) és bomba
        si esPrimeraJugada
            mou la bomba a una posició buida aleatòria
        sinó si esJugadaUsuari
-           retorna True  // Indica explosió
+           retorna true  // Indica explosió
        sinó
-           retorna False // No explota durant la recursivitat
+           retorna false // No explota durant la recursivitat
            
    numMines = comptaMinesAdjacents(tauler, x, y)
    marca (x, y) com descoberta amb numMines
    
    si numMines == 0:
        per cada (dx, dy) al voltant:
-           destapaCasella(tauler, x + dx, y + dy, False, False)
+           destapaCasella(tauler, x + dx, y + dy, false, false)
            
-   retorna False // No explosió
+   retorna false // No explosió
 ```
 ## Exemple de partida
 
