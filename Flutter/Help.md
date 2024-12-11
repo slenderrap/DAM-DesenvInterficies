@@ -10,6 +10,11 @@ export PATH="/Users/$USER/Documents/GitHub/flutter/bin:$PATH"
 export PATH="/home/$USER/Documents/GitHub/flutter/bin:$PATH"
 ```
 
+**A windows**
+```bash
+????
+```
+
 # Afegir el projecte "desktop"
 
 Quan un projecte encara no té carpeta de desenvolupament 'desktop'
