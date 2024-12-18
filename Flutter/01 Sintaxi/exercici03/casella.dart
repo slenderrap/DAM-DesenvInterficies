@@ -9,18 +9,21 @@ class Casella {
   Casella(int posicioX,int posicioY){
     this._posicioX=posicioX;
     this._posicioY=posicioY;
+    this._text ="·";
   }
 
-  destapar(){
+bool destapar(){
     if(this._bandera){
       print("Tens una bandera posada");
     }
     else if (!this._descoberta){
       descoberta = true;
+
     }
     else{
       print("Ja estava destapada");
     }
+    return false;
   }
 
   setTrampa() {
@@ -45,7 +48,7 @@ class Casella {
     if (this._descoberta || this._trampa){
       return _text;
     }else{
-      return ".";
+      return "·";
     }
 
 
@@ -66,7 +69,11 @@ class Casella {
   bool get bandera => _bandera;
 
   set bandera(bool value) {
-    _bandera = value;
+    if (_bandera){
+      this._bandera =false;
+    }else{
+      this._bandera=true;
+    }
   }
 
   bool get trampa => _trampa;

@@ -1,8 +1,9 @@
 import 'dart:math';
 import 'mina.dart';
 import 'casella.dart';
+import 'dart:io';
 
-void main(){
+void main (){
     Random random = Random();
     // print(5 +random.nextInt(11-5));
     List<List<Casella>> matriu =List.generate(6, (i) => List.generate(10,(j) =>Casella(j, i)),);
@@ -30,6 +31,8 @@ void main(){
       }
     }
   }
+
+    //imprimir tablero
     var fila = "";
     for (var i=-1;i<=9;i++){
       if (i!=-1){
@@ -72,7 +75,21 @@ void main(){
 
 
     }
-    
+    String? comanda="";
+    stdout.write("Escriu una comanda: ");
+
+
+    String? input = stdin.readLineSync()?.trim();
+    print("aqui");
+    print(input);
+    if (input == null||input.isEmpty) {
+      print("Has d'introduir una de les comandes");
+
+    }
+    comanda = input;
+    print("object");
+
+
 
   // for (var fila = -1;fila<=6;fila++){
   //   for (var columna=-1;columna<=9;columna++){

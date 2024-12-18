@@ -1,0 +1,3 @@
+[*.dart]
+indent_style = space
+indent_size = 4  # Cambia esto si prefieres usar 4 espacios
