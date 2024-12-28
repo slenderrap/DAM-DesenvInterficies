@@ -1,24 +1,20 @@
 class Casella {
-  late int _posicioX;
-  late int _posicioY;
+
   bool _descoberta = false;
   bool _bandera = false;
   bool _trampa = false;
   late String _text;
 
-  Casella(int posicioX,int posicioY){
-    this._posicioX=posicioX;
-    this._posicioY=posicioY;
+  Casella(){
     this._text ="·";
   }
 
-bool destapar(){
+bool destapar(bool primerMoviment){
     if(this._bandera){
       print("Tens una bandera posada");
     }
     else if (!this._descoberta){
       descoberta = true;
-
     }
     else{
       print("Ja estava destapada");
@@ -35,29 +31,21 @@ bool destapar(){
   }
 
 
-  int get posicioX => _posicioX;
-
-  set posicioX(int value) {
-    _posicioX = value;
-  }
 
   toString(){
-    if (this._bandera){
+    if (this._trampa){
+      return _text;
+    }
+    else if (this._bandera){
       return "#";
     }
-    if (this._descoberta || this._trampa){
+    else if (this._descoberta){
       return _text;
     }else{
       return "·";
     }
 
 
-  }
-
-  int get posicioY => _posicioY;
-
-  set posicioY(int value) {
-    _posicioY = value;
   }
 
   bool get descoberta => _descoberta;
@@ -72,7 +60,11 @@ bool destapar(){
     if (_bandera){
       this._bandera =false;
     }else{
-      this._bandera=true;
+      if (!_descoberta) {
+        this._bandera = true;
+      }else{
+        print("No pots realitzar aquesta accio");
+      }
     }
   }
 

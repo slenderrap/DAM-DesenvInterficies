@@ -3,6 +3,7 @@ import 'dart:math';
 import 'casella.dart';
 import 'dart:math';
 import 'mina.dart';
+int casellesRestants=10*6-8;
 void main() {
     //si hi ha mina explota i es veu tot el taulell
     //caselles . per descobrir
@@ -11,29 +12,38 @@ void main() {
     //  # indiquen bandera
 
     var opcions = ["xy", "xy flag", "xy bandera", "trampes", "cheat", "ajuda"];
-    var lletres="abdef";
+    var lletres="abcdef";
     var matriu = crearMatriu();
     int tirades=0;
+    bool primerMoviment=true;
     bool trampes=false;
     bool victoria = true;
-    int casellesRestants = (matriu.length * matriu[0].length) -8;
-    while(victoria){
+    while(victoria && casellesRestants>0){
 
       var comanda="";
       imprimirTablero(matriu, trampes);
       comanda = verificarComanda(opcions,lletres);
+
       if (comanda.length==2||comanda.contains(" ")){
         tirades++;
         var fila=lletres.indexOf(comanda[0]);
         var columna = int.parse(comanda[1]);
+
         if (!comanda.contains(" ")) {
-          if (matriu[fila][columna].destapar()) {
-            victoria = false;
+
+          if (destaparCasella(matriu,fila,columna,primerMoviment,true)){
+          victoria = false;
           } else {
-            casellesRestants--;
+            //mina no explota
+            primerMoviment=false;
           }
-      }else{
-          matriu[fila][columna].bandera;
+
+        }else{
+          if(matriu[fila][columna].bandera){
+            matriu[fila][columna].bandera=false;
+          }else {
+            matriu[fila][columna].bandera = true;
+          }
         }
     }else if (comanda.contains(" ")){
         tirades++;
@@ -49,13 +59,93 @@ void main() {
           break;
       }
 
+    print("\n");
     }
     if(!victoria){
       print("Has perdut!\nNumero de tirades ${tirades}");
     }else{
-
+        print("Felicitats! Has guanyat!");
     }
 
+}
+
+bool destaparCasella(List<List<Casella>> matriu, int fila, int columna, bool primerMoviment, bool jugadaUsuari) {
+
+    //1. comprobar limits per evitar errors de fora de rang
+    if (fila>=matriu.length||fila<0 || columna>=matriu[0].length || columna<0|| matriu[fila][columna].descoberta) {
+      return false;
+    }
+    if (matriu[fila][columna].bandera){
+      print("tens una bandera posada");
+      return false;
+    }
+    //2. agafem la casella a destapar
+    var casella = matriu[fila][columna];
+    //3. com el meu metode ja gestiona si es una mina, si esta amb una bandera o si ja estava destapada no cal verificar la clase
+    if (casella.destapar(primerMoviment)){
+        //si es el primer moviment movem la mina
+        if (primerMoviment){
+          matriu = moureMina(matriu,fila,columna);
+          destaparCasella(matriu, fila, columna, true, true);
+        }else if(jugadaUsuari) {
+          return true;
+        }
+    }
+
+    //4. comptar mines al voltant i indicar que s'ha destapat una casella
+    casellesRestants--;
+    var minesTrobades=minesProperes(matriu, fila, columna);
+    matriu[fila][columna].text = minesTrobades.toString();
+
+    //5. Si no hi ha cap mina, que sigui recursiu
+    if (minesTrobades==0){
+      matriu[fila][columna].text =" ";
+      for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+          if ((i != 0 || j != 0)) {
+            destaparCasella(matriu, fila + i, columna +j, false, false);
+          }
+        }
+      }
+    }
+    return false;
+}
+
+List<List<Casella>> moureMina(List<List<Casella>> matriu, int filaInicial, int columnaInicial) {
+    for (var i = 0; i < matriu.length; i++) {
+        for (var j = 0; j < matriu[i].length; j++) {
+          if (matriu[i][j] is! Mina && !(i == filaInicial && j == columnaInicial)){
+            matriu[i][j]=Mina();
+            matriu[filaInicial][columnaInicial] = Casella();
+            return matriu;
+          }
+
+        }
+    }
+    return matriu;
+
+
+
+}
+
+int minesProperes(List<List<Casella>> matriu, int fila, int columna) {
+  var minesTrobades = 0;
+  for (var i = -1; i <= 1; i++) {
+    for (var j = -1; j <= 1; j++) {
+      // Saltar la casella central
+      if (i == 0 && j == 0) continue;
+      // Comprovar que les coordenades són vàlides
+      var novaFila = fila + i;
+      var novaColumna = columna + j;
+      if (novaFila >= 0 && novaFila < matriu.length &&
+          novaColumna >= 0 && novaColumna < matriu[0].length) {
+        if (matriu[novaFila][novaColumna] is Mina) {
+          minesTrobades++;
+        }
+      }
+    }
+  }
+  return minesTrobades;
 }
 
 String verificarComanda(opcions,lletres) {
@@ -72,10 +162,8 @@ String verificarComanda(opcions,lletres) {
 
         }else {
           comanda = input;
-          print(comanda.contains(" flag") && comanda.length==7);
           if (comanda.length==2 || (comanda.contains(" flag") && comanda.length==7)|| (comanda.contains(" bandera") && comanda.length==10)){
             var fila = comanda[0];
-            print(fila);
             try {
             if (lletres.indexOf(fila)!=-1) {
               var columna;
@@ -89,7 +177,6 @@ String verificarComanda(opcions,lletres) {
               } on FormatException {
                 print("Error: La columna no era un numero");
               }catch(e){
-                print("aqui");
                 print(e);
               }
             print("No has introduit be la posicio de la casella");
@@ -101,6 +188,7 @@ String verificarComanda(opcions,lletres) {
     }
     return comanda;
 }
+
 void imprimirTablero(matriu, trampes){
       var fila = "";
       for (var i=-1;i<=9;i++){
@@ -147,10 +235,11 @@ void imprimirTablero(matriu, trampes){
 
 
     }
+
 List<List<Casella>> crearMatriu(){
   Random random = Random();
   // print(5 +random.nextInt(11-5));
-  List<List<Casella>> matriu =List.generate(6, (i) => List.generate(10,(j) =>Casella(j, i)),);
+  List<List<Casella>> matriu =List.generate(6, (i) => List.generate(10,(j) =>Casella()),);
   //8 minas: 2 cada quadrant
   //quadrant 1: (0,0) -> (2,4)
   //quadrant 2: (0,5) -> (2,9)
@@ -169,7 +258,7 @@ List<List<Casella>> crearMatriu(){
       var x = quadrant[0]+ random.nextInt(quadrant[1]-quadrant[0]);
       var y = quadrant[2]+ random.nextInt(quadrant[3]-quadrant[2]);
       if (matriu[y][x] is! Mina ){
-        matriu[y][x]=new Mina(x, y);
+        matriu[y][x]=new Mina();
         minesPendents--;
       }
     }
@@ -177,3 +266,4 @@ List<List<Casella>> crearMatriu(){
 
     return matriu;
 }
+

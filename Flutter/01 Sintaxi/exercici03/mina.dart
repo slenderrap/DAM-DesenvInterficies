@@ -1,14 +1,15 @@
 import 'casella.dart';
 class Mina extends Casella{
 
-  Mina(int _posicioX,int _posicioY) : super(_posicioX, _posicioY){
+  Mina() : super(){
     text = "*";
   }
   @override
-  bool destapar() {
-
+  bool destapar(bool primeraJugada) {
+      if (primeraJugada) return true;
       if(this.bandera){
         print("Tens una bandera posada");
+        return false;
       }
       else if (!this.descoberta){
         descoberta = true;
@@ -16,5 +17,7 @@ class Mina extends Casella{
 
       }
       return true;
-    }
+  }
+
+
 }
