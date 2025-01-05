@@ -17,6 +17,8 @@ Fes una aplicació 'Flutter' que permeti posar gestionar serveis/servidors al Pr
 - Ha de permetre pujar nou codi de local a un servidor remot.
 - Ha de permetre configurar/desconfigurar ports del Proxmox remot.
 
+L'aplicació ha de **tenir estètica d'escriptori**, bé sigui amb *"Cupertino desktop kit"*, "Fluent UI" o alguna altre llibreria que imiti interfícies d'escriptori.
+
 Necessitaràs els següents widgets personalitzats:
 
 - Un widget que mostra una llista amb títols en negreta i items seleccionables més petits amb identació.
