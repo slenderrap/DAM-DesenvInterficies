@@ -25,6 +25,8 @@ Necessitaràs els següents widgets personalitzats:
 - Un widget que mostra una taula de ports, redireccions i permet sel·leccionar la que obté la redirecció 80 (o desconfigurar-la).
 - Un widget que mostra l'estat d'un servidor (en funcionament, aturat, reiniciant o error).
 
+**Nota**: Fes servir widgets de progrés indeterminats per indicar que s'està fent una operació que pot trigar uns moments.
+
 Aquest és l'storyboard esperat:
 
 <br/>
