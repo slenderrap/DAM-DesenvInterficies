@@ -3,12 +3,12 @@
         <p>© Albert Palacios Jiménez, 2024</p>
     </div>
     <div style="flex: 1; padding: 0px; text-align: right;">
-        <img src="./assets/ieti.png" height="32" alt="Logo de IETI" style="max-height: 32px;">
+        <img src="../assets/ieti.png" height="32" alt="Logo de IETI" style="max-height: 32px;">
     </div>
 </div>
 <br/>
 
-# Exercici 05
+# Gestor de serveis al Proxmox
 
 Fes una aplicació 'Flutter' que permeti posar gestionar serveis/servidors al Proxmox:
 
@@ -32,17 +32,17 @@ Necessitaràs els següents widgets personalitzats:
 Aquest és l'storyboard esperat:
 
 <br/>
-<center><img src="./assets/exr05dgrm0.png" style="max-height: 400px" alt="">
+<center><img src="./img0.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
 <br/>
-<center><img src="./assets/exr05dgrm1.png" style="max-height: 400px" alt="">
+<center><img src="./img1.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
 <br/>
-<center><img src="./assets/exr05dgrm2.png" style="max-height: 400px" alt="">
+<center><img src="./img2.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
