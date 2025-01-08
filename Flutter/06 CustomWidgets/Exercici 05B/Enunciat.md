@@ -10,7 +10,7 @@
 
 # Escriptori personalitzat
 
-Fes una estil d'escriptori personalitzat per Flutter.
+Fes un estil d'escriptori personalitzat per Flutter.
 
 Fes servir el codi del següent projecte com a base:
 
@@ -33,4 +33,5 @@ Escull un estil d'escriptori clàssic d'entre la següent llista:
 
 **Nota**: Descarrega una màquina virtual per veure'n tots els widgets funcionant, i copia'n l'estil.
 
-Implementa els widgets de la demo d'exemple amb l'estètica de l'escriptori escollit.
+Implementa la demo d'exemple, de tal manera que els widgets tinguin l'estètica de l'escriptori escollit.
+
