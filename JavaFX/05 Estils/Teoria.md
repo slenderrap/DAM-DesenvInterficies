@@ -62,7 +62,7 @@ Això queda plasmat al codi *.fxml*:
 O bé a partir d'un arxiu *.css*:
 
 ```xml
-<AnchorPane ... styleClass="root" ... fx:controller="com.project.Controller">
+<AnchorPane ... styleClass="root" ... fx:controller="com.project.controllers.Controller">
 
 <Label ... styleClass="label" text="ABC">
 ```

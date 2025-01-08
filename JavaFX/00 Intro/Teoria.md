@@ -42,7 +42,7 @@ El codi FXML està basat en arxius de text amb format XML, per tant, es poden ed
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controllers.Controller">
    <children>
       <Text fx:id="textCounter" layoutX="25.0" layoutY="220.173828125" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT" wrappingWidth="285.13671875" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="167.0">
          <font>
@@ -160,7 +160,7 @@ La vista està definida a l'arxiu *src/resources/assets/layout.fxml*:
 
 ```xml
 <!-- Defineix el controlador amb fx:controller -->
-<AnchorPane ... fx:controller="com.project.Controller">
+<AnchorPane ... fx:controller="com.project.controllers.Controller">
     <!-- Per poder modificar el text que mostra, defineix fx:id  -->
     <Text fx:id="textCounter" ...></Text>
     <!-- Per identificar el botó dels del codi, defineix fx:id -->
