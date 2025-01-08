@@ -32,7 +32,6 @@ public class ControllerItem implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        titol.setText("nom");
-        imatge.setImage(new Image());
+
     }
 }

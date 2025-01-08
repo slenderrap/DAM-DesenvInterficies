@@ -23,7 +23,7 @@
                   </HBox>
                 <ScrollPane fitToWidth="true">
                     <content>
-                        <VBox fx:id="itemContainer" spacing="10" padding="10"/>
+                        <VBox fx:id="itemContainer" spacing="10" />
                     </content>
                 </ScrollPane>
               </items>

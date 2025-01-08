@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -17,8 +18,13 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -60,15 +66,15 @@ public class Controller implements Initializable {
         String opcion = seleccion.getValue();
         switch (opcion) {
             case "Jocs":
-                ArrayList<Jocs> jocs = carregarJSON("/JavaFX/02 Subvistes/Exercici 02/src/main/resources/assets/data/jocs.json", Jocs::fromJson);
+                ArrayList<Jocs> jocs = carregarJSON("/src/main/resources/assets/data/jocs.json", Jocs::fromJson);
                 mostrarItems(jocs);
                 break;
             case "Personatges":
-                ArrayList<Personatge> personatges = carregarJSON("/JavaFX/02 Subvistes/Exercici 02/src/main/resources/assets/data/personatges.json", Personatge::fromJson);
+                ArrayList<Personatge> personatges = carregarJSON("/src/main/resources/assets/data/personatges.json", Personatge::fromJson);
                 mostrarItems(personatges);
                 break;
             case "Consoles":
-                ArrayList<Consoles> consoles = carregarJSON("/JavaFX/02 Subvistes/Exercici 02/src/main/resources/assets/data/consoles.json", Consoles::fromJson);
+                ArrayList<Consoles> consoles = carregarJSON("/src/main/resources/assets/data/consoles.json", Consoles::fromJson);
                 mostrarItems(consoles);
                 break;
             default:
@@ -79,6 +85,7 @@ public class Controller implements Initializable {
     private <T> ArrayList<T> carregarJSON(String ruta, Function<JsonObject, T> deserializer) {
         ArrayList<T> items = new ArrayList<T>();
         File arxiu = new File(System.getProperty("user.dir"), ruta);
+        System.out.println(System.getProperty("user.dir"));
         if (arxiu.exists() && arxiu.isFile()) {
             JsonReader jr = null;
             FileReader fr = null;
@@ -108,38 +115,48 @@ public class Controller implements Initializable {
                 }
             }
         }
+        else {
+            System.out.println("arxiu incorrecte");
+        }
         return items;
     }
 
     private <T> void mostrarItems(ArrayList<T> items) {
         itemContainer.getChildren().clear();
         URL resource = getClass().getResource("/assets/layoutItem.fxml");
+        System.out.print(items.size());
 
         for (T item : items) {
             try {
                 FXMLLoader loader = new FXMLLoader(resource);
                 Parent itemNode = loader.load();
-
                 // Assigna el controlador per a cada item.
                 ControllerItem controladorItem = loader.getController();
                 if (item instanceof Jocs) {
                     Jocs joc = (Jocs) item;
                     controladorItem.getTitol().setText(joc.getNom());
-                    controladorItem.setImatge(new ImageView("/assets/images/" + joc.getImatge()));
+                    ImageView image = new ImageView(getClass().getResource("/assets/images"+joc.getImatge()).toURI().toString());
+                    controladorItem.setImatge(image);
                 } else if (item instanceof Personatge) {
                     Personatge personatge = (Personatge) item;
                     controladorItem.getTitol().setText(personatge.getNom());
-                    controladorItem.setImatge(new ImageView("/assets/images/" + personatge.getImatge()));
+                    String imagePath = "/assets/images/" + personatge.getImatge();
+                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+                    controladorItem.setImatge(new ImageView(image));
                 } else if (item instanceof Consoles) {
                     Consoles consola = (Consoles) item;
                     controladorItem.getTitol().setText(consola.getNom());
-                    controladorItem.setImatge(new ImageView("/assets/images/" + consola.getImatge()));
+                    String imagePath = "/assets/images/" + consola.getImatge();
+                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+                    controladorItem.setImatge(new ImageView(image));
                 }
 
                 // Afegim l'item al contenidor.
                 itemContainer.getChildren().add(itemNode);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
             }
         }
     }
