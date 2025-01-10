@@ -1,5 +1,4 @@
 [
-    { "category": "Mamals", "animal": "Dod", "color": "black" },
     { "category": "Mamals", "animal": "Cat", "color": "grey" },
     { "category": "Mamals", "animal": "Horse", "color": "brown" },
     { "category": "Mamals", "animal": "Cow", "color": "white" },
