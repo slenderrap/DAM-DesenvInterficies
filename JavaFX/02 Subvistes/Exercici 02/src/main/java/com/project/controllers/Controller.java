@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -135,20 +136,25 @@ public class Controller implements Initializable {
                 if (item instanceof Jocs) {
                     Jocs joc = (Jocs) item;
                     controladorItem.getTitol().setText(joc.getNom());
+                    System.out.println("ruta: "+getClass().getResource("/assets/images"+joc.getImatge()).toURI().toString());
                     ImageView image = new ImageView(getClass().getResource("/assets/images"+joc.getImatge()).toURI().toString());
-                    controladorItem.setImatge(image);
-                } else if (item instanceof Personatge) {
-                    Personatge personatge = (Personatge) item;
+                    //controladorItem.setImatge(image);
+                } else if (item instanceof Personatge personatge) {
                     controladorItem.getTitol().setText(personatge.getNom());
-                    String imagePath = "/assets/images/" + personatge.getImatge();
-                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-                    controladorItem.setImatge(new ImageView(image));
+
+                    String imgPath = "/assets/images/" + personatge.getImatge();
+                    controladorItem.setImatge(imgPath);
+
+
+
+
+
                 } else if (item instanceof Consoles) {
                     Consoles consola = (Consoles) item;
                     controladorItem.getTitol().setText(consola.getNom());
                     String imagePath = "/assets/images/" + consola.getImatge();
                     Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-                    controladorItem.setImatge(new ImageView(image));
+                    //controladorItem.setImatge(new ImageView(image));
                 }
 
                 // Afegim l'item al contenidor.

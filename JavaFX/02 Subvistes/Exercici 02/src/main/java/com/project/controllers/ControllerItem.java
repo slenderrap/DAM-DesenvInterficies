@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ControllerItem implements Initializable {
@@ -22,9 +23,16 @@ public class ControllerItem implements Initializable {
         return titol;
     }
 
-    public void setImatge(ImageView imatge) {
-        this.imatge = imatge;
+    public void setImatge(String imagePath) {
+        try {
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+            this.imatge.setImage(image); // Assigna la imatge al ImageView ja definit al FXML
+        } catch (NullPointerException e) {
+            System.err.println("Error carregant la imatge: " + imagePath);
+            e.printStackTrace();
+        }
     }
+
 
     public ImageView getImatge() {
         return imatge;
