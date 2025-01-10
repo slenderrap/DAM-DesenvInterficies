@@ -32,7 +32,7 @@ public class ControllerListItem {
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
             this.img.setImage(image);
         } catch (NullPointerException e) {
-            System.err.println("Error carregant la imatge: " + imagePath);
+            System.err.println("Error loading image asset: " + imagePath);
             e.printStackTrace();
         }
     }
