@@ -11,10 +11,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private String currentLayout = "";
     final int WINDOW_WIDTH = 700;
     final int WINDOW_HEIGHT = 500;
     final int MIN_WIDTH = 400;
     final int MIN_HEIGHT = 400;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -59,14 +61,14 @@ public class Main extends Application {
     }
 
     public void _setLayout(int width){
-        if (width<600){
-            System.err.println("cambia a mobil");
-            UtilsViews.setView("Mobile");
-        }else {
-            System.err.println("Cambia a desktop");
-            UtilsViews.setView("Desktop");
+        String newLayout = (width < 600) ? "Mobile" : "Desktop";
+        if (!currentLayout.equals(newLayout)) {
+            currentLayout = newLayout;
+            System.err.println("Cambia a: " + newLayout);
+            UtilsViews.setViewAnimating(newLayout); // usa animación si quieres
         }
     }
+
 
     public static void main(String[] args) {
         launch(args);

@@ -114,36 +114,24 @@ public class Controller implements Initializable {
                 Parent itemNode = loader.load();
                 // Assigna el controlador per a cada item.
                 ControllerItem controladorItem = loader.getController();
-                if (item instanceof Jocs) {
-                    Jocs joc = (Jocs) item;
+                if (item instanceof Jocs joc) {
                     controladorItem.getTitol().setText(joc.getNom());
-                    System.out.println("ruta: "+getClass().getResource("/assets/images"+joc.getImatge()).toURI().toString());
-                    ImageView image = new ImageView(getClass().getResource("/assets/images"+joc.getImatge()).toURI().toString());
-                    //controladorItem.setImatge(image);
+                    String imgPath = "/assets/images/" + joc.getImatge();
+                    controladorItem.setImatge(imgPath);
                 } else if (item instanceof Personatge personatge) {
                     controladorItem.getTitol().setText(personatge.getNom());
-
                     String imgPath = "/assets/images/" + personatge.getImatge();
                     controladorItem.setImatge(imgPath);
-
-
-
-
-
-                } else if (item instanceof Consoles) {
-                    Consoles consola = (Consoles) item;
+                } else if (item instanceof Consoles consola) {
                     controladorItem.getTitol().setText(consola.getNom());
-                    String imagePath = "/assets/images/" + consola.getImatge();
-                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-                    //controladorItem.setImatge(new ImageView(image));
+                    String imgPath = "/assets/images/" + consola.getImatge();
+                    controladorItem.setImatge(imgPath);
                 }
 
                 // Afegim l'item al contenidor.
                 itemContainer.getChildren().add(itemNode);
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
             }
         }
     }
