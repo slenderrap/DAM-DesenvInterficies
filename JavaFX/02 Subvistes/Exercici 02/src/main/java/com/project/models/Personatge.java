@@ -55,6 +55,8 @@ public class Personatge {
         return new Personatge(nom,imatge,color,nomVideojoc);
     }
 
+
+
     @Override
     public String toString() {
         return "Personatge{" +

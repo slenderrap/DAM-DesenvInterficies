@@ -9,11 +9,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileReader;
@@ -106,36 +108,57 @@ public class Controller implements Initializable {
     private <T> void mostrarItems(ArrayList<T> items) {
         itemContainer.getChildren().clear();
         URL resource = getClass().getResource("/assets/layoutItem.fxml");
-        System.out.print(items.size());
 
         for (T item : items) {
             try {
                 FXMLLoader loader = new FXMLLoader(resource);
                 Parent itemNode = loader.load();
-                // Assigna el controlador per a cada item.
-                ControllerItem controladorItem = loader.getController();
+                ControllerItem controllerItem = loader.getController();
+
                 if (item instanceof Jocs joc) {
-                    controladorItem.getTitol().setText(joc.getNom());
+                    controllerItem.getTitol().setText(joc.getNom());
                     String imgPath = "/assets/images/" + joc.getImatge();
-                    controladorItem.setImatge(imgPath);
+                    controllerItem.setImatge(imgPath);
                 } else if (item instanceof Personatge personatge) {
-                    controladorItem.getTitol().setText(personatge.getNom());
+                    controllerItem.getTitol().setText(personatge.getNom());
                     String imgPath = "/assets/images/" + personatge.getImatge();
-                    controladorItem.setImatge(imgPath);
+                    controllerItem.setImatge(imgPath);
                 } else if (item instanceof Consoles consola) {
-                    controladorItem.getTitol().setText(consola.getNom());
+                    controllerItem.getTitol().setText(consola.getNom());
                     String imgPath = "/assets/images/" + consola.getImatge();
-                    controladorItem.setImatge(imgPath);
+                    controllerItem.setImatge(imgPath);
                 }
 
-                // Afegim l'item al contenidor.
+                // Configurar el efecto hover
+                controllerItem.setupHoverEffect();
+
+                // Asignar evento de clic para abrir la pantalla de detalle
+                // Asignar evento de clic para abrir la pantalla de detalle
+                controllerItem.root.setOnMouseClicked(event -> {
+                    try {
+                        // Cargar la pantalla de detalle
+                        FXMLLoader detailLoader = new FXMLLoader(getClass().getResource("/assets/layoutDetailsItem.fxml")); // Cambio aquí
+                        Parent detailView = detailLoader.load();
+                        DetailController detailController = detailLoader.getController();
+
+                        // Pasar los datos del personaje seleccionado
+                        detailController.showDetails(item);
+
+                        // Mostrar la pantalla de detalle
+                        Stage stage = new Stage();
+                        stage.setTitle("Detalles del Elemento");
+                        stage.setScene(new Scene(detailView));
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                // Agregar el elemento al contenedor
                 itemContainer.getChildren().add(itemNode);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
-
 
 }

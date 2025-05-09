@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controllers.ControllerItem">
+<HBox alignment="CENTER_LEFT" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controllers.ControllerItem" fx:id="root">
    <children>
       <ImageView fx:id="imatge" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
       <VBox>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<?import javafx.scene.text.Text?>
+<VBox fx:id="contenidor" alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controllers.DetailController">
+    <children>
+        <ImageView fx:id="imatge" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="nom" text="Nombre del Personaje" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+        <Text fx:id="descripcio" text="" textAlignment="CENTER"/>
+        <VBox fx:id="detallsAdicionals" spacing="5"/>
+    </children>
+</VBox>
