@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -67,15 +68,15 @@ public class Controller implements Initializable {
         String opcion = seleccion.getValue();
         switch (opcion) {
             case "Jocs":
-                ArrayList<Jocs> jocs = carregarJSON("/src/main/resources/assets/data/jocs.json", Jocs::fromJson);
+                ArrayList<Jocs> jocs = carregarJSON("/assets/data/jocs.json", Jocs::fromJson);
                 mostrarItems(jocs);
                 break;
             case "Personatges":
-                ArrayList<Personatge> personatges = carregarJSON("/src/main/resources/assets/data/personatges.json", Personatge::fromJson);
+                ArrayList<Personatge> personatges = carregarJSON("/assets/data/personatges.json", Personatge::fromJson);
                 mostrarItems(personatges);
                 break;
             case "Consoles":
-                ArrayList<Consoles> consoles = carregarJSON("/src/main/resources/assets/data/consoles.json", Consoles::fromJson);
+                ArrayList<Consoles> consoles = carregarJSON("/assets/data/consoles.json", Consoles::fromJson);
                 mostrarItems(consoles);
                 break;
             default:
@@ -84,44 +85,24 @@ public class Controller implements Initializable {
     }
 
     private <T> ArrayList<T> carregarJSON(String ruta, Function<JsonObject, T> deserializer) {
-        ArrayList<T> items = new ArrayList<T>();
-        File arxiu = new File(System.getProperty("user.dir"), ruta);
-        System.out.println(System.getProperty("user.dir"));
-        if (arxiu.exists() && arxiu.isFile()) {
-            JsonReader jr = null;
-            FileReader fr = null;
-            try {
-                fr = new FileReader(arxiu);
-                jr = Json.createReader(fr);
-                JsonArray ja = jr.readArray();
-                System.out.println(ja.size());
-                for (JsonValue value : ja) {
-                    JsonObject jo = (JsonObject) value;
-                    System.out.println("\nitem afegit " + jo);
-                    items.add(deserializer.apply(jo));
-                }
+        ArrayList<T> items = new ArrayList<>();
+        try (InputStream inputStream = getClass().getResourceAsStream(ruta)) {
+            if (inputStream == null) {
+                System.out.println("Archivo no encontrado: " + ruta);
                 return items;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (fr != null) {
-                        fr.close();
-                    }
-                    if (jr != null) {
-                        jr.close();
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
-        }
-        else {
-            System.out.println("arxiu incorrecte");
+
+            JsonReader jr = Json.createReader(inputStream);
+            JsonArray ja = jr.readArray();
+            for (JsonValue value : ja) {
+                JsonObject jo = (JsonObject) value;
+                items.add(deserializer.apply(jo));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return items;
     }
-
     private <T> void mostrarItems(ArrayList<T> items) {
         itemContainer.getChildren().clear();
         URL resource = getClass().getResource("/assets/layoutItem.fxml");
